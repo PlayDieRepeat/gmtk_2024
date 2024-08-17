@@ -1,0 +1,57 @@
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://58654jslq711"]
+
+[ext_resource type="FontFile" uid="uid://dvvl4nkxhvp37" path="res://assets/fonts/Jersey15-Regular.ttf" id="1_3nxat"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g5h17"]
+bg_color = Color(0.266667, 0.266667, 0.266667, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6lgk5"]
+bg_color = Color(0.156863, 0.156863, 0.156863, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_751pw"]
+bg_color = Color(0.156863, 0.156863, 0.156863, 1)
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6dmq6"]
+bg_color = Color(0.266667, 0.266667, 0.266667, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4jia2"]
+bg_color = Color(0.180392, 0.180392, 0.180392, 1)
+border_color = Color(0.113725, 0.113725, 0.113725, 1)
+expand_margin_bottom = 5.0
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l63a4"]
+bg_color = Color(0.156863, 0.156863, 0.156863, 1)
+border_color = Color(0.113725, 0.113725, 0.113725, 1)
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+shadow_size = 5
+shadow_offset = Vector2(2, 2)
+
+[resource]
+Button/font_sizes/font_size = 28
+Button/fonts/font = ExtResource("1_3nxat")
+Button/styles/focus = SubResource("StyleBoxFlat_g5h17")
+Button/styles/hover = SubResource("StyleBoxFlat_6lgk5")
+Button/styles/normal = SubResource("StyleBoxFlat_751pw")
+Button/styles/pressed = SubResource("StyleBoxFlat_6dmq6")
+HSeparator/constants/separation = 20
+HSeparator/styles/separator = SubResource("StyleBoxFlat_4jia2")
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 8
+Label/font_sizes/font_size = 96
+Label/fonts/font = ExtResource("1_3nxat")
+Label/styles/normal = SubResource("StyleBoxFlat_l63a4")
+VBoxContainer/constants/separation = 8

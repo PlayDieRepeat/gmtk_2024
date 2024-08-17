@@ -1,0 +1,63 @@
+[gd_scene load_steps=15 format=3 uid="uid://drel2o4o7c3rc"]
+
+[ext_resource type="Script" path="res://scripts/_autoloads/audio_bank_robber.gd" id="1_aturs"]
+[ext_resource type="Script" path="res://addons/resonate/sound_manager/sound_bank.gd" id="1_k6toc"]
+[ext_resource type="Script" path="res://addons/resonate/sound_manager/sound_event_resource.gd" id="2_t5olp"]
+[ext_resource type="AudioStream" uid="uid://doiloh8qyyelr" path="res://assets/audio/sfx/debug/bloop.wav" id="3_ncbd5"]
+[ext_resource type="AudioStream" uid="uid://dacnwtr5r78cy" path="res://assets/audio/sfx/debug/buzz1.wav" id="4_0bdbw"]
+[ext_resource type="AudioStream" uid="uid://c1kityb1a0nbu" path="res://assets/audio/sfx/debug/zap.wav" id="5_ldjaj"]
+[ext_resource type="AudioStream" uid="uid://d4nmprs55jteq" path="res://assets/audio/sfx/debug/highDing.wav" id="6_kx2u7"]
+[ext_resource type="AudioStream" uid="uid://dp8e4ew7p2lmx" path="res://assets/audio/sfx/debug/robotBleep.wav" id="7_63f0b"]
+[ext_resource type="Script" path="res://addons/resonate/music_manager/music_bank.gd" id="9_d4dbs"]
+
+[sub_resource type="Resource" id="Resource_0vhnw"]
+script = ExtResource("2_t5olp")
+name = "ui_bloop"
+bus = ""
+volume = 0.0
+pitch = 1.0
+streams = Array[AudioStream]([ExtResource("3_ncbd5")])
+
+[sub_resource type="Resource" id="Resource_54v2a"]
+script = ExtResource("2_t5olp")
+name = "ui_buzz"
+bus = ""
+volume = 0.0
+pitch = 1.0
+streams = Array[AudioStream]([ExtResource("4_0bdbw")])
+
+[sub_resource type="Resource" id="Resource_g5gug"]
+script = ExtResource("2_t5olp")
+name = "ui_zap"
+bus = ""
+volume = 0.0
+pitch = 1.0
+streams = Array[AudioStream]([ExtResource("5_ldjaj")])
+
+[sub_resource type="Resource" id="Resource_r2t24"]
+script = ExtResource("2_t5olp")
+name = "ui_ding"
+bus = ""
+volume = 0.0
+pitch = 1.0
+streams = Array[AudioStream]([ExtResource("6_kx2u7")])
+
+[sub_resource type="Resource" id="Resource_l103k"]
+script = ExtResource("2_t5olp")
+name = ""
+bus = ""
+volume = 0.0
+pitch = 1.0
+streams = Array[AudioStream]([ExtResource("7_63f0b")])
+
+[node name="AudioBankRobber" type="Node"]
+script = ExtResource("1_aturs")
+
+[node name="UISoundBank" type="Node" parent="."]
+script = ExtResource("1_k6toc")
+label = "ui"
+bus = "UI Sounds"
+events = Array[ExtResource("2_t5olp")]([SubResource("Resource_0vhnw"), SubResource("Resource_54v2a"), SubResource("Resource_g5gug"), SubResource("Resource_r2t24"), SubResource("Resource_l103k")])
+
+[node name="MainMusicBank" type="Node" parent="."]
+script = ExtResource("9_d4dbs")

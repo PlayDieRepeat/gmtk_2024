@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="RScene" load_steps=3 format=3 uid="uid://dowv3jyjfcrb4"]
+
+[ext_resource type="PackedScene" uid="uid://cwy6coobo8xt1" path="res://scenes/menus/main_menu.tscn" id="1_qi4wv"]
+[ext_resource type="Script" path="res://scripts/_resources/r_scene.gd" id="2_10yav"]
+
+[resource]
+script = ExtResource("2_10yav")
+scene = ExtResource("1_qi4wv")
+scene_id = "MainMenu"
