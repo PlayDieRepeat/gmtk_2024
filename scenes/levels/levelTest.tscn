@@ -107,11 +107,6 @@ position = Vector2(62, 310)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("9_bw7tt")
 
-[node name="limeTree" type="Sprite2D" parent="."]
-position = Vector2(62, 310)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("9_bw7tt")
-
 [node name="yellowTree" type="Sprite2D" parent="."]
 position = Vector2(81, 306)
 scale = Vector2(0.75, 0.75)
