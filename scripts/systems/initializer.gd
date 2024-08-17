@@ -9,9 +9,9 @@ class_name Initializer
 @export var scene_override: RScene
 @export var use_overide: bool
 
-var ready_to_start_game:= false
+var ready_to_start_game := false
 
-func _process(delta: float) -> void: 
+func _process(_delta: float) -> void:
 	if ready_to_start_game == true:
 		return
 	
