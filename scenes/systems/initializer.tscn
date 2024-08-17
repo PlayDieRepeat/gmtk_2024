@@ -6,3 +6,4 @@
 [node name="Initializer" type="Node"]
 script = ExtResource("1_t62qf")
 scene_override = ExtResource("2_q84p8")
+use_overide = null

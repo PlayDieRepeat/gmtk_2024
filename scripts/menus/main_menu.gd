@@ -59,7 +59,7 @@ func _register_button_ui_sounds() -> void:
 
 ## Used to the start the game
 func _on_start_game() -> void:
-	Scenester.switch_scene(game_scene)
+	Scenester.switch_scene(game_scene, true)
 
 ## Used to go to the credits screen
 func _on_go_to_credits() -> void:
