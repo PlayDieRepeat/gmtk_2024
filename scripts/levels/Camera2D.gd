@@ -1,18 +1,51 @@
 extends Camera2D
 
-var threshold = 100
 var step = 5
 var maxStep = 5
-var viewport_size = 0
-func _ready() -> void:
-	viewport_size = get_viewport_rect().size
-	threshold = viewport_size.x/15
+var zoomSpeed = Vector2(0.1,0.1)
+var viewportSizeY: float = get_viewport_rect().size.y/zoom.y
 
-func _process(delta):
-	var local_mouse_pos = get_local_mouse_position()
-	if local_mouse_pos.x < threshold:
-		step = clamp((threshold-local_mouse_pos.x)/10,1,5)
-		position.x -= step
-	elif local_mouse_pos.x > viewport_size.x - threshold:
-		step = clamp((local_mouse_pos.x-(viewport_size.x - threshold))/10,1,5)
-		position.x += step
+func zoomInAndOut(zoomAmount):
+	var maxZoomOut = 360
+	if (zoomAmount.y < 0 and maxZoomOut > viewportSizeY + zoomSpeed.y) or (zoomAmount.x > 0):
+		zoom += zoomAmount
+		position = lerp(position, get_local_mouse_position(), 0.05)
+	
+func scrolling(isHorizontal, isVertical):
+	if (isHorizontal):
+		var viewportSizeX = get_viewport_rect().size.x/zoom.x
+		var thresholdX = viewportSizeX/15
+		var localMousePosX = get_local_mouse_position().x
+		if localMousePosX < thresholdX and position.x > -640:
+			step = clamp((thresholdX-localMousePosX)/10,1,5)
+			position.x -= step
+		elif localMousePosX > viewportSizeX - thresholdX and position.x < 640:
+			step = clamp((localMousePosX-(viewportSizeX - thresholdX))/10,1,5)
+			position.x += step
+			
+	if (isVertical):
+		var localMousePosY = get_local_mouse_position().y
+		var thresholdY = viewportSizeY/10
+		viewportSizeY = get_viewport_rect().size.y/zoom.y
+		if localMousePosY > viewportSizeY - thresholdY and position.y < 360-viewportSizeY:
+			step = clamp((localMousePosY-(viewportSizeY-thresholdY))/10,1,5)
+			position.y += step
+		elif position.y > 360-viewportSizeY:
+			position.y = 360-viewportSizeY
+			
+		if localMousePosY < thresholdY and position.y > 0:
+			step = clamp((thresholdY-localMousePosY)/10,1,5)
+			position.y -= step
+		elif thresholdY and position.y < 0:
+			position.y = 0
+			
+func _ready() -> void:
+	viewportSizeY = get_viewport_rect().size.y/zoom.y
+
+func _process(_delta):
+	scrolling(true, true)
+	if Input.is_action_just_released("Scroll Up"):
+		zoomInAndOut(zoomSpeed)
+	elif Input.is_action_just_released("Scroll Down"):
+		zoomInAndOut(-zoomSpeed)
+			
