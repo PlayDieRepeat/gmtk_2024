@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="RMaterialStack" load_steps=4 format=3 uid="uid://cw64oghrwf550"]
+
+[ext_resource type="Script" path="res://scripts/_resources/r_material_stack.gd" id="1_taklx"]
+[ext_resource type="Script" path="res://scripts/_resources/r_material.gd" id="2_lwjyk"]
+
+[sub_resource type="Resource" id="Resource_adk8i"]
+script = ExtResource("2_lwjyk")
+id = "favor"
+display_name = "favor"
+
+[resource]
+script = ExtResource("1_taklx")
+stacked_material = SubResource("Resource_adk8i")
+stack_count = 10
