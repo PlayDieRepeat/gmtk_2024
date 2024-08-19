@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="RTimeConstants" load_steps=2 format=3 uid="uid://p6f8jdfiqnav"]
+
+[ext_resource type="Script" path="res://scripts/_resources/r_time_constants.gd" id="1_nnksn"]
+
+[resource]
+script = ExtResource("1_nnksn")
+seconds_in_hour = 30
+start_of_day = 6
+end_of_day = 21

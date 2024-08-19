@@ -48,3 +48,4 @@ func _process(_delta):
 		zoomInAndOut(zoomSpeed)
 	elif Input.is_action_just_released("Scroll Down"):
 		zoomInAndOut(-zoomSpeed)
+			
