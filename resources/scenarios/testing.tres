@@ -1,0 +1,56 @@
+[gd_resource type="Resource" script_class="RScenarioValues" load_steps=17 format=3 uid="uid://c14csn7vlswum"]
+
+[ext_resource type="Script" path="res://scripts/_resources/r_scenario_values.gd" id="1_l6fbw"]
+[ext_resource type="Script" path="res://scripts/_resources/r_material_stack.gd" id="2_0t84c"]
+[ext_resource type="Resource" uid="uid://3kpa276sseob" path="res://resources/materials/cloth.tres" id="3_clc7g"]
+[ext_resource type="Resource" uid="uid://r05m2n5w07kb" path="res://resources/materials/favor.tres" id="4_6jq5r"]
+[ext_resource type="Resource" uid="uid://bv37ojbxge7uo" path="res://resources/materials/food.tres" id="5_af4n4"]
+[ext_resource type="Resource" uid="uid://cdsmuncw6nplf" path="res://resources/materials/fulfillment.tres" id="6_etgff"]
+[ext_resource type="Resource" uid="uid://bwtau4rb27yxt" path="res://resources/materials/villager.tres" id="7_oufhg"]
+[ext_resource type="Resource" uid="uid://54wdamax4i3s" path="res://resources/materials/stone.tres" id="8_tkuwj"]
+[ext_resource type="Resource" uid="uid://wscpuo1ajsvh" path="res://resources/materials/wood.tres" id="9_bqnou"]
+
+[sub_resource type="Resource" id="Resource_mcpxq"]
+script = ExtResource("2_0t84c")
+stacked_material = ExtResource("3_clc7g")
+stack_count = 10
+
+[sub_resource type="Resource" id="Resource_2c2m5"]
+script = ExtResource("2_0t84c")
+stacked_material = ExtResource("4_6jq5r")
+stack_count = 10
+
+[sub_resource type="Resource" id="Resource_o07cq"]
+script = ExtResource("2_0t84c")
+stacked_material = ExtResource("5_af4n4")
+stack_count = 10
+
+[sub_resource type="Resource" id="Resource_54e60"]
+script = ExtResource("2_0t84c")
+stacked_material = ExtResource("6_etgff")
+stack_count = 30
+
+[sub_resource type="Resource" id="Resource_1t6as"]
+script = ExtResource("2_0t84c")
+stacked_material = ExtResource("7_oufhg")
+stack_count = 5
+
+[sub_resource type="Resource" id="Resource_e6vqo"]
+script = ExtResource("2_0t84c")
+stacked_material = ExtResource("8_tkuwj")
+stack_count = 10
+
+[sub_resource type="Resource" id="Resource_u03g1"]
+script = ExtResource("2_0t84c")
+stacked_material = ExtResource("9_bqnou")
+stack_count = 10
+
+[resource]
+script = ExtResource("1_l6fbw")
+starting_stone = SubResource("Resource_e6vqo")
+starting_wood = SubResource("Resource_u03g1")
+starting_cloth = SubResource("Resource_mcpxq")
+starting_food = SubResource("Resource_o07cq")
+starting_population = SubResource("Resource_1t6as")
+starting_fulfillment = SubResource("Resource_54e60")
+starting_favor = SubResource("Resource_2c2m5")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djg0lvqvsj1a4"
-path="res://.godot/imported/ten_flagt.png-8818214fa80089310bb0c380527bbccc.ctex"
+uid="uid://cf18whdc2u2bf"
+path="res://.godot/imported/waiting_bubbles.png-7e1b2d22164e58ced481b37414df26c2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/buildings/ten_flagt.png"
-dest_files=["res://.godot/imported/ten_flagt.png-8818214fa80089310bb0c380527bbccc.ctex"]
+source_file="res://assets/images/ui/waiting_bubbles.png"
+dest_files=["res://.godot/imported/waiting_bubbles.png-7e1b2d22164e58ced481b37414df26c2.ctex"]
 
 [params]
 
