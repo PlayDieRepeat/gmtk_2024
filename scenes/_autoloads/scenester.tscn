@@ -1,9 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://dsaj00rb64dcy"]
+[gd_scene load_steps=6 format=3 uid="uid://dsaj00rb64dcy"]
 
 [ext_resource type="Script" path="res://scripts/_autoloads/scenester.gd" id="1_7h0d4"]
 [ext_resource type="Resource" uid="uid://dowv3jyjfcrb4" path="res://resources/scenes/main_menu.tres" id="2_1d6hn"]
+[ext_resource type="PackedScene" uid="uid://cuat3j3t5i28s" path="res://scenes/levels/levelTest.tscn" id="3_bbdpk"]
+[ext_resource type="Script" path="res://scripts/_resources/r_scene.gd" id="4_goux8"]
+
+[sub_resource type="Resource" id="Resource_w8wji"]
+script = ExtResource("4_goux8")
+scene = ExtResource("3_bbdpk")
+scene_id = "level_test"
 
 [node name="Scenester" type="Node"]
 process_mode = 3
 script = ExtResource("1_7h0d4")
 main_menu_scene = ExtResource("2_1d6hn")
+initial_scene = SubResource("Resource_w8wji")

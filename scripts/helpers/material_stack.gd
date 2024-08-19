@@ -8,7 +8,12 @@ func _init(p_stacked_material: RMaterial, p_stack_count: int) -> void:
 	stacked_material = p_stacked_material
 	stack_count = p_stack_count
 
-func add_to_stack(p_material_to_add: , p_count_to_add: int) -> int:
+func get_stack_count(p_material_to_check: RMaterial) -> int:
+	assert(p_material_to_check.id == stacked_material.id, "Trying to get the count of the incorrect material stack")
+
+	return stack_count
+
+func add_to_stack(p_material_to_add: RMaterial, p_count_to_add: int) -> int:
 	assert(p_material_to_add.id == stacked_material.id, "Trying to add the incorrect material to a stack")
 	
 	stack_count += p_count_to_add

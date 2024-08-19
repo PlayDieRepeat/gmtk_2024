@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bjxw6tw4ukkyn"]
 
-[ext_resource type="Texture2D" uid="uid://cnxixdvsqlkqu" path="res://assets/images/gods/pig.png" id="1_puxwf"]
+[ext_resource type="Texture2D" uid="uid://cnxixdvsqlkqu" path="res://assets/images/gods/pig.png" id="1_cxm4y"]
 
 [node name="pigGod" type="Node2D"]
 
@@ -8,4 +8,4 @@
 modulate = Color(1, 1, 0.541176, 0.490196)
 position = Vector2(56, 49)
 scale = Vector2(0.468, 0.5)
-texture = ExtResource("1_puxwf")
+texture = ExtResource("1_cxm4y")

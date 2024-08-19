@@ -5,4 +5,4 @@
 [resource]
 script = ExtResource("1_6rgw1")
 id = "villager"
-display_name = "villager"
+display_name = "people"

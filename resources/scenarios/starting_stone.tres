@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="RMaterialStack" load_steps=4 format=3 uid="uid://cgvjgdl0ws05o"]
+
+[ext_resource type="Script" path="res://scripts/_resources/r_material_stack.gd" id="1_p5cyf"]
+[ext_resource type="Script" path="res://scripts/_resources/r_material.gd" id="2_pqv12"]
+
+[sub_resource type="Resource" id="Resource_h8awi"]
+script = ExtResource("2_pqv12")
+id = "stone"
+display_name = "stone"
+
+[resource]
+script = ExtResource("1_p5cyf")
+stacked_material = SubResource("Resource_h8awi")
+stack_count = 10
