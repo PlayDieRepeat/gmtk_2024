@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6x87uubuyc2"]
+
+[ext_resource type="Script" path="res://scripts/menus/material_display.gd" id="1_xx4gv"]
+[ext_resource type="Texture2D" uid="uid://dyc0su7x3hea1" path="res://assets/images/debug/grid_square.png" id="2_uss8m"]
+
+[node name="MaterialDisplay" type="HBoxContainer" node_paths=PackedStringArray("icon_rect", "material_label", "amount_label", "add_button", "remove_button")]
+script = ExtResource("1_xx4gv")
+icon_rect = NodePath("MaterialIcon")
+material_label = NodePath("MaterialLabel")
+amount_label = NodePath("AmountLabel")
+add_button = NodePath("Add")
+remove_button = NodePath("Button")
+
+[node name="MaterialIcon" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_uss8m")
+
+[node name="MaterialLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(60, 2.08165e-12)
+layout_mode = 2
+text = "Name:"
+vertical_alignment = 1
+
+[node name="AmountLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(30, 2.08165e-12)
+layout_mode = 2
+text = "000"
+vertical_alignment = 1
+
+[node name="Add" type="Button" parent="."]
+custom_minimum_size = Vector2(20, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "+"
+icon_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(20, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "-"
