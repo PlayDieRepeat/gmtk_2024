@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/_autoloads/scenester.gd" id="1_7h0d4"]
 [ext_resource type="Resource" uid="uid://dowv3jyjfcrb4" path="res://resources/scenes/main_menu.tres" id="2_1d6hn"]
-[ext_resource type="PackedScene" uid="uid://v2k1bje4c7m4" path="res://scenes/levels/levelTest.tscn" id="3_cuift"]
+[ext_resource type="PackedScene" uid="uid://cn30r1xbmmkob" path="res://scenes/levels/levelTest.tscn" id="3_cuift"]
 [ext_resource type="Script" path="res://scripts/_resources/r_scene.gd" id="4_ccw7k"]
 
 [sub_resource type="Resource" id="Resource_p167y"]
@@ -15,3 +15,4 @@ process_mode = 3
 script = ExtResource("1_7h0d4")
 main_menu_scene = ExtResource("2_1d6hn")
 initial_scene = SubResource("Resource_p167y")
+should_load_initial_alt = true

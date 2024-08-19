@@ -8,6 +8,7 @@ signal loading_done
 
 @export var main_menu_scene: RScene
 @export var initial_scene: RScene
+@export var should_load_initial_alt: bool = false
 var current_scene_id := ""
 var current_scene: Node = null
 var _loading_screen_path: String = "res://scenes/systems/loading_screen.tscn"
@@ -21,7 +22,9 @@ var use_sub_threads: bool = true
 ## main Menu scene.  Sets the current scene to whatever is currently in the scene.
 func _ready() -> void:
 	assert(main_menu_scene != null,"Main menu scene is not set")
-	if initial_scene == null:
+	if should_load_initial_alt == true:
+		assert(initial_scene != null, "Initial scene is not set")
+	else:
 		initial_scene = main_menu_scene
 	var root := get_tree().root
 	current_scene = root.get_child(root.get_child_count() -1)
@@ -63,6 +66,7 @@ func setup_loading_screen() -> void:
 
 func start_load(_scene_to_load: RScene) -> void:
 	_target_scene = _scene_to_load
+	assert(_target_scene.scene != null, "")
 	var state = ResourceLoader.load_threaded_request(_target_scene.scene.get_path(), "", use_sub_threads)
 	if state == OK:
 		set_process(true)
