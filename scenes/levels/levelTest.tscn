@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/levels/level1.gd" id="1_qugou"]
 [ext_resource type="Texture2D" uid="uid://cnfo8uvub8twr" path="res://assets/images/sky.jpg" id="2_ex08u"]
-[ext_resource type="PackedScene" uid="uid://bjxw6tw4ukkyn" path="res://resources/scenes/materials/gods/pigGod.tscn" id="3_15xkn"]
+[ext_resource type="PackedScene" uid="uid://bjxw6tw4ukkyn" path="res://scenes/gods/pigGod.tscn" id="3_15xkn"]
 [ext_resource type="Texture2D" uid="uid://cpohewy4agqu0" path="res://assets/images/ground.png" id="4_pihki"]
 [ext_resource type="PackedScene" uid="uid://bxk6fl5f820xw" path="res://resources/scenes/materials/buildings/scaffold.tscn" id="5_86pwy"]
 [ext_resource type="PackedScene" uid="uid://b5t8vmp1prekn" path="res://resources/scenes/materials/buildings/temple.tscn" id="6_5curv"]

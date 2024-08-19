@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RGod" load_steps=2 format=3 uid="uid://bmte4vtapjwc2"]
+
+[ext_resource type="Script" path="res://scripts/_resources/r_god.gd" id="1_22lij"]
+
+[resource]
+script = ExtResource("1_22lij")
+passive = ""
+happiness = 0
+happiness_tier_rewards = []
+tithe = 0
+tithe_thresholds = []
