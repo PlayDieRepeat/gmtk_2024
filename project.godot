@@ -27,10 +27,10 @@ manager/music/bus="Music"
 
 [autoload]
 
-SoundManager="*res://addons/resonate/sound_manager/sound_manager.gd"
-MusicManager="*res://addons/resonate/music_manager/music_manager.gd"
 Scenester="*res://scenes/_autoloads/scenester.tscn"
 AudioBankRobber="*res://scenes/_autoloads/audio_bank_robber.tscn"
+SoundManager="*res://addons/resonate/sound_manager/sound_manager.gd"
+MusicManager="*res://addons/resonate/music_manager/music_manager.gd"
 
 [display]
 
@@ -46,7 +46,7 @@ export/convert_text_resources_to_binary=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/filesystem_drawer/plugin.cfg", "res://addons/resonate/plugin.cfg")
+enabled=PackedStringArray("res://addons/filesystem_drawer/plugin.cfg", "res://addons/finite_state_machine/plugin.cfg", "res://addons/resonate/plugin.cfg")
 
 [input]
 
