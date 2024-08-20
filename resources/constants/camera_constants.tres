@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RCameraConstants" load_steps=2 format=3 uid="uid://b7qymya8ffvmv"]
+
+[ext_resource type="Script" path="res://scripts/_resources/r_camera_constants.gd" id="1_xid2w"]
+
+[resource]
+script = ExtResource("1_xid2w")
+camera_x_step_size = 5
+camera_y_step_size = 5
+default_view_width = 640
+default_view_height = 360
+zoom_speed = Vector2(0.1, 0.1)
