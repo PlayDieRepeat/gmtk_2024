@@ -40,13 +40,17 @@ window/size/window_width_override=1600
 window/size/window_height_override=900
 window/stretch/mode="canvas_items"
 
+[dotnet]
+
+project/assembly_name="godot_template"
+
 [editor]
 
 export/convert_text_resources_to_binary=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/filesystem_drawer/plugin.cfg", "res://addons/finite_state_machine/plugin.cfg", "res://addons/resonate/plugin.cfg")
+enabled=PackedStringArray("res://addons/finite_state_machine/plugin.cfg", "res://addons/resonate/plugin.cfg")
 
 [input]
 
