@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://innnb2tbok8l"]
 
 [ext_resource type="Script" path="res://scripts/systems/world_controller.gd" id="1_mxxxw"]
-[ext_resource type="Resource" uid="uid://p6f8jdfiqnav" path="res://resources/constants/time_constants.tres" id="2_d3xj7"]
+[ext_resource type="Resource" path="res://resources/constants/time_constants.tres" id="2_d3xj7"]
 [ext_resource type="Texture2D" uid="uid://ckg8negcy31xd" path="res://assets/images/blue_sky.png" id="3_ot6mi"]
 [ext_resource type="Texture2D" uid="uid://dcqes7x801sf6" path="res://assets/images/Mountains.png" id="4_gd2m1"]
 [ext_resource type="Texture2D" uid="uid://dhst3f6w5g8wn" path="res://assets/images/alpha.png" id="5_k2k73"]
