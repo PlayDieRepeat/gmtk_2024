@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="RTerrainType" load_steps=2 format=3 uid="uid://b0gojq4hbc63c"]
+
+[ext_resource type="Script" path="res://scripts/_resources/r_terrain_type.gd" id="1_3k145"]
+
+[resource]
+script = ExtResource("1_3k145")
+id = "Shrubland"
+display_name = "Berries and Fruit"
