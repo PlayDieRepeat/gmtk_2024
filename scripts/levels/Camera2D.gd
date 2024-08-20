@@ -3,7 +3,7 @@ extends Camera2D
 var step = 5
 var maxStep = 5
 var zoomSpeed = Vector2(0.1,0.1)
-var viewportSizeY: float = get_viewport_rect().size.y/zoom.y
+var viewportSizeY: float
 
 func zoomInAndOut(zoomAmount):
 	var maxZoomOut = 360
