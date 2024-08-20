@@ -21,16 +21,17 @@ func scrolling() -> void:
 	
 	if local_mouse_pos_x < threshold_x and position.x > -camera_constant.default_view_width:
 		x_scroll_step_size = -clamp((threshold_x-local_mouse_pos_x)/10,1,camera_constant.camera_x_step_size)
+		position.x += x_scroll_step_size
 	elif local_mouse_pos_x > viewport_width - threshold_x and position.x < camera_constant.default_view_width:
 		x_scroll_step_size = clamp((local_mouse_pos_x-(viewport_width - threshold_x))/10,1,camera_constant.camera_x_step_size)
+		position.x += x_scroll_step_size
 	
 	if local_mouse_pos_y > viewport_height - threshold_y and position.y < camera_constant.default_view_height-viewport_height:
 		y_scroll_step_size = clamp((local_mouse_pos_y-(viewport_height-threshold_y))/10,1,camera_constant.camera_y_step_size)
+		position.y += y_scroll_step_size
 	elif local_mouse_pos_y < threshold_y and position.y > 0:
 		y_scroll_step_size = -clamp((threshold_y-local_mouse_pos_y)/10,1,camera_constant.camera_y_step_size)
-	
-	position.x += x_scroll_step_size
-	position.y += y_scroll_step_size
+		position.y += y_scroll_step_size
 	
 	if position.y > camera_constant.default_view_height-viewport_height:
 		position.y = camera_constant.default_view_height-viewport_height

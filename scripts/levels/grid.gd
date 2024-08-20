@@ -1,7 +1,6 @@
 extends Node2D
 
-@export var grid_position: Vector2 = Vector2.ZERO
-@export var 
+@export var grid: RGrid = Vector2.ZERO
 
 var cell_size: int = 32 # cells are square
 var grid_size: Array[int] = [4, 4]
