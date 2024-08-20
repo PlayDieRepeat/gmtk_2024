@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://innnb2tbok8l"]
+[gd_scene load_steps=8 format=3 uid="uid://innnb2tbok8l"]
 
+[ext_resource type="Script" path="res://scripts/systems/world_event_system.gd" id="1_h4j28"]
 [ext_resource type="Script" path="res://scripts/systems/world_controller.gd" id="1_mxxxw"]
 [ext_resource type="Resource" path="res://resources/constants/time_constants.tres" id="2_d3xj7"]
 [ext_resource type="Texture2D" uid="uid://ckg8negcy31xd" path="res://assets/images/blue_sky.png" id="3_ot6mi"]
@@ -12,6 +13,80 @@
 [node name="GlobalTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 autostart = true
+
+[node name="EventSystem" type="Node" parent="."]
+script = ExtResource("1_h4j28")
+
+[node name="EndOfDayCard" type="Control" parent="EventSystem"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="EventSystem/EndOfDayCard"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 280.0
+offset_bottom = 130.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.992157, 0.878431, 0.67451, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EventSystem/EndOfDayCard"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Title" type="Label" parent="EventSystem/EndOfDayCard/VBoxContainer"]
+layout_mode = 2
+text = "End of Day Summary"
+
+[node name="Subtitle" type="Label" parent="EventSystem/EndOfDayCard/VBoxContainer"]
+layout_mode = 2
+text = "After a hard day here's what you accomplished"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EventSystem/EndOfDayCard/VBoxContainer"]
+layout_mode = 2
+
+[node name="ParticulateSummary" type="PanelContainer" parent="EventSystem/EndOfDayCard/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Stone" type="Label" parent="EventSystem/EndOfDayCard/VBoxContainer/HBoxContainer/ParticulateSummary"]
+layout_mode = 2
+text = "Stone Gained:"
+
+[node name="Wood" type="Label" parent="EventSystem/EndOfDayCard/VBoxContainer/HBoxContainer/ParticulateSummary"]
+layout_mode = 2
+text = "Wood Gained:"
+
+[node name="Food" type="Label" parent="EventSystem/EndOfDayCard/VBoxContainer/HBoxContainer/ParticulateSummary"]
+layout_mode = 2
+text = "Food Gained:"
+
+[node name="Population" type="Label" parent="EventSystem/EndOfDayCard/VBoxContainer/HBoxContainer/ParticulateSummary"]
+layout_mode = 2
+text = "Population Gained:"
+
+[node name="GodSummary" type="PanelContainer" parent="EventSystem/EndOfDayCard/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Favor" type="Label" parent="EventSystem/EndOfDayCard/VBoxContainer/HBoxContainer/GodSummary"]
+layout_mode = 2
+text = "Favor Gained:"
 
 [node name="world_controller" type="Node" parent="."]
 script = ExtResource("1_mxxxw")
@@ -79,3 +154,4 @@ offset_bottom = 360.0
 texture = ExtResource("6_rbdk2")
 
 [connection signal="timeout" from="GlobalTimer" to="world_controller" method="_on_global_timer_timeout"]
+[connection signal="new_day" from="world_controller" to="EventSystem" method="_on_world_controller_new_day"]
