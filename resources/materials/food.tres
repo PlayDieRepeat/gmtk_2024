@@ -5,4 +5,4 @@
 [resource]
 script = ExtResource("1_kqy6k")
 id = "food"
-display_name = "food"
+display_name = "Food"

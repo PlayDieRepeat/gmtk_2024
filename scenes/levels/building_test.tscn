@@ -1,0 +1,71 @@
+[gd_scene load_steps=10 format=3 uid="uid://dslwdbb8w5y7p"]
+
+[ext_resource type="PackedScene" uid="uid://b5ru1bmvckk8a" path="res://scenes/systems/population_manager.tscn" id="1_frddk"]
+[ext_resource type="Script" path="res://scripts/systems/metropolis.gd" id="1_jyjxa"]
+[ext_resource type="Resource" uid="uid://ccyyrasw84v38" path="res://resources/buildings/tent.tres" id="3_g74mg"]
+[ext_resource type="Resource" uid="uid://c14csn7vlswum" path="res://resources/scenarios/testing.tres" id="3_prlsa"]
+[ext_resource type="PackedScene" uid="uid://esp3ey8uhv7t" path="res://scenes/buildings/building.tscn" id="5_qsf5b"]
+[ext_resource type="Script" path="res://scripts/menus/debug_resource_grid.gd" id="7_ho8eq"]
+[ext_resource type="PackedScene" uid="uid://c6x87uubuyc2" path="res://scenes/menus/material_display.tscn" id="8_dg2hi"]
+[ext_resource type="Script" path="res://scripts/systems/material_warehouse.gd" id="12_nqwws"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_dqyr3"]
+
+[node name="Node" type="Node"]
+
+[node name="Timer" type="Timer" parent="." groups=["world_timer"]]
+unique_name_in_owner = true
+autostart = true
+
+[node name="tempbg" type="TextureRect" parent="."]
+self_modulate = Color(0, 0.976471, 0.980392, 1)
+offset_right = 640.0
+offset_bottom = 360.0
+texture = SubResource("PlaceholderTexture2D_dqyr3")
+
+[node name="PopulationManager" parent="." instance=ExtResource("1_frddk")]
+
+[node name="MaterialWarehouse" type="Node" parent="."]
+script = ExtResource("12_nqwws")
+starting_values = ExtResource("3_prlsa")
+
+[node name="Metropolis" type="Node" parent="." node_paths=PackedStringArray("warehouse")]
+script = ExtResource("1_jyjxa")
+starting_values = ExtResource("3_prlsa")
+building_scene = ExtResource("5_qsf5b")
+warehouse = NodePath("../MaterialWarehouse")
+
+[node name="Building" parent="Metropolis" node_paths=PackedStringArray("metropolis") instance=ExtResource("5_qsf5b")]
+position = Vector2(280, 320)
+building_data = ExtResource("3_g74mg")
+metropolis = NodePath("..")
+
+[node name="GameplayUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="ResourceGrid" type="GridContainer" parent="GameplayUI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -220.0
+offset_right = 220.0
+offset_bottom = 71.0
+grow_horizontal = 2
+columns = 3
+script = ExtResource("7_ho8eq")
+material_display_control = ExtResource("8_dg2hi")
+
+[connection signal="timeout" from="Timer" to="Metropolis" method="_on_tick"]
+[connection signal="initialize_stack_ui" from="MaterialWarehouse" to="GameplayUI/ResourceGrid" method="_on_initiliaze_control"]
+[connection signal="material_stack_changed" from="MaterialWarehouse" to="GameplayUI/ResourceGrid" method="_on_material_stack_changed"]
+[connection signal="debug_add_material" from="GameplayUI/ResourceGrid" to="MaterialWarehouse" method="add_material"]
+[connection signal="debug_remove_material" from="GameplayUI/ResourceGrid" to="MaterialWarehouse" method="remove_material"]

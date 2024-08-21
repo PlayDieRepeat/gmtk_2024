@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RScenarioValues" load_steps=17 format=3 uid="uid://c14csn7vlswum"]
+[gd_resource type="Resource" script_class="RScenarioValues" load_steps=21 format=3 uid="uid://c14csn7vlswum"]
 
 [ext_resource type="Script" path="res://scripts/_resources/r_scenario_values.gd" id="1_l6fbw"]
 [ext_resource type="Script" path="res://scripts/_resources/r_material_stack.gd" id="2_0t84c"]
@@ -6,7 +6,9 @@
 [ext_resource type="Resource" uid="uid://r05m2n5w07kb" path="res://resources/materials/favor.tres" id="4_6jq5r"]
 [ext_resource type="Resource" uid="uid://bv37ojbxge7uo" path="res://resources/materials/food.tres" id="5_af4n4"]
 [ext_resource type="Resource" uid="uid://cdsmuncw6nplf" path="res://resources/materials/fulfillment.tres" id="6_etgff"]
+[ext_resource type="Resource" uid="uid://d2ukj2ro02jds" path="res://resources/materials/housing.tres" id="7_deggw"]
 [ext_resource type="Resource" uid="uid://bwtau4rb27yxt" path="res://resources/materials/villager.tres" id="7_oufhg"]
+[ext_resource type="Resource" uid="uid://rd47bgi8o0q6" path="res://resources/materials/hunger.tres" id="8_61wfu"]
 [ext_resource type="Resource" uid="uid://54wdamax4i3s" path="res://resources/materials/stone.tres" id="8_tkuwj"]
 [ext_resource type="Resource" uid="uid://wscpuo1ajsvh" path="res://resources/materials/wood.tres" id="9_bqnou"]
 
@@ -30,6 +32,16 @@ script = ExtResource("2_0t84c")
 stacked_material = ExtResource("6_etgff")
 stack_count = 30
 
+[sub_resource type="Resource" id="Resource_i5tqf"]
+script = ExtResource("2_0t84c")
+stacked_material = ExtResource("7_deggw")
+stack_count = 0
+
+[sub_resource type="Resource" id="Resource_uof24"]
+script = ExtResource("2_0t84c")
+stacked_material = ExtResource("8_61wfu")
+stack_count = 0
+
 [sub_resource type="Resource" id="Resource_1t6as"]
 script = ExtResource("2_0t84c")
 stacked_material = ExtResource("7_oufhg")
@@ -52,5 +64,7 @@ starting_wood = SubResource("Resource_u03g1")
 starting_cloth = SubResource("Resource_mcpxq")
 starting_food = SubResource("Resource_o07cq")
 starting_population = SubResource("Resource_1t6as")
+starting_housing = SubResource("Resource_i5tqf")
+starting_hunger = SubResource("Resource_uof24")
 starting_fulfillment = SubResource("Resource_54e60")
 starting_favor = SubResource("Resource_2c2m5")

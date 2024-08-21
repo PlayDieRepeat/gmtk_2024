@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dq8s4idfun2xu"]
+
+[ext_resource type="Script" path="res://scripts/states/building_states/waiting_state.gd" id="1_gjb81"]
+
+[node name="Waiting" type="Node"]
+script = ExtResource("1_gjb81")
