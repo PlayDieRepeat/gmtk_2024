@@ -1,7 +1,7 @@
 extends Resource
 class_name RTimeConstants
 
-@export var seconds_in_hour: int = 30
+@export var seconds_in_hour: int = 12
 @export var start_of_day: int = 6
 @export var end_of_day: int = 21
 

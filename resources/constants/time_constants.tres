@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_nnksn")
-seconds_in_hour = 30
+seconds_in_hour = 12
 start_of_day = 6
 end_of_day = 21

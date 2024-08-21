@@ -1,0 +1,104 @@
+[gd_scene load_steps=3 format=3 uid="uid://bd3cvxjknt16n"]
+
+[ext_resource type="Script" path="res://scripts/systems/end_of_day_card.gd" id="1_vmyrd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_smacc"]
+bg_color = Color(0.94902, 0.858824, 0.796078, 1)
+
+[node name="EndOfDayCard" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(20, 20)
+script = ExtResource("1_vmyrd")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = -150.0
+offset_top = -75.0
+offset_right = 150.0
+offset_bottom = 75.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_smacc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 166.0
+
+[node name="Title" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "End of Day Summary"
+
+[node name="Subtitle" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "Here's what you accomplished today"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+
+[node name="ParticularsSummary" type="VBoxContainer" parent="Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Stone" type="Label" parent="Panel/VBoxContainer/HBoxContainer/ParticularsSummary"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Stone Gained:"
+
+[node name="Wood" type="Label" parent="Panel/VBoxContainer/HBoxContainer/ParticularsSummary"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Wood Gained:"
+
+[node name="Food" type="Label" parent="Panel/VBoxContainer/HBoxContainer/ParticularsSummary"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Food Gained:"
+
+[node name="Population" type="Label" parent="Panel/VBoxContainer/HBoxContainer/ParticularsSummary"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Population Gained:"
+
+[node name="MarginContainer2" type="MarginContainer" parent="Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+
+[node name="GodEvents" type="VBoxContainer" parent="Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Favor" type="Label" parent="Panel/VBoxContainer/HBoxContainer/GodEvents"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Favor Gained:"
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 16
+
+[node name="CloseButton" type="Button" parent="Panel/VBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "Continue"
+
+[connection signal="button_up" from="Panel/VBoxContainer/MarginContainer/CloseButton" to="." method="_on_close_button_button_up"]

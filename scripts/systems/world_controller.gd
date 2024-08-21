@@ -6,7 +6,7 @@ var hour_count: int = 0
 var day_count: int = 0
 var starting_alpha_float: float = 0.5
 var alpha_float: float = starting_alpha_float
-var alpha_change_float: float = alpha_float/180.0
+var alpha_change_float: float = 0
 var ui_time = null
 
 signal new_day
@@ -20,6 +20,7 @@ func _ready():
 	var margin_value: int = 15
 	$CanvasLayer/MarginContainer.add_theme_constant_override("margin_left", margin_value)
 	ui_time = $CanvasLayer/MarginContainer/Label
+	alpha_change_float = alpha_float/(time_constant.seconds_in_hour*6)
 
 func _process(_delta: float) -> void:
 	var m_string: String = " AM"
