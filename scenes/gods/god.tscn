@@ -1,15 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dv0twjcqcp3dt"]
+[gd_scene load_steps=3 format=3 uid="uid://dv0twjcqcp3dt"]
 
-[ext_resource type="Script" path="res://scenes/gods/god.gd" id="1_adyte"]
-[ext_resource type="Resource" uid="uid://bmte4vtapjwc2" path="res://resources/scenes/gods/fourth_god.tres" id="2_7v6wq"]
-[ext_resource type="Texture2D" uid="uid://cnxixdvsqlkqu" path="res://assets/images/gods/pig.png" id="2_dsa37"]
+[ext_resource type="Script" path="res://scripts/gods/god.gd" id="1_adyte"]
+[ext_resource type="Resource" uid="uid://cm0a8vlbhldmn" path="res://resources/gods/pig_god.tres" id="2_jelpa"]
 
 [node name="God" type="Node2D"]
 script = ExtResource("1_adyte")
-god_resource = ExtResource("2_7v6wq")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 0.541176, 0.490196)
-position = Vector2(56, 49)
-scale = Vector2(0.468, 0.5)
-texture = ExtResource("2_dsa37")
+god_resource = ExtResource("2_jelpa")

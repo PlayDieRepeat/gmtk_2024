@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="RGod" load_steps=4 format=3 uid="uid://cm0a8vlbhldmn"]
+
+[ext_resource type="Texture2D" uid="uid://cnxixdvsqlkqu" path="res://assets/images/gods/pig.png" id="1_8gg7h"]
+[ext_resource type="Script" path="res://scripts/_resources/r_god.gd" id="2_i3ovy"]
+[ext_resource type="Resource" uid="uid://derkw5664qs3w" path="res://resources/gods/tithes/pig_tithe.tres" id="3_a57e1"]
+
+[resource]
+script = ExtResource("2_i3ovy")
+image = ExtResource("1_8gg7h")
+passive = "PigPassive"
+tithe = ExtResource("3_a57e1")
+favor_cap = 100

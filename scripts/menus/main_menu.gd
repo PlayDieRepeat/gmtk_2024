@@ -18,7 +18,7 @@ var button_click_sfx_instance: PooledAudioStreamPlayer
 func _ready() -> void:
 	# We reserve sfx player instances so that we can play these sounds back monophonically
 	button_hover_sfx_instance = SoundManager.instance("ui", "ui_bloop", "UI Sounds")
-	button_click_sfx_instance = SoundManager.instance("ui", "ui_buzz", "UI Sounds")
+	button_click_sfx_instance = SoundManager.instance("ui", "ui_bloop", "UI Sounds")
 	# Load the start menu by default
 	_ready_start_menu()
 

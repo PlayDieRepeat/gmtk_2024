@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="RTithe" load_steps=3 format=3 uid="uid://d0wb8l5oflcf8"]
+
+[ext_resource type="Script" path="res://scripts/_resources/r_tithe.gd" id="1_ss1we"]
+[ext_resource type="Resource" uid="uid://54wdamax4i3s" path="res://resources/materials/stone.tres" id="2_vewu7"]
+
+[resource]
+script = ExtResource("1_ss1we")
+favor_per_tithe_min = 4
+favor_per_tithe_mid = 6
+favor_per_tithe_max = 9
+stacked_material = ExtResource("2_vewu7")
+stack_count = 30
