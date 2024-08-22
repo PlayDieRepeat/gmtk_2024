@@ -5,4 +5,4 @@
 
 [node name="God" type="Node2D"]
 script = ExtResource("1_adyte")
-god_resource = ExtResource("2_jelpa")
+god_data = ExtResource("2_jelpa")

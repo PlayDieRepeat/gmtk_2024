@@ -6,7 +6,9 @@ class_name RGod
 @export var tithe: RTithe = null
 @export var favor_cap: int = 0
 
-func _init(p_image: Texture2D = null, p_passive: String = "", p_tithe: RTithe = null) -> void:
+func _init(p_image: Texture2D = null, p_passive: String = "",
+p_tithe: RTithe = null, p_favor_cap: int = 0) -> void:
 	image = p_image
 	passive = p_passive
 	tithe = p_tithe
+	favor_cap = p_favor_cap
