@@ -22,6 +22,5 @@ func tithe(p_tithe: RMaterialStack) -> void:
 		if p_tithe.stack_count >= god_data.tithe.stack_count:
 			favor += god_data.tithe.favor_per_tithe_max
 			emit_signal("favor_has_changed", favor)
-			print("Good Tithe!!! I am happy!")
 			if favor >= god_data.favor_cap:
 				emit_signal("favor_cap_reached")

@@ -34,8 +34,8 @@ func _ready():
 	ui_favor = $CanvasLayer/MarginContainer/VBoxContainer/Favor
 	ui_favor.text = "Favor: "
 	var god_background: TextureRect = $ParallaxBackground/GodLayer/GodImage
-	var new_god: RGod = ResourceLoader.load("res://resources/gods/cat_god.tres", "RGod")
-	%God.set_god(new_god)
+	#var new_god: RGod = ResourceLoader.load("res://resources/gods/cat_god.tres", "RGod")
+	#%God.set_god(new_god)
 	god_background.texture = %God.god_data.image
 	hour_count = time_constant.start_of_day
 	$ParallaxBackground/AlphaLayer/AlphaImage.self_modulate.a = alpha_float
@@ -87,8 +87,13 @@ func _on_global_timer_timeout():
 	if seconds_count == time_constant.seconds_in_hour:
 		hour_count += 1
 		seconds_count = 0
-		var random_tithe: int = randi_range(8, 12)
-		var tithing: RMaterialStack = RMaterialStack.new(villager_mat_cache, random_tithe)
+		var random_tithe_count: int = randi_range(6, 15)
+		var random_tithe_flip: int = randi_range(0, 1)
+		var tithing: RMaterialStack
+		if random_tithe_flip == 0:
+			tithing = RMaterialStack.new(food_mat_cache, random_tithe_count)
+		else:
+			tithing = RMaterialStack.new(villager_mat_cache, random_tithe_count)
 		ui_tithing.text = ui_tithing_text_ph % tithing.stacked_material.display_name
 		%God.tithe(tithing)
 		new_hour.emit()
