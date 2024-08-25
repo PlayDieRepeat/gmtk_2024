@@ -9,6 +9,7 @@ signal loading_done
 @export var main_menu_scene: RScene
 @export var initial_scene: RScene
 @export var should_load_initial_alt: bool = false
+@export var pause_menu: PackedScene = null
 var current_scene_id := ""
 var current_scene: Node = null
 var _loading_screen_path: String = "res://scenes/systems/loading_screen.tscn"
