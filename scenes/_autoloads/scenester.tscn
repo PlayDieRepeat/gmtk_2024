@@ -1,20 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://dsaj00rb64dcy"]
+[gd_scene load_steps=5 format=3 uid="uid://dsaj00rb64dcy"]
 
 [ext_resource type="Script" path="res://scripts/_autoloads/scenester.gd" id="1_7h0d4"]
 [ext_resource type="Resource" uid="uid://dowv3jyjfcrb4" path="res://resources/scenes/main_menu.tres" id="2_1d6hn"]
-[ext_resource type="PackedScene" uid="uid://cn30r1xbmmkob" path="res://scenes/levels/levelTest.tscn" id="3_cuift"]
-[ext_resource type="Script" path="res://scripts/_resources/r_scene.gd" id="4_ccw7k"]
-[ext_resource type="PackedScene" uid="uid://bleoor11yvpc0" path="res://scenes/menus/pause_menu.tscn" id="5_ivinq"]
-
-[sub_resource type="Resource" id="Resource_p167y"]
-script = ExtResource("4_ccw7k")
-scene = ExtResource("3_cuift")
-scene_id = "TestLevel"
+[ext_resource type="Resource" uid="uid://bkccupmu5mjrh" path="res://resources/scenes/game_scenes/level_1.tres" id="3_mqhwx"]
+[ext_resource type="PackedScene" path="res://scenes/menus/pause_menu.tscn" id="5_ivinq"]
 
 [node name="Scenester" type="Node"]
 process_mode = 3
 script = ExtResource("1_7h0d4")
 main_menu_scene = ExtResource("2_1d6hn")
-initial_scene = SubResource("Resource_p167y")
+initial_scene = ExtResource("3_mqhwx")
 should_load_initial_alt = true
 pause_menu = ExtResource("5_ivinq")

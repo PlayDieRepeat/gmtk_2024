@@ -24,7 +24,7 @@ signal build_button_pressed(p_building: RBuilding)
 func _ready() -> void:
 	assert(metropolis != null, "No reference to Metropolis")
 	world_timer = get_tree().get_first_node_in_group("world_timer")
-	assert(world_timer != null, "No reference to Metropolis")
+	assert(world_timer != null, "No reference to World Timer")
 	_generate_states()
 	if building_data == null:
 		state_machine.change_state("Empty")

@@ -9,11 +9,14 @@ class_name Metropolis
 @export var warehouse: MaterialWarehouse
 
 var waiting_queue: Array[Building]
+var world_timer: Timer
 
-signal build_button_pressed(p_building: RBuilding)
+signal build_button_pressed(p_building: Building)
 
 func _ready() -> void:
-	pass
+	world_timer = get_tree().get_first_node_in_group("world_timer")
+	assert(world_timer != null, "No reference to World Timer")
+	world_timer.timeout.connect(_on_tick)
 
 func _on_build_pressed(p_building: Building) -> void:
 	build_button_pressed.emit(p_building)
