@@ -3,6 +3,8 @@ extends Node
 enum InputType {AUTO_DETECT, FORCE_CONTROLLER, FORCE_MOUSE_KEYBOARD}
 @export_group("Input Options")
 @export var input_detect_type: InputType
+@export_group("Debug Menu")
+@export var debug_menu_packed: PackedScene
 enum InputState {MENU_STATE, GAME_STATE, TRANSITIONAL_STATE, PAUSE_STATE, RECONNECT_STATE}
 var input_state: InputState = InputState.MENU_STATE
 var last_input_state: InputState = input_state
@@ -12,6 +14,7 @@ var mouse_relative_change: Vector2 = Vector2.ZERO
 var gamepad_detected := false
 var should_consume_event:= true
 var is_pausing := false
+var debug_menu: Node
 
 signal back_to_start_from_pause_menu
 signal game_state_has_changed(p_state: String)
@@ -20,7 +23,11 @@ var gamepads: Array[int]= []
 var gamepad_info: Array[Dictionary]= []
 
 func _ready() -> void:
+	assert(debug_menu_packed != null, "Debug menu not set!!")
 	Input.joy_connection_changed.connect(_on_joy_connection_changed)
+	if Elephant.is_debug_build == true:
+		var debug_menu = debug_menu_packed.instantiate()
+		add_child(debug_menu)
 
 func _on_joy_connection_changed(device: int, connected: bool) -> void:
 	_get_gamepads()
@@ -63,7 +70,8 @@ func _process_input(event: InputEvent) -> void:
 			#is_pausing = false TODO: probably need to remove these
 			unpause_game()
 	if Input.is_action_just_pressed("DebugMenu"):
-		Critters.display_or_hide_debug_ui()
+		if Elephant.is_debug_build == true:
+			debug_menu.display_or_hide_debug_ui()
 	
 	match input_detect_type:
 		InputType.AUTO_DETECT:
@@ -85,7 +93,7 @@ func _process_gamepad_input(event: InputEvent) -> void:
 func _process_key_and_mouse_input(event: InputEvent) -> void:
 	pass
 
-# the built-in process is used mostly to handle the input state machine
+# not sure Brainiac needs this.
 func _process(_delta: float) -> void:
 	match input_state:
 		InputState.MENU_STATE:

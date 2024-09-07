@@ -14,7 +14,7 @@
 
 [node name="world" type="Node2D"]
 
-[node name="GlobalTimer" type="Timer" parent="."]
+[node name="WorldTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 autostart = true
 
@@ -102,6 +102,6 @@ offset_right = 1280.0
 offset_bottom = 360.0
 texture = ExtResource("6_rbdk2")
 
-[connection signal="timeout" from="GlobalTimer" to="world_controller" method="_on_global_timer_timeout"]
+[connection signal="timeout" from="WorldTimer" to="world_controller" method="_on_global_timer_timeout"]
 [connection signal="favor_has_changed" from="God" to="world_controller" method="_on_god_favor_has_changed"]
 [connection signal="new_day" from="world_controller" to="EventSystem" method="_on_world_controller_new_day"]

@@ -27,13 +27,12 @@ manager/music/bus="Music"
 
 [autoload]
 
+Elephant="*res://scenes/_autoloads/elephant.tscn"
 Brainiac="*res://scenes/systems/brainiac.tscn"
 Scenester="*res://scenes/_autoloads/scenester.tscn"
-Critters="*res://scenes/_autoloads/critters.tscn"
 AudioBankRobber="*res://scenes/_autoloads/audio_bank_robber.tscn"
 SoundManager="*res://addons/resonate/sound_manager/sound_manager.gd"
 MusicManager="*res://addons/resonate/music_manager/music_manager.gd"
-Elephant="*res://scenes/_autoloads/elephant.tscn"
 
 [display]
 

@@ -1,5 +1,7 @@
 extends Node
 
+class_name Critters
+
 ## Critters handles debug UI
 ## UI Components
 @export_group("UI Components")
@@ -10,11 +12,12 @@ extends Node
 @export var footer_left_label: RichTextLabel
 @export var footer_center_label: RichTextLabel
 @export var footer_right_label: RichTextLabel
+@export var ui_canvas_layer: CanvasLayer
 @export_group("Alpha Options")
-@export_range(0.0, 1.0, 0.1) var main_alpha: float = 0.5
-@export_range(0.0, 1.0, 0.1) var header_alpha: float = 1.0
-@export_range(0.0, 1.0, 0.1) var grid_alpha: float = 0.5
-@export_range(0.0, 1.0, 0.1) var footer_alpha: float = 1.0
+@export_range(0.0, 1.0, 0.1) var main_alpha := 0.5
+@export_range(0.0, 1.0, 0.1) var header_alpha := 1.0
+@export_range(0.0, 1.0, 0.1) var grid_alpha := 0.5
+@export_range(0.0, 1.0, 0.1) var footer_alpha := 1.0
 
 enum grid_position {TOP_LEFT, TOP_CENTER, TOP_RIGHT,
 					MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT,
@@ -25,8 +28,6 @@ var footer_left_text:= "FPS: %d"
 var footer_center_text:= "State: %s"
 var footer_right_text:= "Scene: %s"
 var grid_bools: Array[bool] = []
-var frames := 0
-var time := 0.0
 
 func _ready() -> void:
 	assert(header_panel != null, "Header Panel not assigned!")
@@ -41,6 +42,8 @@ func _ready() -> void:
 	_set_default_system()
 	$UI.visible = false
 	Elephant.event_logged.connect(on_debug_event_logged)
+	%TickOneSec.timeout.connect(on_tick)
+	_get_fps()
 
 func _set_default_system() -> void:
 	$UI/MainMargin.modulate = Color(1.0, 1.0, 1.0, main_alpha)
@@ -62,8 +65,8 @@ func _set_footer_info() -> void:
 	footer_center_label.text = _text
 	Scenester.scene_has_changed.connect(on_scene_has_changed)
 
-func _fps_has_changed(p_fps: int) -> void:
-	var _fps_string := footer_left_text % p_fps
+func _get_fps() -> void:
+	var _fps_string := footer_left_text % Performance.get_monitor(Performance.TIME_FPS)
 	footer_left_label.text = _fps_string
 
 func on_state_has_changed(p_state: String) -> void:
@@ -78,15 +81,10 @@ func on_debug_event_logged(p_event: String) -> void:
 	grid_bools[0] = true
 	grid_labels[0].text = p_event
 
+func on_tick() -> void:
+	_get_fps()
+
 func _process(delta: float) -> void:
-	var temp_time = time + delta
-	if temp_time > 1.0:
-		_fps_has_changed(frames)
-		frames = 0
-		time = 0.0
-	else:
-		time = temp_time
-	frames += 1
 	check_grid_panel_visibility()
 
 func check_grid_panel_visibility() -> void:
@@ -97,8 +95,7 @@ func check_grid_panel_visibility() -> void:
 			grid_panels[i].visible = false
 
 func display_or_hide_debug_ui() -> void:
-	if $UI.visible == false:
-		$UI.visible = true
-		$UI/MainMargin/MainVBox/HeaderPanel
+	if ui_canvas_layer.visible == false:
+		ui_canvas_layer.visible = true
 	else:
-		$UI.visible = false
+		ui_canvas_layer.visible = false

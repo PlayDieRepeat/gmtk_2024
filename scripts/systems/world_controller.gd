@@ -35,7 +35,7 @@ func _ready():
 
 	# Store reference to world_timer and connect signal
 	# TODO - Should we just instantiate the Timer here as a node? think it depends how we handle time going forward.
-	world_timer = %GlobalTimer
+	world_timer = %WorldTimer
 	world_timer.timeout.connect(_on_timer_timeout)
 
 	hour_count = time_constants.start_of_day
