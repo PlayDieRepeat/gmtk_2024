@@ -7,3 +7,5 @@
 script = ExtResource("2_10yav")
 scene = ExtResource("1_qi4wv")
 scene_id = "MainMenu"
+scene_is_pausable = false
+is_game_scene = false

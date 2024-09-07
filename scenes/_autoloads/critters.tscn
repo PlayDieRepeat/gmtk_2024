@@ -1,0 +1,333 @@
+[gd_scene load_steps=3 format=3 uid="uid://byow4rmfkdogn"]
+
+[ext_resource type="Script" path="res://scripts/_autoloads/critters.gd" id="1_ingdy"]
+[ext_resource type="Theme" uid="uid://kqg5b6wuwxx" path="res://resources/themes/debug1_theme.tres" id="2_1pn6r"]
+
+[node name="Critters" type="Node" node_paths=PackedStringArray("header_panel", "footer_panel", "grid_panels", "grid_labels", "footer_left_label", "footer_center_label", "footer_right_label")]
+script = ExtResource("1_ingdy")
+header_panel = NodePath("UI/MainMargin/MainVBox/HeaderPanel")
+footer_panel = NodePath("UI/MainMargin/MainVBox/FooterPanel")
+grid_panels = [NodePath("UI/MainMargin/MainVBox/GridContainer/TopLeftMargin/TopLeftPanel"), NodePath("UI/MainMargin/MainVBox/GridContainer/TopCenterMargin/TopCenterPanel"), NodePath("UI/MainMargin/MainVBox/GridContainer/TopRightMargin/TopRightPanel"), NodePath("UI/MainMargin/MainVBox/GridContainer/MiddleLeftMargin/MiddleLeftPanel"), NodePath("UI/MainMargin/MainVBox/GridContainer/MiddleCenterMargin/MiddleCenterPanel"), NodePath("UI/MainMargin/MainVBox/GridContainer/MiddleRightMargin/MiddleRightPanel"), NodePath("UI/MainMargin/MainVBox/GridContainer/BottomLeftMargin/BottomLeftPanel"), NodePath("UI/MainMargin/MainVBox/GridContainer/BottomCenterMargin/BottomCenterPanel"), NodePath("UI/MainMargin/MainVBox/GridContainer/BottomRightMargin/BottomRightPanel")]
+grid_labels = [NodePath("UI/MainMargin/MainVBox/GridContainer/TopLeftMargin/TopLeftPanel/TopLeftLabel"), NodePath("UI/MainMargin/MainVBox/GridContainer/TopCenterMargin/TopCenterPanel/TopCenterLabel"), NodePath("UI/MainMargin/MainVBox/GridContainer/TopRightMargin/TopRightPanel/TopRightLabel"), NodePath("UI/MainMargin/MainVBox/GridContainer/MiddleLeftMargin/MiddleLeftPanel/MiddleLeftLabel"), NodePath("UI/MainMargin/MainVBox/GridContainer/MiddleCenterMargin/MiddleCenterPanel/MiddleCenterLabel"), NodePath("UI/MainMargin/MainVBox/GridContainer/MiddleRightMargin/MiddleRightPanel/MiddleRightLabel"), NodePath("UI/MainMargin/MainVBox/GridContainer/BottomLeftMargin/BottomLeftPanel/BottomLeftLabel"), NodePath("UI/MainMargin/MainVBox/GridContainer/BottomCenterMargin/BottomCenterPanel/BottomCenterLabel"), NodePath("UI/MainMargin/MainVBox/GridContainer/BottomRightMargin/BottomRightPanel/BottomRightLabel")]
+footer_left_label = NodePath("UI/MainMargin/MainVBox/FooterPanel/FooterMargin/FooterHBox/FooterLeftLabel")
+footer_center_label = NodePath("UI/MainMargin/MainVBox/FooterPanel/FooterMargin/FooterHBox/FooterCenterLabel")
+footer_right_label = NodePath("UI/MainMargin/MainVBox/FooterPanel/FooterMargin/FooterHBox/FooterRightLabel")
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="MainMargin" type="MarginContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_right = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="MainVBox" type="VBoxContainer" parent="UI/MainMargin"]
+custom_minimum_size = Vector2(640, 360)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+
+[node name="HeaderPanel" type="PanelContainer" parent="UI/MainMargin/MainVBox"]
+custom_minimum_size = Vector2(620, 16)
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+theme_type_variation = &"HeaderPanel"
+
+[node name="HeaderMargin" type="MarginContainer" parent="UI/MainMargin/MainVBox/HeaderPanel"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 0
+
+[node name="HeaderHBox" type="HBoxContainer" parent="UI/MainMargin/MainVBox/HeaderPanel/HeaderMargin"]
+layout_mode = 2
+
+[node name="HeaderLabel" type="RichTextLabel" parent="UI/MainMargin/MainVBox/HeaderPanel/HeaderMargin/HeaderHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+theme = ExtResource("2_1pn6r")
+text = "Critters - Debug Menu"
+fit_content = true
+
+[node name="MenuBar" type="MenuBar" parent="UI/MainMargin/MainVBox/HeaderPanel/HeaderMargin/HeaderHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_1pn6r")
+
+[node name="DebugCommands" type="PopupMenu" parent="UI/MainMargin/MainVBox/HeaderPanel/HeaderMargin/HeaderHBox/MenuBar"]
+
+[node name="Clear Contents" type="PopupMenu" parent="UI/MainMargin/MainVBox/HeaderPanel/HeaderMargin/HeaderHBox/MenuBar"]
+
+[node name="GridContainer" type="GridContainer" parent="UI/MainMargin/MainVBox"]
+custom_minimum_size = Vector2(640, 300)
+layout_direction = 2
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+columns = 3
+
+[node name="TopLeftMargin" type="MarginContainer" parent="UI/MainMargin/MainVBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+theme_type_variation = &"GridPanel"
+
+[node name="TopLeftPanel" type="PanelContainer" parent="UI/MainMargin/MainVBox/GridContainer/TopLeftMargin"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+
+[node name="TopLeftLabel" type="RichTextLabel" parent="UI/MainMargin/MainVBox/GridContainer/TopLeftMargin/TopLeftPanel"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+text = "Mock Label = Mock Value
+slkjflsdkj
+'d;sljfdslk;jflkdsj
+dslfkjdslkj"
+fit_content = true
+
+[node name="TopCenterMargin" type="MarginContainer" parent="UI/MainMargin/MainVBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+theme_type_variation = &"GridPanel"
+
+[node name="TopCenterPanel" type="PanelContainer" parent="UI/MainMargin/MainVBox/GridContainer/TopCenterMargin"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+
+[node name="TopCenterLabel" type="RichTextLabel" parent="UI/MainMargin/MainVBox/GridContainer/TopCenterMargin/TopCenterPanel"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+text = "Mock Label = Mock Value
+slkjflsdkj
+'d;sljfdslk;jflkdsj
+dslfkjdslkj"
+fit_content = true
+
+[node name="TopRightMargin" type="MarginContainer" parent="UI/MainMargin/MainVBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+theme_type_variation = &"GridPanel"
+
+[node name="TopRightPanel" type="PanelContainer" parent="UI/MainMargin/MainVBox/GridContainer/TopRightMargin"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+
+[node name="TopRightLabel" type="RichTextLabel" parent="UI/MainMargin/MainVBox/GridContainer/TopRightMargin/TopRightPanel"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+text = "Mock Label = Mock Value
+slkjflsdkj
+'d;sljfdslk;jflkdsj
+dslfkjdslkj"
+fit_content = true
+
+[node name="MiddleLeftMargin" type="MarginContainer" parent="UI/MainMargin/MainVBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+theme_type_variation = &"GridPanel"
+
+[node name="MiddleLeftPanel" type="PanelContainer" parent="UI/MainMargin/MainVBox/GridContainer/MiddleLeftMargin"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+
+[node name="MiddleLeftLabel" type="RichTextLabel" parent="UI/MainMargin/MainVBox/GridContainer/MiddleLeftMargin/MiddleLeftPanel"]
+layout_mode = 2
+mouse_filter = 2
+text = "Some data
+Some more data
+Blah"
+fit_content = true
+scroll_active = false
+
+[node name="MiddleCenterMargin" type="MarginContainer" parent="UI/MainMargin/MainVBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+theme_type_variation = &"GridPanel"
+
+[node name="MiddleCenterPanel" type="PanelContainer" parent="UI/MainMargin/MainVBox/GridContainer/MiddleCenterMargin"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+
+[node name="MiddleCenterLabel" type="RichTextLabel" parent="UI/MainMargin/MainVBox/GridContainer/MiddleCenterMargin/MiddleCenterPanel"]
+layout_mode = 2
+mouse_filter = 2
+text = "Some data
+Some more data
+Blah"
+fit_content = true
+scroll_active = false
+
+[node name="MiddleRightMargin" type="MarginContainer" parent="UI/MainMargin/MainVBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+theme_type_variation = &"GridPanel"
+
+[node name="MiddleRightPanel" type="PanelContainer" parent="UI/MainMargin/MainVBox/GridContainer/MiddleRightMargin"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+
+[node name="MiddleRightLabel" type="RichTextLabel" parent="UI/MainMargin/MainVBox/GridContainer/MiddleRightMargin/MiddleRightPanel"]
+layout_mode = 2
+mouse_filter = 2
+text = "Some data
+Some more data
+Blah"
+fit_content = true
+scroll_active = false
+
+[node name="BottomLeftMargin" type="MarginContainer" parent="UI/MainMargin/MainVBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+theme_type_variation = &"GridPanel"
+
+[node name="BottomLeftPanel" type="PanelContainer" parent="UI/MainMargin/MainVBox/GridContainer/BottomLeftMargin"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+
+[node name="BottomLeftLabel" type="RichTextLabel" parent="UI/MainMargin/MainVBox/GridContainer/BottomLeftMargin/BottomLeftPanel"]
+layout_mode = 2
+mouse_filter = 2
+text = "Blah
+Blah
+Blah
+Blsh"
+fit_content = true
+
+[node name="BottomCenterMargin" type="MarginContainer" parent="UI/MainMargin/MainVBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+theme_type_variation = &"GridPanel"
+
+[node name="BottomCenterPanel" type="PanelContainer" parent="UI/MainMargin/MainVBox/GridContainer/BottomCenterMargin"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+
+[node name="BottomCenterLabel" type="RichTextLabel" parent="UI/MainMargin/MainVBox/GridContainer/BottomCenterMargin/BottomCenterPanel"]
+layout_mode = 2
+mouse_filter = 2
+text = "Blah
+Blah
+Blah
+Blsh"
+fit_content = true
+
+[node name="BottomRightMargin" type="MarginContainer" parent="UI/MainMargin/MainVBox/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+theme_type_variation = &"GridPanel"
+
+[node name="BottomRightPanel" type="PanelContainer" parent="UI/MainMargin/MainVBox/GridContainer/BottomRightMargin"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+
+[node name="BottomRightLabel" type="RichTextLabel" parent="UI/MainMargin/MainVBox/GridContainer/BottomRightMargin/BottomRightPanel"]
+layout_mode = 2
+mouse_filter = 2
+text = "Blah
+Blah
+Blah
+Blsh"
+fit_content = true
+
+[node name="FooterPanel" type="PanelContainer" parent="UI/MainMargin/MainVBox"]
+custom_minimum_size = Vector2(640, 16)
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+theme_type_variation = &"FooterPanel"
+
+[node name="FooterMargin" type="MarginContainer" parent="UI/MainMargin/MainVBox/FooterPanel"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="FooterHBox" type="HBoxContainer" parent="UI/MainMargin/MainVBox/FooterPanel/FooterMargin"]
+custom_minimum_size = Vector2(620, 16)
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+
+[node name="FooterLeftLabel" type="RichTextLabel" parent="UI/MainMargin/MainVBox/FooterPanel/FooterMargin/FooterHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+text = "FPS
+"
+
+[node name="FooterCenterLabel" type="RichTextLabel" parent="UI/MainMargin/MainVBox/FooterPanel/FooterMargin/FooterHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+text = "State
+"
+
+[node name="FooterRightLabel" type="RichTextLabel" parent="UI/MainMargin/MainVBox/FooterPanel/FooterMargin/FooterHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme = ExtResource("2_1pn6r")
+text = "Scene:
+"

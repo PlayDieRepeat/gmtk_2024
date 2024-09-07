@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="godot_template"
+config/name="hungry_gods"
 run/main_scene="res://scenes/systems/initializer.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
@@ -27,10 +27,13 @@ manager/music/bus="Music"
 
 [autoload]
 
+Brainiac="*res://scenes/systems/brainiac.tscn"
 Scenester="*res://scenes/_autoloads/scenester.tscn"
+Critters="*res://scenes/_autoloads/critters.tscn"
 AudioBankRobber="*res://scenes/_autoloads/audio_bank_robber.tscn"
 SoundManager="*res://addons/resonate/sound_manager/sound_manager.gd"
 MusicManager="*res://addons/resonate/music_manager/music_manager.gd"
+Elephant="*res://scenes/_autoloads/elephant.tscn"
 
 [display]
 
@@ -109,6 +112,12 @@ Menu={
 "Scroll Down"={
 "deadzone": 0.5,
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":16,"position":Vector2(218, 23),"global_position":Vector2(226, 103),"factor":1.0,"button_index":5,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
+DebugMenu={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":126,"key_label":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":96,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
 
