@@ -12,7 +12,7 @@ func _ready() -> void:
 func _process(_delta) -> void:
 	pass
 
-func _on_world_controller_new_day() -> void:
+func _on_world_controller_new_day(_p_new_day: int, _p_old_day: int, _p_time_constants: RTimeConstants) -> void:
 	get_tree().paused = true
 	#Get all end of day event data
 	var woodGained: int = 12

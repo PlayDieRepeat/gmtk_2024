@@ -13,6 +13,8 @@ class_name BuildMenu
 @export var close_button: Button
 @export var action_button: Button
 
+var active_building: Building
+
 signal build_pressed(p_selected_building: RBuilding)
 signal building_selected(p_selected_building: RBuilding)
 
@@ -22,7 +24,11 @@ func _ready() -> void:
 
 
 func _on_close_pressed() -> void:
-	queue_free()
+	hide()
 
 func _on_action_pressed() -> void:
 	pass # Replace with function body.
+
+func _on_build_button_pressed(p_building: Building) -> void:
+	active_building = p_building
+	show()
