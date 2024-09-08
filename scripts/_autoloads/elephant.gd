@@ -22,7 +22,7 @@ func _ready() -> void:
 	# Returns the name of the host OS.
 	# Note: Custom builds of the engine may support additional platforms,
 	# such as consoles, yielding other return values.
-	var platform_name: String = OS.get_name()
+	platform_name = OS.get_name()
 	match platform_name:
 		"Windows":
 			print("Platform: Windows")
@@ -116,7 +116,7 @@ func load_save():
 func start_logger() -> void:
 	save_time = Time.get_datetime_dict_from_system()
 	if setup_logger_dir() != 0:
-		assert(1==2, "Big Problem!!")
+		Elephant.log_event("ERROR: Log dir not set up!")
 	var string_array: PackedStringArray = _get_dir_contents(save_game_constants.save_log_dir_path)
 	var config_filename: String = save_game_constants.save_log_default_name + ".log"
 	logger_file_path = save_game_constants.save_log_dir_path + config_filename

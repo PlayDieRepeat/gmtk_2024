@@ -26,7 +26,7 @@ func _ready() -> void:
 	assert(debug_menu_packed != null, "Debug menu not set!!")
 	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 	if Elephant.is_debug_build == true:
-		var debug_menu = debug_menu_packed.instantiate()
+		debug_menu = debug_menu_packed.instantiate()
 		add_child(debug_menu)
 
 func _on_joy_connection_changed(device: int, connected: bool) -> void:
