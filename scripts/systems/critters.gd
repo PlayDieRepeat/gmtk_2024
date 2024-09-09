@@ -68,8 +68,7 @@ func _set_footer_info() -> void:
 	Scenester.scene_has_changed.connect(on_scene_has_changed)
 
 func _get_fps() -> void:
-	var _fps_string := footer_left_text % Performance.get_monitor(Performance.TIME_FPS)
-	footer_left_label.text = _fps_string
+	footer_left_label.text = footer_left_text % Performance.get_monitor(Performance.TIME_FPS)
 
 func on_state_has_changed(p_state: String) -> void:
 	footer_center_label.text = footer_center_text % p_state
