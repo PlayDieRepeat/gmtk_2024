@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://esp3ey8uhv7t"]
 
-[ext_resource type="Script" path="res://scripts/systems/building.gd" id="1_akstq"]
+[ext_resource type="Script" path="res://scripts/systems/game/building.gd" id="1_akstq"]
 [ext_resource type="PackedScene" uid="uid://dq8s4idfun2xu" path="res://scenes/states/building/waiting.tscn" id="3_ppb02"]
 [ext_resource type="PackedScene" uid="uid://daw8idi8fjmp" path="res://scenes/states/building/construction.tscn" id="4_m5pdg"]
 [ext_resource type="PackedScene" uid="uid://cwmuvduyk6h1f" path="res://scenes/states/building/open.tscn" id="5_uag46"]
