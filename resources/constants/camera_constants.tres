@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RCameraConstants" load_steps=2 format=3 uid="uid://b7qymya8ffvmv"]
 
-[ext_resource type="Script" path="res://scripts/_data_templates/constants/r_camera_constants.gd" id="1_xid2w"]
+[ext_resource type="Script" path="res://scripts/_resources/r_camera_constants.gd" id="1_xid2w"]
 
 [resource]
 script = ExtResource("1_xid2w")

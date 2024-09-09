@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RPopConstants" load_steps=2 format=3 uid="uid://dyjtaobat81sc"]
 
-[ext_resource type="Script" path="res://scripts/_data_templates/constants/r_population_constants.gd" id="1_7xahi"]
+[ext_resource type="Script" path="res://scripts/_resources/r_population_constants.gd" id="1_7xahi"]
 
 [resource]
 script = ExtResource("1_7xahi")

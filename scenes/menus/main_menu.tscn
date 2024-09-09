@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bacvkh6dk4dm5" path="res://scenes/menus/credits_menu.tscn" id="3_ce5hj"]
 [ext_resource type="PackedScene" uid="uid://efyl535owuk0" path="res://scenes/menus/options_menu.tscn" id="4_8pjeb"]
 [ext_resource type="PackedScene" uid="uid://cn30r1xbmmkob" path="res://scenes/levels/levelTest.tscn" id="5_8vo86"]
-[ext_resource type="Script" path="res://scripts/_data_templates/setup/r_scene.gd" id="6_lv8xv"]
+[ext_resource type="Script" path="res://scripts/_resources/r_scene.gd" id="6_lv8xv"]
 
 [sub_resource type="Resource" id="Resource_euw0v"]
 script = ExtResource("6_lv8xv")
