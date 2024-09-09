@@ -27,7 +27,7 @@ enum grid_position {TOP_LEFT, TOP_CENTER, TOP_RIGHT,
 var footer_left_text:= "FPS: %d"
 var footer_center_text:= "State: %s"
 var footer_right_text:= "Scene: %s"
-var grid_bools: Array[bool] = []
+var grid_panel_flags: Array[bool] = []
 
 func _ready() -> void:
 	assert(header_panel != null, "Header Panel not assigned!")
@@ -36,7 +36,9 @@ func _ready() -> void:
 	assert(footer_left_label != null, "Footer Left not assigned!")
 	assert(footer_center_label != null, "Footer Center not assigned!")
 	assert(footer_right_label != null, "Footer Right not assigned!")
-	grid_bools = [false, false, false,
+	## used to flag if a panel in the grid container is being used to
+	## display a variable. If it is false, it will hide the panel.
+	grid_panel_flags = [false, false, false,
 				false, false, false,
 				false, false, false]
 	_set_default_system()
@@ -70,15 +72,13 @@ func _get_fps() -> void:
 	footer_left_label.text = _fps_string
 
 func on_state_has_changed(p_state: String) -> void:
-	var _state_string := footer_center_text % p_state
-	footer_center_label.text = _state_string
+	footer_center_label.text = footer_center_text % p_state
 
 func on_scene_has_changed(p_scene: String) -> void:
-	var _scene_string := footer_right_text % p_scene
-	footer_right_label.text = _scene_string
+	footer_right_label.text = footer_right_text % p_scene
 
 func on_debug_event_logged(p_event: String) -> void:
-	grid_bools[0] = true
+	grid_panel_flags[0] = true
 	grid_labels[0].text = p_event
 
 func on_tick() -> void:
@@ -87,9 +87,12 @@ func on_tick() -> void:
 func _process(delta: float) -> void:
 	check_grid_panel_visibility()
 
+## TODO: Come up with a better way to couple a panel with some info about it.
+## is a Resource the answer here?
+## grid_panels.size == grid_panel_flags.size, and they are a 1:1 relationship
 func check_grid_panel_visibility() -> void:
 	for i in grid_panels.size():
-		if grid_bools[i] == true:
+		if grid_panel_flags[i] == true:
 			grid_panels[i].visible = true
 		else:
 			grid_panels[i].visible = false
