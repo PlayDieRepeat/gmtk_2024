@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="hungry_gods"
-run/main_scene="res://scenes/systems/boot/initializer.tscn"
+run/main_scene="res://scenes/systems/initializer.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -27,12 +27,12 @@ manager/music/bus="Music"
 
 [autoload]
 
-AudioBankRobber="*res://scenes/_autoloads/audio_bank_robber.tscn"
-MusicManager="*res://addons/resonate/music_manager/music_manager.gd"
-SoundManager="*res://addons/resonate/sound_manager/sound_manager.gd"
 Elephant="*res://scenes/_autoloads/elephant.tscn"
-Brainiac="*res://scenes/_autoloads/brainiac.tscn"
+Brainiac="*res://scenes/systems/brainiac.tscn"
 Scenester="*res://scenes/_autoloads/scenester.tscn"
+AudioBankRobber="*res://scenes/_autoloads/audio_bank_robber.tscn"
+SoundManager="*res://addons/resonate/sound_manager/sound_manager.gd"
+MusicManager="*res://addons/resonate/music_manager/music_manager.gd"
 
 [display]
 

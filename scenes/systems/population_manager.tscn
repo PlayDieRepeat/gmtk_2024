@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b5ru1bmvckk8a"]
 
-[ext_resource type="Script" path="res://scripts/systems/game/population_manager.gd" id="1_vst0j"]
+[ext_resource type="Script" path="res://scripts/systems/population_manager.gd" id="1_vst0j"]
 [ext_resource type="Resource" uid="uid://dyjtaobat81sc" path="res://resources/constants/population_constants.tres" id="2_m7s47"]
 
 [node name="PopulationManager" type="Node"]

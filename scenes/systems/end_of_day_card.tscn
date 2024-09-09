@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bd3cvxjknt16n"]
 
-[ext_resource type="Script" path="res://scripts/systems/game/end_of_day_card.gd" id="1_vmyrd"]
+[ext_resource type="Script" path="res://scripts/systems/end_of_day_card.gd" id="1_vmyrd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_smacc"]
 bg_color = Color(0.94902, 0.858824, 0.796078, 1)
