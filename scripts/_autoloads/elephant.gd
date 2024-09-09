@@ -35,6 +35,7 @@ func _ready() -> void:
 		"iOS":
 			print("Platform: iOS")
 		"Web":
+			OS.set_restart_on_exit(true)
 			print("Platform: Web")
 	save_config()
 	setup_game_save_dir()
