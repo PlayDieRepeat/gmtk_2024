@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="RScene" load_steps=3 format=3 uid="uid://7xr33l70656f"]
 
 [ext_resource type="PackedScene" uid="uid://cpsifuyb4adew" path="res://scenes/systems/reconnect_menu.tscn" id="1_nmjmp"]
-[ext_resource type="Script" path="res://scripts/_resources/r_scene.gd" id="1_oo3we"]
+[ext_resource type="Script" path="res://scripts/_data_templates/setup/r_scene.gd" id="1_oo3we"]
 
 [resource]
 script = ExtResource("1_oo3we")
