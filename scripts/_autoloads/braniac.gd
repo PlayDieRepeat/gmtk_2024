@@ -15,9 +15,12 @@ var gamepad_detected := false
 var should_consume_event:= true
 var is_pausing := false
 var debug_menu: Node
+var all_input_actions: Array[StringName]
+var custom_input_actions: Array[StringName]
 
 signal back_to_start_from_pause_menu
 signal game_state_has_changed(p_state: String)
+signal input_event_has_changed
 
 var gamepads: Array[int]= []
 var gamepad_info: Array[Dictionary]= []
@@ -28,6 +31,13 @@ func _ready() -> void:
 	if Elephant.is_debug_build == true:
 		debug_menu = debug_menu_packed.instantiate()
 		add_child(debug_menu)
+	all_input_actions = InputMap.get_actions()
+	# All built-in actions start with "ui_", so we save them as default,
+	# and save the differing ones as our custom actions, these can be modified,
+	# deleted, or appended to.
+	for action in all_input_actions:
+		if !action.begins_with("ui_"):
+			custom_input_actions.append(action)
 
 func _on_joy_connection_changed(device: int, connected: bool) -> void:
 	_get_gamepads()
@@ -191,3 +201,15 @@ func _set_last_callable(p_input_state: InputState) -> void:
 			last_input_func = set_pause_state
 		InputState.RECONNECT_STATE:
 			last_input_func = set_reconnect_state
+
+func _check_if_action_exists(StringName) -> bool:
+	if true:
+		return true
+	else:
+		return false
+
+func change_event_on_action(p_event_to_chsnge: StringName) -> bool:
+	return true
+
+func _set_input_action_mapping_to_default() -> void:
+	InputMap.load_from_project_settings()
