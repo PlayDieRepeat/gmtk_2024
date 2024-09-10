@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c6x87uubuyc2"]
 
-[ext_resource type="Script" path="res://scripts/menus/material_stack_debug_display.gd" id="1_n7f74"]
+[ext_resource type="Script" path="res://scripts/menus/game/material_stack_debug_display.gd" id="1_n7f74"]
 [ext_resource type="Texture2D" uid="uid://bs5pxch7md6qu" path="res://assets/images/ui/grid_icon.png" id="2_3a4t8"]
 [ext_resource type="Texture2D" uid="uid://bekhbq2inxyhe" path="res://assets/images/debug/plus.png" id="3_yp5sj"]
 [ext_resource type="Texture2D" uid="uid://dnntnmuqc0l3g" path="res://assets/images/debug/minus.png" id="4_twm73"]

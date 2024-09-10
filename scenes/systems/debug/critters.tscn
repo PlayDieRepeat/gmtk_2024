@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://byow4rmfkdogn"]
 
-[ext_resource type="Script" path="res://scripts/systems/critters.gd" id="1_mdnlh"]
+[ext_resource type="Script" path="res://scripts/systems/debug/critters.gd" id="1_mdnlh"]
 [ext_resource type="Theme" uid="uid://kqg5b6wuwxx" path="res://resources/themes/debug1_theme.tres" id="2_ivgnl"]
 
 [node name="Critters" type="Node" node_paths=PackedStringArray("header_panel", "footer_panel", "grid_panels", "grid_labels", "footer_left_label", "footer_center_label", "footer_right_label", "ui_canvas_layer")]

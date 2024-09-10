@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c0qpyxfnjuyr3"]
 
-[ext_resource type="Script" path="res://scripts/menus/clock_display.gd" id="1_ow6e0"]
+[ext_resource type="Script" path="res://scripts/menus/game/clock_display.gd" id="1_ow6e0"]
 
 [node name="ClockDisplay" type="MarginContainer" node_paths=PackedStringArray("clock_label")]
 offset_right = 75.0

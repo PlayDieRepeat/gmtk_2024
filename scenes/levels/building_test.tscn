@@ -1,13 +1,13 @@
 [gd_scene load_steps=10 format=3 uid="uid://dslwdbb8w5y7p"]
 
 [ext_resource type="PackedScene" uid="uid://b5ru1bmvckk8a" path="res://scenes/systems/population_manager.tscn" id="1_frddk"]
-[ext_resource type="Script" path="res://scripts/systems/metropolis.gd" id="1_jyjxa"]
+[ext_resource type="Script" path="res://scripts/systems/game/metropolis.gd" id="1_jyjxa"]
 [ext_resource type="Resource" uid="uid://ccyyrasw84v38" path="res://resources/buildings/tent.tres" id="3_g74mg"]
 [ext_resource type="Resource" uid="uid://c14csn7vlswum" path="res://resources/scenarios/testing.tres" id="3_prlsa"]
 [ext_resource type="PackedScene" uid="uid://esp3ey8uhv7t" path="res://scenes/buildings/building.tscn" id="5_qsf5b"]
-[ext_resource type="Script" path="res://scripts/menus/debug_resource_grid.gd" id="7_ho8eq"]
-[ext_resource type="PackedScene" uid="uid://c6x87uubuyc2" path="res://scenes/menus/material_display.tscn" id="8_dg2hi"]
-[ext_resource type="Script" path="res://scripts/systems/material_warehouse.gd" id="12_nqwws"]
+[ext_resource type="Script" path="res://scripts/menus/game/debug_resource_grid.gd" id="7_ho8eq"]
+[ext_resource type="PackedScene" uid="uid://c6x87uubuyc2" path="res://scenes/menus/game/material_display.tscn" id="8_dg2hi"]
+[ext_resource type="Script" path="res://scripts/systems/game/material_warehouse.gd" id="12_nqwws"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_dqyr3"]
 
