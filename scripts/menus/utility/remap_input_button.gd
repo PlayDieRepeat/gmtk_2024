@@ -1,17 +1,22 @@
 extends Button
 
 @export var action := "UP"
+var current_key : InputEvent
 
 func _ready() -> void:
 	set_process_unhandled_key_input(false)
+	update_key()
 	display_key()
 
 func display_key() -> void:
-	text = "%s" % InputMap.get_actions()[0].to_upper()
+	pass #text = current_key
+
+func update_key() -> void:
+	pass# current_key = "%s" % InputMap.get_actions()[0].to_upper()
 
 func _on_toggled(p_toggled_on: bool) -> void:
-	set_process_unhandled_key_input(p_toggled_on)
-	if p_toggled_on == true: 
+	if p_toggled_on == true:
+		#Brainiac.change_event_on_action()
 		text = "..."
 	else:
 		display_key()

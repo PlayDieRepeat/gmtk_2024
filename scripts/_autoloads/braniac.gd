@@ -17,6 +17,7 @@ var is_pausing := false
 var debug_menu: Node
 var all_input_actions: Array[StringName]
 var custom_input_actions: Array[StringName]
+var custom_input_action_events := {}
 
 signal back_to_start_from_pause_menu
 signal game_state_has_changed(p_state: String)
@@ -28,6 +29,7 @@ var gamepad_info: Array[Dictionary]= []
 func _ready() -> void:
 	assert(debug_menu_packed != null, "Debug menu not set!!")
 	Input.joy_connection_changed.connect(_on_joy_connection_changed)
+	set_process_unhandled_input(false)
 	if Elephant.is_debug_build == true:
 		debug_menu = debug_menu_packed.instantiate()
 		add_child(debug_menu)
@@ -38,6 +40,9 @@ func _ready() -> void:
 	for action in all_input_actions:
 		if !action.begins_with("ui_"):
 			custom_input_actions.append(action)
+	for action in custom_input_actions:
+		for event in InputMap.action_get_events(action):
+			custom_input_action_events.get(action, InputEvent)
 
 func _on_joy_connection_changed(device: int, connected: bool) -> void:
 	_get_gamepads()
@@ -117,6 +122,9 @@ func _process(_delta: float) -> void:
 		InputState.RECONNECT_STATE:
 			if gamepad_detected:
 				_device_reconnected()
+
+func _unhandled_input(event: InputEvent) -> void:
+	pass
 
 func set_menu_state() -> void:
 	if input_state != InputState.MENU_STATE:
@@ -202,13 +210,10 @@ func _set_last_callable(p_input_state: InputState) -> void:
 		InputState.RECONNECT_STATE:
 			last_input_func = set_reconnect_state
 
-func _check_if_action_exists(StringName) -> bool:
-	if true:
-		return true
-	else:
-		return false
-
-func change_event_on_action(p_event_to_chsnge: StringName) -> bool:
+func change_event_on_action(p_action: StringName, p_event: InputEvent) -> bool:
+	InputMap.action_erase_event(p_action, p_event)
+	set_process_unhandled_input(true)
+	InputMap.action_add_event(p_action, p_event)
 	return true
 
 func _set_input_action_mapping_to_default() -> void:
