@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RScene" load_steps=3 format=3 uid="uid://dh7ss3dglp6tc"]
 
-[ext_resource type="Script" path="res://scripts/_resources/r_scene.gd" id="1_et2oj"]
+[ext_resource type="Script" path="res://scripts/_data_templates/setup/r_scene.gd" id="1_et2oj"]
 [ext_resource type="PackedScene" uid="uid://b7mgkhxxr13nm" path="res://scenes/menus/utility/pause_menu.tscn" id="1_rr18d"]
 
 [resource]

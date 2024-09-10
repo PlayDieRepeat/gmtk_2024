@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="RScenarioValues" load_steps=21 format=3 uid="uid://c14csn7vlswum"]
 
-[ext_resource type="Script" path="res://scripts/_resources/r_scenario_values.gd" id="1_l6fbw"]
-[ext_resource type="Script" path="res://scripts/_resources/r_material_stack.gd" id="2_0t84c"]
+[ext_resource type="Script" path="res://scripts/_data_templates/setup/r_scenario_values.gd" id="1_l6fbw"]
+[ext_resource type="Script" path="res://scripts/_data_templates/game/r_material_stack.gd" id="2_0t84c"]
 [ext_resource type="Resource" uid="uid://3kpa276sseob" path="res://resources/materials/cloth.tres" id="3_clc7g"]
 [ext_resource type="Resource" uid="uid://r05m2n5w07kb" path="res://resources/materials/favor.tres" id="4_6jq5r"]
 [ext_resource type="Resource" uid="uid://bv37ojbxge7uo" path="res://resources/materials/food.tres" id="5_af4n4"]
