@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="RMaterialStack" load_steps=3 format=3 uid="uid://cf6oflm5c8rf1"]
+
+[ext_resource type="Script" path="res://scripts/_resources/r_material_stack.gd" id="1_hvam5"]
+[ext_resource type="Resource" uid="uid://r05m2n5w07kb" path="res://resources/materials/cat_favor.tres" id="2_cro17"]
+
+[resource]
+script = ExtResource("1_hvam5")
+stacked_material = ExtResource("2_cro17")
+stack_count = 10

@@ -1,7 +1,10 @@
-extends RMaterialStack
-
+extends Resource
 class_name RTithe
 
+@export var tithe_material: RMaterial
+@export var tithe_lower_threshold := 0
+@export var tithe_middle_threshold := 0
+@export var tithe_upper_threshold := 0
 @export var favor_per_tithe_min: int = 0
 @export var favor_per_tithe_mid: int = 0
 @export var favor_per_tithe_max: int = 0

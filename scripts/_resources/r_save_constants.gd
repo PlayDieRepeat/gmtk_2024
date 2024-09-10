@@ -1,5 +1,5 @@
 extends Resource
-class_name RSaveGame
+class_name RSaveConstants
 
 @export var save_game_dir_path := ""
 @export var save_config_dir_path := ""

@@ -6,7 +6,7 @@ signal event_logged(p_event: String)
 ## This scene will check and retain pertinent system and platform info.
 ## It will also help save and load stuff from disk. It might also be the logger
 ## module, but that is a lot of things.
-@export var save_game_constants: RSaveGame
+@export var save_game_constants: RSaveConstants
 var platform_name:= ""
 var is_debug_build:= false
 var save_time: Dictionary
