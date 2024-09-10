@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="RMaterialStack" load_steps=3 format=3 uid="uid://c6jc6t2c44lfg"]
-
-[ext_resource type="Script" path="res://scripts/_resources/r_material_stack.gd" id="1_dw80o"]
-[ext_resource type="Resource" uid="uid://v7hly1ajtn3c" path="res://resources/materials/pig_favor.tres" id="2_u7rw3"]
-
-[resource]
-script = ExtResource("1_dw80o")
-stacked_material = ExtResource("2_u7rw3")
-stack_count = 15
