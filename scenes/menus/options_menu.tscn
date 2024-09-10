@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://efyl535owuk0"]
+[gd_scene load_steps=3 format=3 uid="uid://efyl535owuk0"]
 
 [ext_resource type="Script" path="res://scripts/menus/options_menu.gd" id="1_upgtq"]
+[ext_resource type="PackedScene" uid="uid://drip0n7wdi2wt" path="res://scenes/menus/utility/remap_input_button.tscn" id="2_uh3vg"]
 
 [node name="OptionsMenu" type="Control"]
 layout_mode = 3
@@ -11,7 +12,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_upgtq")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="Center" type="CenterContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,20 +20,289 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="CenterContainer"]
+[node name="ARC" type="AspectRatioContainer" parent="Center"]
 layout_mode = 2
 ratio = 1.7778
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/AspectRatioContainer"]
+[node name="BackgroundPanel" type="PanelContainer" parent="Center/ARC"]
 layout_mode = 2
 
-[node name="OptionsLabel" type="Label" parent="CenterContainer/AspectRatioContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Center/ARC"]
+custom_minimum_size = Vector2(640, 360)
 layout_mode = 2
-text = "OPTIONS"
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
 
-[node name="BackButton" type="Button" parent="CenterContainer/AspectRatioContainer/VBoxContainer" groups=["Buttons"]]
+[node name="MainVBox" type="VBoxContainer" parent="Center/ARC/MarginContainer"]
 layout_mode = 2
+
+[node name="Tabs" type="TabContainer" parent="Center/ARC/MarginContainer/MainVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 2
+clip_tabs = false
+all_tabs_in_front = true
+
+[node name="MainOptionsPanel" type="PanelContainer" parent="Center/ARC/MarginContainer/MainVBox/Tabs"]
+visible = false
+layout_mode = 2
+
+[node name="SoundsOptionsPanel" type="PanelContainer" parent="Center/ARC/MarginContainer/MainVBox/Tabs"]
+visible = false
+layout_mode = 2
+
+[node name="ControlsOptionsPanel" type="PanelContainer" parent="Center/ARC/MarginContainer/MainVBox/Tabs"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="ControlsHBox" type="HBoxContainer" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="KnMVBoxActions" type="VBoxContainer" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="UPKnMLabel" type="RichTextLabel" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/ScrollContainer/KnMVBoxActions"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 10
+text = "UP"
+fit_content = true
+
+[node name="DOWNKnMLabel" type="RichTextLabel" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/ScrollContainer/KnMVBoxActions"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 10
+text = "DOWN"
+fit_content = true
+
+[node name="LEFTKnMLabel" type="RichTextLabel" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/ScrollContainer/KnMVBoxActions"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 10
+text = "LEFT"
+fit_content = true
+
+[node name="RIGHTKnMLabel" type="RichTextLabel" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/ScrollContainer/KnMVBoxActions"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 10
+text = "RIGHT"
+fit_content = true
+
+[node name="ACTIONKnMLabel" type="RichTextLabel" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/ScrollContainer/KnMVBoxActions"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 10
+text = "ACTION"
+fit_content = true
+
+[node name="JUMPKnMLabel" type="RichTextLabel" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/ScrollContainer/KnMVBoxActions"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 10
+text = "JUMP"
+fit_content = true
+
+[node name="CLICKKnMLabel" type="RichTextLabel" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/ScrollContainer/KnMVBoxActions"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 10
+text = "CLICK"
+fit_content = true
+
+[node name="MENUKnMLabel" type="RichTextLabel" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/ScrollContainer/KnMVBoxActions"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 10
+text = "MENU"
+fit_content = true
+
+[node name="SCROLLUPKnMLabel9" type="RichTextLabel" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/ScrollContainer/KnMVBoxActions"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 10
+text = "SCROLL UP"
+fit_content = true
+
+[node name="SCROLLDOWNKnMLabel10" type="RichTextLabel" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/ScrollContainer/KnMVBoxActions"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 10
+text = "SCROLL DOWN"
+fit_content = true
+
+[node name="KnMVBoxKeys" type="VBoxContainer" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="RemapInputButton" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/KnMVBoxKeys" instance=ExtResource("2_uh3vg")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "UP"
+
+[node name="RemapInputButton2" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/KnMVBoxKeys" instance=ExtResource("2_uh3vg")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "..."
+
+[node name="RemapInputButton3" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/KnMVBoxKeys" instance=ExtResource("2_uh3vg")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "..."
+
+[node name="RemapInputButton4" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/KnMVBoxKeys" instance=ExtResource("2_uh3vg")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "..."
+
+[node name="RemapInputButton5" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/KnMVBoxKeys" instance=ExtResource("2_uh3vg")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "..."
+
+[node name="RemapInputButton6" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/KnMVBoxKeys" instance=ExtResource("2_uh3vg")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "..."
+
+[node name="RemapInputButton7" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/KnMVBoxKeys" instance=ExtResource("2_uh3vg")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "..."
+
+[node name="RemapInputButton8" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/KnMVBoxKeys" instance=ExtResource("2_uh3vg")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "..."
+
+[node name="RemapInputButton9" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/KnMVBoxKeys" instance=ExtResource("2_uh3vg")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "..."
+
+[node name="RemapInputButton10" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/KnMVBoxKeys" instance=ExtResource("2_uh3vg")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 10
+text = "..."
+
+[node name="GpadVBoxActions" type="VBoxContainer" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="UPGPLabel" type="RichTextLabel" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/GpadVBoxActions"]
+layout_mode = 2
+text = "UP"
+fit_content = true
+
+[node name="DOWNGPLabel" type="RichTextLabel" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/GpadVBoxActions"]
+layout_mode = 2
+text = "DOWN"
+fit_content = true
+
+[node name="LEFTGPLabel" type="RichTextLabel" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/GpadVBoxActions"]
+layout_mode = 2
+text = "LEFT"
+fit_content = true
+
+[node name="RIGHTGPLabel" type="RichTextLabel" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/GpadVBoxActions"]
+layout_mode = 2
+text = "RIGHT"
+fit_content = true
+
+[node name="ACTIONGPLabel" type="RichTextLabel" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/GpadVBoxActions"]
+layout_mode = 2
+text = "ACTION"
+fit_content = true
+
+[node name="JUMPGPLabel" type="RichTextLabel" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/GpadVBoxActions"]
+layout_mode = 2
+text = "JUMP"
+fit_content = true
+
+[node name="CLICKGPLabel" type="RichTextLabel" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/GpadVBoxActions"]
+layout_mode = 2
+text = "CLICK"
+fit_content = true
+
+[node name="MENUGPLabel" type="RichTextLabel" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/GpadVBoxActions"]
+layout_mode = 2
+text = "MENU"
+fit_content = true
+
+[node name="SCROLLUPGPLabel" type="RichTextLabel" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/GpadVBoxActions"]
+layout_mode = 2
+text = "SCROLL UP"
+fit_content = true
+
+[node name="SCROLLDOWNGPLabel" type="RichTextLabel" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox/GpadVBoxActions"]
+layout_mode = 2
+text = "SCROLL DOWN"
+fit_content = true
+
+[node name="GpadVBoxKeys" type="VBoxContainer" parent="Center/ARC/MarginContainer/MainVBox/Tabs/ControlsOptionsPanel/MarginContainer/ControlsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Center/ARC/MarginContainer/MainVBox"]
+layout_mode = 2
+
+[node name="FooterLeftPanel" type="PanelContainer" parent="Center/ARC/MarginContainer/MainVBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="FooterMiddlePanel" type="PanelContainer" parent="Center/ARC/MarginContainer/MainVBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BackButton" type="Button" parent="Center/ARC/MarginContainer/MainVBox/HBoxContainer/FooterMiddlePanel" groups=["Buttons"]]
+layout_mode = 2
+size_flags_stretch_ratio = 2.0
 keep_pressed_outside = true
 text = "BACK"
 
-[connection signal="pressed" from="CenterContainer/AspectRatioContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+[node name="FooterRightPanel" type="PanelContainer" parent="Center/ARC/MarginContainer/MainVBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[connection signal="pressed" from="Center/ARC/MarginContainer/MainVBox/HBoxContainer/FooterMiddlePanel/BackButton" to="." method="_on_back_button_pressed"]
