@@ -14,14 +14,14 @@ var mouse_relative_change: Vector2 = Vector2.ZERO
 var gamepad_detected := false
 var should_consume_event:= true
 var is_pausing := false
+var waiting_on_keypress := false
 var debug_menu: Node
-var all_input_actions: Array[StringName]
 var custom_input_actions: Array[StringName]
 var custom_input_action_events := {}
 
 signal back_to_start_from_pause_menu
 signal game_state_has_changed(p_state: String)
-signal input_event_has_changed
+signal input_events_have_changed(p_action: StringName, p_events: Array[InputEvent])
 
 var gamepads: Array[int]= []
 var gamepad_info: Array[Dictionary]= []
@@ -33,16 +33,103 @@ func _ready() -> void:
 	if Elephant.is_debug_build == true:
 		debug_menu = debug_menu_packed.instantiate()
 		add_child(debug_menu)
+	var all_input_actions: Array[StringName]
 	all_input_actions = InputMap.get_actions()
-	# All built-in actions start with "ui_", so we save them as default,
-	# and save the differing ones as our custom actions, these can be modified,
-	# deleted, or appended to.
+	assert(!all_input_actions.is_empty(), "ERROR: Could not get Input Actions!")
+	# All built-in actions start with "ui_", so we get all actions and save the 
+	# differing ones as our custom actions, these can be modified, deleted, 
+	# or appended to.
 	for action in all_input_actions:
 		if !action.begins_with("ui_"):
 			custom_input_actions.append(action)
-	for action in custom_input_actions:
+	write_action_event_dict(custom_input_actions)
+
+## Save all actions and events as a dictionary with key=Action(StringName) 
+## and values as a list of InputEvents.
+func write_action_event_dict(p_actions_arr: Array[StringName]) -> void:
+	for action in p_actions_arr:
+		var _list: Array[String]
 		for event in InputMap.action_get_events(action):
-			custom_input_action_events.get(action, InputEvent)
+			var translated_event: String = _translate_input_event_to_ui_string(event)
+			_list.append(translated_event)
+		custom_input_action_events[action] = _list
+
+func _translate_input_event_to_ui_string(p_input_event: InputEvent) -> String:
+	var _string: String = p_input_event.get_class()
+	match p_input_event.get_class():
+		"InputEventJoypadMotion":
+			var _stick_str: String = p_input_event.as_text()
+			if _stick_str.contains("Left Stick Y-Axis"):
+				if _stick_str.contains("-1.00"):
+					return "Left Stick Up"
+				elif _stick_str.contains("1.00"):
+					return "Left Stick Down"
+			elif _stick_str.contains("Left Stick X-Axis"):
+				if _stick_str.contains("-1.00"):
+					return "Left Stick Left"
+				elif _stick_str.contains("1.00"):
+					return "Left Stick Right"
+			elif _stick_str.contains("Right Stick Y-Axis"):
+				if _stick_str.contains("-1.00"):
+					return "Right Stick Up"
+				elif _stick_str.contains("1.00"):
+					return "Right Stick Down"
+			elif _stick_str.contains("Right Stick X-Axis"):
+				if _stick_str.contains("-1.00"):
+					return "Right Stick Left"
+				elif _stick_str.contains("1.00"):
+					return "Right Stick Right"
+			elif _stick_str.contains("Left Trigger"):
+				return "Left Trigger"
+			elif _stick_str.contains("Right Trigger"):
+				return "Right Trigger"
+		"InputEventJoypadButton":
+			var _button_str: String = p_input_event.as_text()
+			if p_input_event.as_text().contains("Left Action"):
+				return "Face Button Left"
+			elif p_input_event.as_text().contains("Right Action"):
+				return "Face Button Right "
+			elif p_input_event.as_text().contains("Top Action"):
+				return "Face Button Top "
+			elif p_input_event.as_text().contains("Bottom Action"):
+				return "Face Button Bottom"
+			elif p_input_event.as_text().contains("Joypad Button 4"):
+				return "Select"
+			elif p_input_event.as_text().contains("Joypad Button 6"):
+				return "Start"
+			elif p_input_event.as_text().contains("Joypad Button 7"):
+				return "Left Stick Click"
+			elif p_input_event.as_text().contains("Joypad Button 8"):
+				return "Right Stick Click"
+			elif p_input_event.as_text().contains("Joypad Button 9"):
+				return "Left Shoulder"
+			elif p_input_event.as_text().contains("Joypad Button 10"):
+				return "Right Shoulder"
+			elif p_input_event.as_text().contains("Joypad Button 11"):
+				return "D-Pad Up"
+			elif p_input_event.as_text().contains("Joypad Button 12"):
+				return "D-Pad Down"
+			elif p_input_event.as_text().contains("Joypad Button 13"):
+				return "D-Pad Left"
+			elif p_input_event.as_text().contains("Joypad Button 14"):
+				return "D-Pad Right"
+		"InputEventMouseButton":
+			var _button_str: String = p_input_event.as_text()
+			if p_input_event.as_text().contains("Left Mouse Button"):
+				return "Left Mouse Click"
+			if p_input_event.as_text().contains("Right Mouse Button"):
+				return "Right Mouse Click"
+			if p_input_event.as_text().contains("Mouse Wheel Up"):
+				return "Mouse Wheel Up"
+			if p_input_event.as_text().contains("Mouse Wheel Down"):
+				return "Mouse Wheel Down"
+		"InputEventKey":
+			var _key_str: String = p_input_event.as_text()
+			if p_input_event.as_text().contains(" (Physical)"):
+				return p_input_event.as_text().replacen(" (Physical)", "")
+			else:
+				return _key_str
+	return ""
 
 func _on_joy_connection_changed(device: int, connected: bool) -> void:
 	_get_gamepads()
@@ -84,7 +171,7 @@ func _process_input(event: InputEvent) -> void:
 		elif input_state == InputState.PAUSE_STATE:
 			#is_pausing = false TODO: probably need to remove these
 			unpause_game()
-	if Input.is_action_just_pressed("DebugMenu"):
+	if Input.is_action_just_pressed("ui_DebugMenu"):
 		if Elephant.is_debug_build == true:
 			debug_menu.display_or_hide_debug_ui()
 	
@@ -124,7 +211,7 @@ func _process(_delta: float) -> void:
 				_device_reconnected()
 
 func _unhandled_input(event: InputEvent) -> void:
-	pass
+	print(event)
 
 func set_menu_state() -> void:
 	if input_state != InputState.MENU_STATE:
@@ -210,11 +297,17 @@ func _set_last_callable(p_input_state: InputState) -> void:
 		InputState.RECONNECT_STATE:
 			last_input_func = set_reconnect_state
 
-func change_event_on_action(p_action: StringName, p_event: InputEvent) -> bool:
-	InputMap.action_erase_event(p_action, p_event)
+func change_event_on_action(p_action: StringName, p_event: InputEvent) -> void:
+	for action in custom_input_actions:
+		for event in custom_input_action_events[action]:
+			if p_action == action:
+				print ("Found Action: %s" % action.to_upper())
+		InputMap.action_erase_event(p_action, p_event)
 	set_process_unhandled_input(true)
 	InputMap.action_add_event(p_action, p_event)
-	return true
 
 func _set_input_action_mapping_to_default() -> void:
 	InputMap.load_from_project_settings()
+
+func get_custom_actions_and_events() -> Dictionary:
+	return custom_input_action_events
