@@ -39,7 +39,7 @@ func _set_all_control_buttons() -> void:
 		if events.size() > 1:
 			_gp_button.update_key(action, events[1])
 		else:
-			_gp_button.update_key(action, "")
+			_gp_button.update_key(action, "EMPTY")
 
 func _map_keys_to_buttons() -> void:
 	if knm_buttons_arr.size() == actions_and_events_dict.size():

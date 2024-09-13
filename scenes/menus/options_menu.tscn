@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://efyl535owuk0"]
+[gd_scene load_steps=4 format=3 uid="uid://efyl535owuk0"]
 
+[ext_resource type="Theme" uid="uid://tqa2qha7e2k6" path="res://resources/themes/options_menu_theme.tres" id="1_cmgag"]
 [ext_resource type="Script" path="res://scripts/menus/options_menu.gd" id="1_upgtq"]
 [ext_resource type="PackedScene" uid="uid://drip0n7wdi2wt" path="res://scenes/menus/utility/remap_input_button.tscn" id="2_uh3vg"]
 
@@ -10,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_cmgag")
 script = ExtResource("1_upgtq")
 button_packed_scene = ExtResource("2_uh3vg")
 
@@ -20,17 +22,21 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_cmgag")
 
 [node name="ARC" type="AspectRatioContainer" parent="Center"]
 layout_mode = 2
+theme = ExtResource("1_cmgag")
 ratio = 1.7778
 
 [node name="BackgroundPanel" type="PanelContainer" parent="Center/ARC"]
 layout_mode = 2
+theme = ExtResource("1_cmgag")
 
 [node name="MarginContainer" type="MarginContainer" parent="Center/ARC"]
 custom_minimum_size = Vector2(640, 360)
 layout_mode = 2
+theme = ExtResource("1_cmgag")
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
@@ -38,24 +44,29 @@ theme_override_constants/margin_bottom = 4
 
 [node name="MainVBox" type="VBoxContainer" parent="Center/ARC/MarginContainer"]
 layout_mode = 2
+theme = ExtResource("1_cmgag")
 
 [node name="MainTabs" type="TabContainer" parent="Center/ARC/MarginContainer/MainVBox"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("1_cmgag")
 current_tab = 2
 clip_tabs = false
 
 [node name="Main Options" type="PanelContainer" parent="Center/ARC/MarginContainer/MainVBox/MainTabs"]
 visible = false
 layout_mode = 2
+theme = ExtResource("1_cmgag")
 
 [node name="MainScroll" type="ScrollContainer" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Main Options"]
 layout_mode = 2
+theme = ExtResource("1_cmgag")
 
 [node name="MainMargin" type="MarginContainer" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Main Options/MainScroll"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("1_cmgag")
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
@@ -63,48 +74,58 @@ theme_override_constants/margin_bottom = 10
 
 [node name="MainVBox" type="VBoxContainer" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Main Options/MainScroll/MainMargin"]
 layout_mode = 2
+theme = ExtResource("1_cmgag")
 
 [node name="MainLabel0" type="RichTextLabel" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Main Options/MainScroll/MainMargin/MainVBox"]
 layout_mode = 2
+theme = ExtResource("1_cmgag")
 text = "OPTION 0"
 fit_content = true
 
 [node name="MainLabel1" type="RichTextLabel" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Main Options/MainScroll/MainMargin/MainVBox"]
 layout_mode = 2
+theme = ExtResource("1_cmgag")
 text = "OPTION 1"
 fit_content = true
 
 [node name="MainLabel2" type="RichTextLabel" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Main Options/MainScroll/MainMargin/MainVBox"]
 layout_mode = 2
+theme = ExtResource("1_cmgag")
 text = "OPTION 2"
 fit_content = true
 
 [node name="MainLabel3" type="RichTextLabel" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Main Options/MainScroll/MainMargin/MainVBox"]
 layout_mode = 2
+theme = ExtResource("1_cmgag")
 text = "OPTION 3"
 fit_content = true
 
 [node name="MainLabel4" type="RichTextLabel" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Main Options/MainScroll/MainMargin/MainVBox"]
 layout_mode = 2
+theme = ExtResource("1_cmgag")
 text = "OPTION 4"
 fit_content = true
 
 [node name="MainLabel5" type="RichTextLabel" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Main Options/MainScroll/MainMargin/MainVBox"]
 layout_mode = 2
+theme = ExtResource("1_cmgag")
 text = "OPTION 5"
 fit_content = true
 
 [node name="Sounds Options" type="PanelContainer" parent="Center/ARC/MarginContainer/MainVBox/MainTabs"]
 visible = false
 layout_mode = 2
+theme = ExtResource("1_cmgag")
 
 [node name="SoundsScroll" type="ScrollContainer" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Sounds Options"]
 layout_mode = 2
+theme = ExtResource("1_cmgag")
 
 [node name="SoundsMargin" type="MarginContainer" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Sounds Options/SoundsScroll"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("1_cmgag")
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 40
@@ -114,27 +135,32 @@ theme_override_constants/margin_bottom = 40
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("1_cmgag")
 
 [node name="SoundsLabelsVBox" type="VBoxContainer" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Sounds Options/SoundsScroll/SoundsMargin/SoundsHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
+theme = ExtResource("1_cmgag")
 
 [node name="MainVolumeLabel" type="RichTextLabel" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Sounds Options/SoundsScroll/SoundsMargin/SoundsHBox/SoundsLabelsVBox"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("1_cmgag")
 text = "Main Volume"
 fit_content = true
 
 [node name="SoundsVolumeLabel" type="RichTextLabel" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Sounds Options/SoundsScroll/SoundsMargin/SoundsHBox/SoundsLabelsVBox"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("1_cmgag")
 text = "Sounds Volume"
 fit_content = true
 
 [node name="MusicVolumeLabel" type="RichTextLabel" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Sounds Options/SoundsScroll/SoundsMargin/SoundsHBox/SoundsLabelsVBox"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("1_cmgag")
 text = "Music Volume"
 fit_content = true
 
@@ -142,10 +168,12 @@ fit_content = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
+theme = ExtResource("1_cmgag")
 
 [node name="MainVolumeHSlider" type="HSlider" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Sounds Options/SoundsScroll/SoundsMargin/SoundsHBox/SoundsControlsVBox"]
 layout_mode = 2
 size_flags_vertical = 2
+theme = ExtResource("1_cmgag")
 value = 100.0
 tick_count = 5
 ticks_on_borders = true
@@ -153,6 +181,7 @@ ticks_on_borders = true
 [node name="SoundsVolumeHSlider" type="HSlider" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Sounds Options/SoundsScroll/SoundsMargin/SoundsHBox/SoundsControlsVBox"]
 layout_mode = 2
 size_flags_vertical = 2
+theme = ExtResource("1_cmgag")
 value = 75.0
 tick_count = 5
 ticks_on_borders = true
@@ -160,25 +189,30 @@ ticks_on_borders = true
 [node name="MusicVolumeHSlider" type="HSlider" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Sounds Options/SoundsScroll/SoundsMargin/SoundsHBox/SoundsControlsVBox"]
 layout_mode = 2
 size_flags_vertical = 2
+theme = ExtResource("1_cmgag")
 value = 75.0
 tick_count = 5
 ticks_on_borders = true
 
 [node name="Controls Options" type="PanelContainer" parent="Center/ARC/MarginContainer/MainVBox/MainTabs"]
 layout_mode = 2
+theme = ExtResource("1_cmgag")
 
 [node name="ControlsTabs" type="TabContainer" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Controls Options"]
 layout_mode = 2
+theme = ExtResource("1_cmgag")
 
 [node name="Keyboard and Mouse" type="ScrollContainer" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Controls Options/ControlsTabs"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
+theme = ExtResource("1_cmgag")
 
 [node name="ControlsMargin" type="MarginContainer" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Controls Options/ControlsTabs/Keyboard and Mouse"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("1_cmgag")
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
@@ -188,31 +222,33 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("1_cmgag")
 
 [node name="ControlsKnMLabels" type="VBoxContainer" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Controls Options/ControlsTabs/Keyboard and Mouse/ControlsMargin/ControlsHBox"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 0
-size_flags_stretch_ratio = 0.5
+theme = ExtResource("1_cmgag")
 
 [node name="ControlsKnMButtons" type="VBoxContainer" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Controls Options/ControlsTabs/Keyboard and Mouse/ControlsMargin/ControlsHBox"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-size_flags_stretch_ratio = 0.5
+theme = ExtResource("1_cmgag")
 
 [node name="Controller" type="ScrollContainer" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Controls Options/ControlsTabs"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
+theme = ExtResource("1_cmgag")
 
 [node name="ControlsMargin" type="MarginContainer" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Controls Options/ControlsTabs/Controller"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("1_cmgag")
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
@@ -222,35 +258,43 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("1_cmgag")
 
 [node name="ControlsGPLabels" type="VBoxContainer" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Controls Options/ControlsTabs/Controller/ControlsMargin/ControlsHBox"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 4
+size_flags_vertical = 0
 size_flags_stretch_ratio = 0.5
+theme = ExtResource("1_cmgag")
 
 [node name="ControlsGPButtons" type="VBoxContainer" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Controls Options/ControlsTabs/Controller/ControlsMargin/ControlsHBox"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 0
 size_flags_stretch_ratio = 0.5
+theme = ExtResource("1_cmgag")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Center/ARC/MarginContainer/MainVBox"]
 layout_mode = 2
+theme = ExtResource("1_cmgag")
 
 [node name="FooterLeftPanel" type="PanelContainer" parent="Center/ARC/MarginContainer/MainVBox/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
+theme = ExtResource("1_cmgag")
 
 [node name="FooterMiddlePanel" type="PanelContainer" parent="Center/ARC/MarginContainer/MainVBox/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("1_cmgag")
 
 [node name="BackButton" type="Button" parent="Center/ARC/MarginContainer/MainVBox/HBoxContainer/FooterMiddlePanel" groups=["Buttons"]]
 layout_mode = 2
 size_flags_stretch_ratio = 2.0
+theme = ExtResource("1_cmgag")
 keep_pressed_outside = true
 text = "BACK"
 
@@ -258,5 +302,6 @@ text = "BACK"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
+theme = ExtResource("1_cmgag")
 
 [connection signal="pressed" from="Center/ARC/MarginContainer/MainVBox/HBoxContainer/FooterMiddlePanel/BackButton" to="." method="_on_back_button_pressed"]
