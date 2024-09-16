@@ -1,13 +1,18 @@
 extends Button
 
-var action := ""
+var action: StringName
+var event: InputEvent
 
-func update_key(p_action: String, p_key: String) -> void:
+func initialize_button(p_action: StringName, p_event: Array) -> void:
 	action = p_action
-	text = p_key
+	update_event(p_event)
+
+func update_event(p_event: Array) -> void:
+	text = p_event[0]
+	event = p_event[1]
 	button_pressed = false
 
 func _on_toggled(p_toggled_on: bool) -> void:
 	if p_toggled_on == true:
-		#Brainiac.change_event_on_action()
+		get_owner().set_request_new_mapping(self, action, event)
 		text = "..."

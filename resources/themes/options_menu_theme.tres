@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://tqa2qha7e2k6"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://tqa2qha7e2k6"]
 
 [ext_resource type="FontFile" uid="uid://cn3enp4yb7w5l" path="res://assets/fonts/novem.ttf" id="1_h7mfd"]
 
@@ -17,6 +17,8 @@ border_width_bottom = 2
 border_color = Color(0.180392, 0.00784314, 0, 1)
 corner_detail = 1
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wejme"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xmjnu"]
 bg_color = Color(0.156863, 0.156863, 0.156863, 1)
 border_width_left = 1
@@ -33,4 +35,5 @@ RichTextLabel/fonts/normal_font = ExtResource("1_h7mfd")
 TabContainer/colors/font_selected_color = Color(0.588235, 0.72549, 0.984314, 1)
 TabContainer/font_sizes/font_size = 14
 TabContainer/fonts/font = ExtResource("1_h7mfd")
+TabContainer/styles/tab_focus = SubResource("StyleBoxEmpty_wejme")
 TabContainer/styles/tab_selected = SubResource("StyleBoxFlat_xmjnu")
