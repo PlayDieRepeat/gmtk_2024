@@ -226,23 +226,34 @@ func _process(_delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	var str_event = event.get_class()
-	if remap_info[2] == true: # is a gamepad
-		match str_event:
-			"InputEventMouseMotion":
-				mouse_relative_change = event.relative
-				mouse_position = event.global_position
-				#get_tree().get_root().set_input_as_handled()
-			"InputEventKey":
-				print(event.as_text())
-	InputMap.action_add_event(remap_info[0], event)
+	if waiting_on_keypress == true:
+		if remap_info[2] == true: # is a gamepad
+			match str_event:
+				"InputEventJoypadMotion":
+					_update_event_and_notify(event)
+				"InputEventJoypadButton":
+					_update_event_and_notify(event)
+		else:
+			match str_event:
+				"InputEventMouseMotion":
+					mouse_relative_change = event.relative
+					mouse_position = event.global_position
+					#get_tree().get_root().set_input_as_handled()
+				"InputEventMouseButton":
+					_update_event_and_notify(event)
+				"InputEventKey":
+					_update_event_and_notify(event)
+
+func _update_event_and_notify(p_event: InputEvent) -> void:
+	InputMap.action_add_event(remap_info[0], p_event)
 	_write_action_event_dicts(input_actions)
 	var _tranlated_event: Array
-	_tranlated_event = _translate_input_event(event)
+	_tranlated_event = _translate_input_event(p_event)
 	# signal input_event_has_changed(p_action: StringName, p_event: InputEvent)
 	input_event_has_changed.emit(remap_info[0], _tranlated_event)
 	waiting_on_keypress = false
 	set_process_unhandled_input(false)
-	print(event)
+	#get_tree().get_root().set_input_as_handled()
 
 func set_menu_state() -> void:
 	if input_state != InputState.MENU_STATE:
