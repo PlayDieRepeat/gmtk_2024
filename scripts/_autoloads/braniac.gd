@@ -20,6 +20,7 @@ var input_actions: Array[StringName]
 var input_action_knm_events := {}
 var input_action_gp_events := {}
 var remap_info = []
+var controller_deadzone := 0.2
 
 signal back_to_start_from_pause_menu
 signal game_state_has_changed(p_state: String)
@@ -90,24 +91,24 @@ func _translate_input_event(p_input_event: InputEvent) -> Array:
 		"InputEventJoypadMotion":
 			var _stick_str: String = p_input_event.as_text()
 			if _stick_str.contains("Left Stick Y-Axis"):
-				if _stick_str.contains("-1.00"):
+				if p_input_event.get_axis_value() < 0:
 					return ["Left Stick Up", p_input_event]
-				elif _stick_str.contains("1.00"):
+				elif p_input_event.get_axis_value() > 0:
 					return ["Left Stick Down", p_input_event]
 			elif _stick_str.contains("Left Stick X-Axis"):
-				if _stick_str.contains("-1.00"):
+				if p_input_event.get_axis_value() < 0:
 					return ["Left Stick Left", p_input_event]
-				elif _stick_str.contains("1.00"):
+				elif p_input_event.get_axis_value() > 0:
 					return ["Left Stick Right", p_input_event]
 			elif _stick_str.contains("Right Stick Y-Axis"):
-				if _stick_str.contains("-1.00"):
+				if p_input_event.get_axis_value() < 0:
 					return ["Right Stick Up", p_input_event]
-				elif _stick_str.contains("1.00"):
+				elif p_input_event.get_axis_value() > 0:
 					return ["Right Stick Down", p_input_event]
 			elif _stick_str.contains("Right Stick X-Axis"):
-				if _stick_str.contains("-1.00"):
+				if p_input_event.get_axis_value() < 0:
 					return ["Right Stick Left", p_input_event]
-				elif _stick_str.contains("1.00"):
+				elif p_input_event.get_axis_value() > 0:
 					return ["Right Stick Right", p_input_event]
 			elif _stick_str.contains("Left Trigger"):
 				return ["Left Trigger", p_input_event]
@@ -164,10 +165,6 @@ func _input(event: InputEvent) -> void:
 	_process_input(event)
 
 func _process_input(event: InputEvent) -> void:
-	if should_consume_event == true:
-		pass
-		#get_tree().get_root().set_input_as_handled()
-	
 	# check the event type for mouse motion
 	var str_event = event.get_class()
 	match str_event:
@@ -230,7 +227,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		if remap_info[2] == true: # is a gamepad
 			match str_event:
 				"InputEventJoypadMotion":
-					_update_event_and_notify(event)
+					if abs(event.get_axis_value()) >= controller_deadzone:
+						_update_event_and_notify(event)
 				"InputEventJoypadButton":
 					_update_event_and_notify(event)
 		else:
