@@ -8,7 +8,6 @@ enum InputType {AUTO_DETECT, FORCE_CONTROLLER, FORCE_MOUSE_KEYBOARD}
 enum InputState {MENU_STATE, GAME_STATE, TRANSITIONAL_STATE, PAUSE_STATE, RECONNECT_STATE}
 var input_state: InputState = InputState.MENU_STATE
 var last_input_state: InputState = input_state
-var last_input_func: Callable
 var mouse_position: Vector2 = Vector2.ZERO
 var mouse_relative_change: Vector2 = Vector2.ZERO
 var gamepad_detected := false
@@ -38,6 +37,7 @@ func _ready() -> void:
 		add_child(debug_menu)
 	_get_all_actions_from_map()
 	_write_action_event_dicts(input_actions)
+	Elephant.log_event("All Input Actions and Events captured.")
 
 func _get_all_actions_from_map() -> void:
 	var all_input_actions: Array[StringName]
@@ -173,7 +173,7 @@ func _process_input(event: InputEvent) -> void:
 			mouse_position = event.global_position
 			#get_tree().get_root().set_input_as_handled()
 		"InputEventKey":
-			Elephant.log_event(OS.get_keycode_string(event.keycode), true)
+			Elephant.log_event("Keystroke: " + OS.get_keycode_string(event.keycode), false)
 	
 	if Input.is_action_just_pressed("Menu"):
 		if input_state == InputState.GAME_STATE:
@@ -249,6 +249,7 @@ func _update_event_and_notify(p_event: InputEvent) -> void:
 	_tranlated_event = _translate_input_event(p_event)
 	# signal input_event_has_changed(p_action: StringName, p_event: InputEvent)
 	input_event_has_changed.emit(remap_info[0], _tranlated_event)
+	Elephant.log_event("Action Event Updated: " + remap_info[0] + _tranlated_event[0])
 	waiting_on_keypress = false
 	set_process_unhandled_input(false)
 	#get_tree().get_root().set_input_as_handled()
@@ -256,43 +257,37 @@ func _update_event_and_notify(p_event: InputEvent) -> void:
 func set_menu_state() -> void:
 	if input_state != InputState.MENU_STATE:
 		last_input_state = input_state
-		_set_last_callable(last_input_state)
-		game_state_has_changed.emit("Menu State")
 		input_state = InputState.MENU_STATE
+		Elephant.log_event("InputState: Menu State")
+		game_state_has_changed.emit("Menu State")
 
 func set_game_state() -> void:
 	if input_state != InputState.GAME_STATE:
 		last_input_state = input_state
-		_set_last_callable(last_input_state)
-		game_state_has_changed.emit("Game State")
 		input_state = InputState.GAME_STATE
+		Elephant.log_event("InputState: Game State")
+		game_state_has_changed.emit("Game State")
 
 func set_transitional_state() -> void:
 	if input_state != InputState.TRANSITIONAL_STATE:
 		last_input_state = input_state
-		_set_last_callable(last_input_state)
 		input_state = InputState.TRANSITIONAL_STATE
+		Elephant.log_event("InputState: Load State")
 		game_state_has_changed.emit("Load State")
 
 func set_pause_state() -> void:
 	if input_state != InputState.PAUSE_STATE:
 		last_input_state = input_state
-		_set_last_callable(last_input_state)
 		input_state = InputState.PAUSE_STATE
-		#get_tree().paused = !get_tree().paused
+		Elephant.log_event("InputState: Pause State")
 		game_state_has_changed.emit("Pause State")
 
 func set_reconnect_state() -> void:
 	if input_state != InputState.RECONNECT_STATE:
 		last_input_state = input_state
-		_set_last_callable(last_input_state)
 		input_state = InputState.RECONNECT_STATE
-		#get_tree().paused = !get_tree().paused
+		Elephant.log_event("InputState: Reconnect State")
 		game_state_has_changed.emit("Reconnect State")
-
-func set_last_state() -> void:
-	input_state = last_input_state
-	last_input_func.call()
 
 func get_game_state_string() -> String:
 	match input_state:
@@ -323,19 +318,6 @@ func pause_game() -> void:
 
 func unpause_game() -> void:
 	Scenester.unpause_scene()
-
-func _set_last_callable(p_input_state: InputState) -> void:
-	match p_input_state:
-		InputState.MENU_STATE:
-			last_input_func = set_menu_state
-		InputState.GAME_STATE:
-			last_input_func = set_game_state
-		InputState.TRANSITIONAL_STATE:
-			last_input_func = set_transitional_state
-		InputState.PAUSE_STATE:
-			last_input_func = set_pause_state
-		InputState.RECONNECT_STATE:
-			last_input_func = set_reconnect_state
 
 func change_event_on_action(p_action: StringName, p_event: InputEvent, p_is_gamepad: bool) -> void:
 	InputMap.action_erase_event(p_action, p_event)

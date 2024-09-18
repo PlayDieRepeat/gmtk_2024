@@ -1,22 +1,24 @@
-[gd_scene load_steps=8 format=3 uid="uid://cwy6coobo8xt1"]
+[gd_scene load_steps=9 format=3 uid="uid://cwy6coobo8xt1"]
 
 [ext_resource type="Script" path="res://scripts/menus/main_menu.gd" id="1_551gt"]
 [ext_resource type="PackedScene" uid="uid://c3tch322g3hhb" path="res://scenes/menus/start_menu.tscn" id="2_fj2cm"]
+[ext_resource type="PackedScene" uid="uid://biof1aaxrvbg" path="res://scenes/menus/load_menu.tscn" id="3_4nak5"]
 [ext_resource type="PackedScene" uid="uid://bacvkh6dk4dm5" path="res://scenes/menus/credits_menu.tscn" id="3_ce5hj"]
 [ext_resource type="PackedScene" uid="uid://efyl535owuk0" path="res://scenes/menus/options_menu.tscn" id="4_8pjeb"]
-[ext_resource type="PackedScene" uid="uid://cn30r1xbmmkob" path="res://scenes/levels/levelTest.tscn" id="5_8vo86"]
+[ext_resource type="PackedScene" uid="uid://di3ut8c68gk7h" path="res://scenes/levels/level1.tscn" id="5_pdr76"]
 [ext_resource type="Script" path="res://scripts/_data_templates/setup/r_scene.gd" id="6_lv8xv"]
 
 [sub_resource type="Resource" id="Resource_euw0v"]
 script = ExtResource("6_lv8xv")
-scene = ExtResource("5_8vo86")
-scene_id = "LevelTest"
+scene = ExtResource("5_pdr76")
+scene_id = "Level1"
 scene_is_pausable = true
 is_game_scene = true
 
 [node name="MainMenu" type="Node"]
 script = ExtResource("1_551gt")
 start_menu_packed_scene = ExtResource("2_fj2cm")
+load_menu_packed_scene = ExtResource("3_4nak5")
 credits_menu_packed_scene = ExtResource("3_ce5hj")
 options_menu_packed_scene = ExtResource("4_8pjeb")
 game_scene = SubResource("Resource_euw0v")

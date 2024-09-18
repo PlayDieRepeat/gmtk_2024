@@ -11,6 +11,7 @@ func _ready() -> void:
 	assert(god_data != null, "God resource == null")
 	assert(god_data.image != null, "God resource image == null")
 	assert(god_data.tithe != null, "God tithe == null")
+	add_to_group("Savable", true)
 
 func set_god(p_god: RGod) -> void:
 	if p_god != null:

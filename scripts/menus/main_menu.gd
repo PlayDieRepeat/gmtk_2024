@@ -5,9 +5,9 @@ class_name MainMenu
 
 @export_group("Menu Sub Scenes")
 @export var start_menu_packed_scene: PackedScene
+@export var load_menu_packed_scene: PackedScene
 @export var credits_menu_packed_scene: PackedScene
 @export var options_menu_packed_scene: PackedScene
-
 @export_group("Game Scenes")
 @export var game_scene: RScene
 
@@ -26,6 +26,7 @@ func _ready() -> void:
 func _ready_start_menu() -> void: 
 	_instantiate_sub_menu(start_menu_packed_scene)
 	current_sub_menu_instance.connect("start_button_pressed", _on_start_game)
+	current_sub_menu_instance.connect("load_button_pressed", _on_go_to_load_menu)
 	current_sub_menu_instance.connect("credits_button_pressed", _on_go_to_credits)
 	current_sub_menu_instance.connect("options_button_pressed", _on_go_to_options)
 	current_sub_menu_instance.connect("quit_button_pressed", _on_quit)
@@ -39,6 +40,12 @@ func _ready_credits_menu() -> void:
 func _ready_options_menu() -> void:
 	_instantiate_sub_menu(options_menu_packed_scene)
 	current_sub_menu_instance.connect("back_to_start_from_options", _on_return_to_start)
+
+## Instantiate the options menu and maps its buttons to the appropriate events
+func _ready_load_menu() -> void:
+	_instantiate_sub_menu(load_menu_packed_scene)
+	current_sub_menu_instance.connect("back_to_start_from_load", _on_return_to_start)
+	current_sub_menu_instance.connect("load_game", _on_load_game)
 
 ## Handles actual menu instantiaion, registering button sfx, and cleaning up the previous menu
 func _instantiate_sub_menu(p_sub_menU_scene: PackedScene) -> void:
@@ -60,6 +67,13 @@ func _register_button_ui_sounds() -> void:
 ## Used to the start the game
 func _on_start_game() -> void:
 	Scenester.switch_scene(game_scene, true)
+
+func _on_load_game() -> void:
+	print("Loading Goes Here!")
+
+## Used to load a game from disk
+func _on_go_to_load_menu() -> void:
+	_ready_load_menu()
 
 ## Used to go to the credits screen
 func _on_go_to_credits() -> void:

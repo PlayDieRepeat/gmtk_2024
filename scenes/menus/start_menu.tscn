@@ -46,7 +46,7 @@ theme = ExtResource("1_12hgg")
 layout_mode = 2
 size_flags_vertical = 1
 theme = ExtResource("1_12hgg")
-text = "Game Title
+text = "Hungry Gods
 "
 
 [node name="HSeparator" type="HSeparator" parent="CenterContainer/AspectRatioContainer/VBoxContainer"]
@@ -56,22 +56,36 @@ size_flags_horizontal = 4
 size_flags_vertical = 3
 theme = ExtResource("1_12hgg")
 
-[node name="StartButton" type="Button" parent="CenterContainer/AspectRatioContainer/VBoxContainer" groups=["Buttons"]]
+[node name="ButtonGrid" type="GridContainer" parent="CenterContainer/AspectRatioContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme = ExtResource("1_12hgg")
+columns = 3
+
+[node name="StartButton" type="Button" parent="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid" groups=["Buttons"]]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("1_12hgg")
 text = "Start"
 
-[node name="CreditsButton" type="Button" parent="CenterContainer/AspectRatioContainer/VBoxContainer" groups=["Buttons"]]
+[node name="PanelBlank1" type="PanelContainer" parent="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid"]
+layout_mode = 2
+theme = ExtResource("1_12hgg")
+
+[node name="LoadButton" type="Button" parent="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid" groups=["Buttons"]]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("1_12hgg")
-text = "Credits
-"
+text = "Load"
 
-[node name="OptionsButton" type="Button" parent="CenterContainer/AspectRatioContainer/VBoxContainer" groups=["Buttons"]]
+[node name="PanelBlank2" type="PanelContainer" parent="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid"]
+layout_mode = 2
+theme = ExtResource("1_12hgg")
+
+[node name="OptionsButton" type="Button" parent="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid" groups=["Buttons"]]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -79,7 +93,23 @@ theme = ExtResource("1_12hgg")
 text = "Options
 "
 
-[node name="QuitButton" type="Button" parent="CenterContainer/AspectRatioContainer/VBoxContainer" groups=["Buttons"]]
+[node name="PanelBlank3" type="PanelContainer" parent="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid"]
+layout_mode = 2
+theme = ExtResource("1_12hgg")
+
+[node name="CreditsButton" type="Button" parent="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid" groups=["Buttons"]]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_12hgg")
+text = "Credits
+"
+
+[node name="PanelBlank4" type="PanelContainer" parent="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid"]
+layout_mode = 2
+theme = ExtResource("1_12hgg")
+
+[node name="QuitButton" type="Button" parent="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid" groups=["Buttons"]]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -100,15 +130,15 @@ size_flags_horizontal = 4
 theme = ExtResource("1_12hgg")
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 12
-text = "Controls:  ESC Pause/Unpause
-WASD Move, E Action"
+text = "by PLAY|DIE|REPEAT"
 horizontal_alignment = 1
 
-[connection signal="mouse_entered" from="CenterContainer/AspectRatioContainer/VBoxContainer/StartButton" to="." method="_on_start_button_mouse_entered"]
-[connection signal="pressed" from="CenterContainer/AspectRatioContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="mouse_entered" from="CenterContainer/AspectRatioContainer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_mouse_entered"]
-[connection signal="pressed" from="CenterContainer/AspectRatioContainer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
-[connection signal="mouse_entered" from="CenterContainer/AspectRatioContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_mouse_entered"]
-[connection signal="pressed" from="CenterContainer/AspectRatioContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
-[connection signal="mouse_entered" from="CenterContainer/AspectRatioContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_mouse_entered"]
-[connection signal="pressed" from="CenterContainer/AspectRatioContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="mouse_entered" from="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid/StartButton" to="." method="_on_start_button_mouse_entered"]
+[connection signal="pressed" from="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid/LoadButton" to="." method="_on_load_button_pressed"]
+[connection signal="mouse_entered" from="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid/OptionsButton" to="." method="_on_options_button_mouse_entered"]
+[connection signal="pressed" from="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="mouse_entered" from="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid/CreditsButton" to="." method="_on_credits_button_mouse_entered"]
+[connection signal="pressed" from="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="mouse_entered" from="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid/QuitButton" to="." method="_on_quit_button_mouse_entered"]
+[connection signal="pressed" from="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid/QuitButton" to="." method="_on_quit_button_pressed"]

@@ -106,6 +106,7 @@ func add_loaded_as_current(p_scene: PackedScene, p_scene_id: String) -> void:
  
 func _on_new_scene_entered_tree() -> void:
 	get_tree().set_current_scene(current_scene)
+	Elephant.log_event("New Scene Entered Tree: " + current_scene.to_string())
 
 func pause_for_controller_reconnection() -> void:
 	pass

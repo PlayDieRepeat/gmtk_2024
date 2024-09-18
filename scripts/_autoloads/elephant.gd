@@ -12,6 +12,8 @@ var is_debug_build:= false
 var save_time: Dictionary
 var config_file_path: String
 var logger_file_path: String
+var log_queue := []
+var log_queue_buffer_size := 2
 
 func _ready() -> void:
 	assert(save_game_constants != null, "Save Game Constants is empty!!")
@@ -117,22 +119,32 @@ func load_save():
 func start_logger() -> void:
 	save_time = Time.get_datetime_dict_from_system()
 	if setup_logger_dir() != 0:
-		Elephant.log_event("ERROR: Log dir not set up!")
+		printerr("WARNING: Log directory could not be made!")
 	var string_array: PackedStringArray = _get_dir_contents(save_game_constants.save_log_dir_path)
 	var config_filename: String = save_game_constants.save_log_default_name + ".log"
 	logger_file_path = save_game_constants.save_log_dir_path + config_filename
-	if string_array.find(config_filename):
-		var file = FileAccess.open(logger_file_path, FileAccess.WRITE)
-		file.store_var(self, true)
+	if string_array.find(config_filename) >= 0:
+		var file = FileAccess.open(logger_file_path, FileAccess.READ_WRITE)
+		file.seek_end()
+		file.store_line(Time.get_datetime_string_from_system())
+		file.store_line("Re-starting Logger ...")
+		file.close()
 	else:
 		var file = FileAccess.open(logger_file_path, FileAccess.WRITE)
-		file.store_var(self, true)
+		file.store_line(Time.get_datetime_string_from_system())
+		file.store_line("Welcome to the Logger. This is the main log.")
+		file.close()
 
 func log_event(p_event: String, p_display := false) -> void:
 	if is_debug_build:
-		save_time = Time.get_datetime_dict_from_system()
-		var file = FileAccess.open(logger_file_path, FileAccess.WRITE)
-		file.store_string(p_event)
+		log_queue.append(p_event)
+		if log_queue.size() == log_queue_buffer_size:
+			var file = FileAccess.open(logger_file_path, FileAccess.READ_WRITE)
+			for line in log_queue:
+				file.seek_end()
+				file.store_line(Time.get_datetime_string_from_system() + " : " + p_event)
+			file.close()
+			log_queue.clear()
 		event_logged.emit(p_event)
 		if p_display == true:
 			printerr(p_event)
