@@ -1,6 +1,5 @@
-[gd_scene load_steps=12 format=3 uid="uid://cn30r1xbmmkob"]
+[gd_scene load_steps=11 format=3 uid="uid://cn30r1xbmmkob"]
 
-[ext_resource type="Script" path="res://scripts/levels/level1.gd" id="1_qugou"]
 [ext_resource type="PackedScene" uid="uid://innnb2tbok8l" path="res://scenes/systems/world.tscn" id="2_n6w4y"]
 [ext_resource type="Texture2D" uid="uid://cpohewy4agqu0" path="res://assets/images/ground.png" id="4_pihki"]
 [ext_resource type="PackedScene" uid="uid://bxk6fl5f820xw" path="res://scenes/buildings/scaffold.tscn" id="5_86pwy"]
@@ -13,7 +12,6 @@
 [ext_resource type="Resource" uid="uid://b7qymya8ffvmv" path="res://resources/constants/camera_constants.tres" id="11_ns467"]
 
 [node name="LevelTest" type="Node2D"]
-script = ExtResource("1_qugou")
 
 [node name="world" parent="." instance=ExtResource("2_n6w4y")]
 

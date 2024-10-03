@@ -1,96 +1,36 @@
-[gd_scene load_steps=8 format=3 uid="uid://innnb2tbok8l"]
+[gd_scene load_steps=12 format=3 uid="uid://innnb2tbok8l"]
 
+[ext_resource type="Script" path="res://scripts/gods/god.gd" id="1_gt2hh"]
 [ext_resource type="Script" path="res://scripts/systems/world_event_system.gd" id="1_h4j28"]
 [ext_resource type="Script" path="res://scripts/systems/world_controller.gd" id="1_mxxxw"]
-[ext_resource type="Resource" path="res://resources/constants/time_constants.tres" id="2_d3xj7"]
+[ext_resource type="PackedScene" uid="uid://bd3cvxjknt16n" path="res://scenes/systems/end_of_day_card.tscn" id="2_3ilro"]
+[ext_resource type="Resource" uid="uid://cm0a8vlbhldmn" path="res://resources/gods/pig_god.tres" id="2_c3j8p"]
+[ext_resource type="Resource" uid="uid://jew5ejix3nu" path="res://resources/constants/time_constants.tres" id="2_d3xj7"]
 [ext_resource type="Texture2D" uid="uid://ckg8negcy31xd" path="res://assets/images/blue_sky.png" id="3_ot6mi"]
 [ext_resource type="Texture2D" uid="uid://dcqes7x801sf6" path="res://assets/images/Mountains.png" id="4_gd2m1"]
 [ext_resource type="Texture2D" uid="uid://dhst3f6w5g8wn" path="res://assets/images/alpha.png" id="5_k2k73"]
 [ext_resource type="Texture2D" uid="uid://d2rwvvnjk558s" path="res://assets/images/hills.png" id="6_rbdk2"]
+[ext_resource type="Resource" uid="uid://mdu3kq4heym6" path="res://resources/gods/cat_god.tres" id="7_mjhqj"]
 
 [node name="world" type="Node2D"]
 
-[node name="GlobalTimer" type="Timer" parent="."]
+[node name="WorldTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 autostart = true
 
+[node name="God" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_gt2hh")
+god_data = ExtResource("2_c3j8p")
+
 [node name="EventSystem" type="Node" parent="."]
 script = ExtResource("1_h4j28")
-
-[node name="EndOfDayCard" type="Control" parent="EventSystem"]
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Background" type="ColorRect" parent="EventSystem/EndOfDayCard"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 280.0
-offset_bottom = 130.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.992157, 0.878431, 0.67451, 1)
-
-[node name="VBoxContainer" type="VBoxContainer" parent="EventSystem/EndOfDayCard"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Title" type="Label" parent="EventSystem/EndOfDayCard/VBoxContainer"]
-layout_mode = 2
-text = "End of Day Summary"
-
-[node name="Subtitle" type="Label" parent="EventSystem/EndOfDayCard/VBoxContainer"]
-layout_mode = 2
-text = "After a hard day here's what you accomplished"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="EventSystem/EndOfDayCard/VBoxContainer"]
-layout_mode = 2
-
-[node name="ParticulateSummary" type="PanelContainer" parent="EventSystem/EndOfDayCard/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="Stone" type="Label" parent="EventSystem/EndOfDayCard/VBoxContainer/HBoxContainer/ParticulateSummary"]
-layout_mode = 2
-text = "Stone Gained:"
-
-[node name="Wood" type="Label" parent="EventSystem/EndOfDayCard/VBoxContainer/HBoxContainer/ParticulateSummary"]
-layout_mode = 2
-text = "Wood Gained:"
-
-[node name="Food" type="Label" parent="EventSystem/EndOfDayCard/VBoxContainer/HBoxContainer/ParticulateSummary"]
-layout_mode = 2
-text = "Food Gained:"
-
-[node name="Population" type="Label" parent="EventSystem/EndOfDayCard/VBoxContainer/HBoxContainer/ParticulateSummary"]
-layout_mode = 2
-text = "Population Gained:"
-
-[node name="GodSummary" type="PanelContainer" parent="EventSystem/EndOfDayCard/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="Favor" type="Label" parent="EventSystem/EndOfDayCard/VBoxContainer/HBoxContainer/GodSummary"]
-layout_mode = 2
-text = "Favor Gained:"
+end_of_day_card = ExtResource("2_3ilro")
 
 [node name="world_controller" type="Node" parent="."]
 script = ExtResource("1_mxxxw")
-time_constant = ExtResource("2_d3xj7")
+time_constants = ExtResource("2_d3xj7")
+god_data = ExtResource("7_mjhqj")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="world_controller"]
 
@@ -98,7 +38,16 @@ time_constant = ExtResource("2_d3xj7")
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Label" type="Label" parent="world_controller/CanvasLayer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="world_controller/CanvasLayer/MarginContainer"]
+layout_mode = 2
+
+[node name="Time" type="Label" parent="world_controller/CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Tithing" type="Label" parent="world_controller/CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Favor" type="Label" parent="world_controller/CanvasLayer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="world_controller"]
@@ -136,7 +85,7 @@ texture = ExtResource("5_k2k73")
 [node name="GodLayer" type="ParallaxLayer" parent="world_controller/ParallaxBackground"]
 motion_scale = Vector2(0.2, 0.2)
 
-[node name="God" type="TextureRect" parent="world_controller/ParallaxBackground/GodLayer"]
+[node name="GodImage" type="TextureRect" parent="world_controller/ParallaxBackground/GodLayer"]
 modulate = Color(1, 1, 0.462745, 0.533333)
 offset_left = 198.0
 offset_top = 44.0
@@ -153,5 +102,6 @@ offset_right = 1280.0
 offset_bottom = 360.0
 texture = ExtResource("6_rbdk2")
 
-[connection signal="timeout" from="GlobalTimer" to="world_controller" method="_on_global_timer_timeout"]
+[connection signal="timeout" from="WorldTimer" to="world_controller" method="_on_global_timer_timeout"]
+[connection signal="favor_has_changed" from="God" to="world_controller" method="_on_god_favor_has_changed"]
 [connection signal="new_day" from="world_controller" to="EventSystem" method="_on_world_controller_new_day"]

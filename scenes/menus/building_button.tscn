@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyw57toxwlpqd"]
+
+[ext_resource type="ButtonGroup" uid="uid://dobvk7poodyet" path="res://resources/building_buttons.tres" id="1_1vvvr"]
+[ext_resource type="Texture2D" uid="uid://u6osxr3px5tt" path="res://assets/aseprite/tent_icon.png" id="2_uyjgs"]
+
+[node name="Button" type="Button"]
+theme_override_font_sizes/font_size = 12
+toggle_mode = true
+button_group = ExtResource("1_1vvvr")
+text = "Tent"
+icon = ExtResource("2_uyjgs")
+icon_alignment = 1
+vertical_icon_alignment = 0

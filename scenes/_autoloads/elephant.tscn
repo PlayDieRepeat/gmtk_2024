@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://e1uvrmlly83y"]
+
+[ext_resource type="Script" path="res://scripts/_autoloads/elephant.gd" id="1_nl6m1"]
+[ext_resource type="Resource" uid="uid://wjtrwnrcig01" path="res://resources/constants/save_constants.tres" id="2_vb1y4"]
+
+[node name="Elephant" type="Node" groups=["Persistent"]]
+script = ExtResource("1_nl6m1")
+save_game_constants = ExtResource("2_vb1y4")

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://4m22m0jaepth"]
+
+[ext_resource type="Script" path="res://scripts/systems/braniac.gd" id="1_3lba3"]
+[ext_resource type="PackedScene" uid="uid://byow4rmfkdogn" path="res://scenes/systems/critters.tscn" id="2_ljnwm"]
+
+[node name="Braniac" type="Node"]
+script = ExtResource("1_3lba3")
+debug_menu_packed = ExtResource("2_ljnwm")

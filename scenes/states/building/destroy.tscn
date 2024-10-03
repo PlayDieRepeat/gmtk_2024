@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgrnf62cbgomf"]
+
+[ext_resource type="Script" path="res://scripts/states/building_states/destroy_state.gd" id="1_2dy7d"]
+
+[node name="Destroy" type="Node"]
+script = ExtResource("1_2dy7d")

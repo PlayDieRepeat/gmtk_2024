@@ -5,8 +5,9 @@ class_name RBuilding
 @export var grid_height: int
 @export var building_texture: Texture2D
 @export var construction_texture: Texture2D
+@export var teardown_texture: Texture2D
 @export var terrain_requirement: RTerrainType
-@export var material_requirements: Array[RMaterialRequirement]
+@export var material_requirements: Array[RMaterialStack]
 @export var can_build_above: bool
 @export var time_to_build: int
 

@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6x87uubuyc2"]
+
+[ext_resource type="Script" path="res://scripts/menus/material_stack_debug_display.gd" id="1_n7f74"]
+[ext_resource type="Texture2D" uid="uid://bs5pxch7md6qu" path="res://assets/images/ui/grid_icon.png" id="2_3a4t8"]
+[ext_resource type="Texture2D" uid="uid://bekhbq2inxyhe" path="res://assets/images/debug/plus.png" id="3_yp5sj"]
+[ext_resource type="Texture2D" uid="uid://dnntnmuqc0l3g" path="res://assets/images/debug/minus.png" id="4_twm73"]
+
+[node name="MaterialDisplay" type="MarginContainer" node_paths=PackedStringArray("icon_rect", "material_label", "amount_label", "add_button", "remove_button")]
+offset_right = 140.0
+offset_bottom = 21.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+script = ExtResource("1_n7f74")
+icon_rect = NodePath("HBox/MaterialIcon")
+material_label = NodePath("HBox/MaterialLabel")
+amount_label = NodePath("HBox/AmountLabel")
+add_button = NodePath("HBox/Add")
+remove_button = NodePath("HBox/Button")
+
+[node name="HBox" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="MaterialIcon" type="TextureRect" parent="HBox"]
+custom_minimum_size = Vector2(16, 2.08165e-12)
+layout_mode = 2
+texture = ExtResource("2_3a4t8")
+stretch_mode = 5
+
+[node name="MaterialLabel" type="Label" parent="HBox"]
+custom_minimum_size = Vector2(50, 2.08165e-12)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Material:"
+vertical_alignment = 1
+
+[node name="AmountLabel" type="Label" parent="HBox"]
+custom_minimum_size = Vector2(24, 2.08165e-12)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "000"
+vertical_alignment = 1
+
+[node name="Add" type="Button" parent="HBox"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 8
+icon = ExtResource("3_yp5sj")
+icon_alignment = 1
+
+[node name="Button" type="Button" parent="HBox"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 8
+icon = ExtResource("4_twm73")
