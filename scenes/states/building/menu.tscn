@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://5327j6ggy4i1"]
+
+[ext_resource type="Script" path="res://scripts/states/building_states/menu_state.gd" id="1_qy4d0"]
+
+[node name="MenuState" type="Node"]
+script = ExtResource("1_qy4d0")
