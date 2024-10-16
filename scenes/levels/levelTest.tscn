@@ -1,14 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://cn30r1xbmmkob"]
+[gd_scene load_steps=8 format=3 uid="uid://cn30r1xbmmkob"]
 
 [ext_resource type="PackedScene" uid="uid://innnb2tbok8l" path="res://scenes/systems/world.tscn" id="2_n6w4y"]
-[ext_resource type="Texture2D" uid="uid://cpohewy4agqu0" path="res://assets/images/ground.png" id="4_pihki"]
-[ext_resource type="PackedScene" uid="uid://bxk6fl5f820xw" path="res://scenes/buildings/scaffold.tscn" id="5_86pwy"]
-[ext_resource type="PackedScene" uid="uid://b5t8vmp1prekn" path="res://scenes/buildings/temple.tscn" id="6_5curv"]
-[ext_resource type="PackedScene" uid="uid://cgaru2o57fe3j" path="res://scenes/buildings/house.tscn" id="7_6ccch"]
+[ext_resource type="Texture2D" uid="uid://cpohewy4agqu0" path="res://assets/images/environment/ground.png" id="4_pihki"]
 [ext_resource type="Texture2D" uid="uid://bmmq23vga8ukr" path="res://assets/images/trees/treeRed.png" id="8_k7tws"]
 [ext_resource type="Texture2D" uid="uid://clcspwowhnoch" path="res://assets/images/trees/treeGreen.png" id="9_bw7tt"]
 [ext_resource type="Texture2D" uid="uid://dfuotlar74515" path="res://assets/images/trees/treeYellow.png" id="10_0d87u"]
-[ext_resource type="Script" path="res://scripts/levels/Camera2D.gd" id="11_h4tf8"]
+[ext_resource type="Script" path="res://scripts/levels/world_camera.gd" id="11_h4tf8"]
 [ext_resource type="Resource" uid="uid://b7qymya8ffvmv" path="res://resources/constants/camera_constants.tres" id="11_ns467"]
 
 [node name="LevelTest" type="Node2D"]
@@ -58,18 +55,6 @@ position = Vector2(640, 328)
 scale = Vector2(10.023, 0.5)
 texture = ExtResource("4_pihki")
 centered = false
-
-[node name="scaffold" parent="." instance=ExtResource("5_86pwy")]
-position = Vector2(173, 302)
-
-[node name="scaffold2" parent="." instance=ExtResource("5_86pwy")]
-position = Vector2(309, 301)
-
-[node name="temple" parent="." instance=ExtResource("6_5curv")]
-position = Vector2(333, 261)
-
-[node name="house" parent="." instance=ExtResource("7_6ccch")]
-position = Vector2(198, 281)
 
 [node name="redTree" type="Sprite2D" parent="."]
 position = Vector2(40, 301)

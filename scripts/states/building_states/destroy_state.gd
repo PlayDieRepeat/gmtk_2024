@@ -4,7 +4,8 @@ class_name DestroyState
 
 # Called when the state machine enters this state.
 func on_enter() -> void:
-	parent_building.call_deferred("queue_free")
+	parent_building.show_building_texture(false)
+	parent_building.set_building_name()
 
 # Called every frame when this state is active.
 func on_process(_delta: float) -> void:
