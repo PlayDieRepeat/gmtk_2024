@@ -1,7 +1,6 @@
 extends BuildingState
 class_name WaitingState
 
-
 # Called when the state machine enters this state.
 func on_enter() -> void:
 	parent_building.try_add_neighbor()

@@ -1,7 +1,7 @@
 extends Node2D
 class_name Building
 
-@export_group("Buidling Data")
+@export_group("Building Data")
 @export var is_prebuilt := false
 @export var building_data: RBuilding
 @export var building_states: Array[PackedScene]
@@ -129,7 +129,7 @@ func _on_building_selected(p_building_data: RBuilding) -> void:
 	show_building_texture(true)
 	show_scaffolding(true)
 
-func _on_menu_cancelded() -> void:
+func _on_menu_canceled() -> void:
 	state_machine.change_state("Empty")
 
 func _on_build_confirmed() -> void:

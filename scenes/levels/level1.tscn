@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://jew5ejix3nu" path="res://resources/constants/time_constants.tres" id="8_7fp10"]
 [ext_resource type="Resource" uid="uid://mdu3kq4heym6" path="res://resources/gods/cat_god.tres" id="9_s4vp6"]
 [ext_resource type="Texture2D" uid="uid://cpohewy4agqu0" path="res://assets/images/environment/ground.png" id="12_543hd"]
+[ext_resource type="Script" path="res://scenes/levels/im_gui_helper.gd" id="13_hj33i"]
 [ext_resource type="PackedScene" uid="uid://dodop7a7svo6t" path="res://scenes/world/SkyBox.tscn" id="14_xq1sr"]
 [ext_resource type="Texture2D" uid="uid://bmmq23vga8ukr" path="res://assets/images/trees/treeRed.png" id="16_tywj6"]
 [ext_resource type="Texture2D" uid="uid://clcspwowhnoch" path="res://assets/images/trees/treeGreen.png" id="17_c7fb8"]
@@ -28,25 +29,7 @@
 [ext_resource type="Script" path="res://scripts/menus/debug_resource_grid.gd" id="27_aipw5"]
 [ext_resource type="PackedScene" uid="uid://c6x87uubuyc2" path="res://scenes/menus/material_display.tscn" id="28_y16u3"]
 
-[sub_resource type="GDScript" id="GDScript_kldew"]
-script/source = "extends Node
-
-# signal back_to_start_from_pause_menu
-
-# func _process(_delta: float) -> void:
-# 	if Input.is_action_just_pressed(\"Menu\"):
-# 		%PauseMenu.visible = !%PauseMenu.visible
-# 		get_tree().paused = !get_tree().paused
-
-# func _on_quit_button_pressed() -> void:
-# 	get_tree().quit()
-
-# func _on_back_button_pressed() -> void:
-# 	emit_signal(\"back_to_start_from_pause_menu\")
-"
-
 [node name="Level1" type="Node"]
-script = SubResource("GDScript_kldew")
 
 [node name="Systems" type="Node" parent="."]
 
@@ -78,6 +61,9 @@ god_data = ExtResource("3_xqme8")
 anchor_mode = 0
 script = ExtResource("19_qtfqm")
 camera_constant = ExtResource("20_r8y4d")
+
+[node name="ImGuiHelper" type="Node" parent="Systems"]
+script = ExtResource("13_hj33i")
 
 [node name="World" type="Node" parent="."]
 

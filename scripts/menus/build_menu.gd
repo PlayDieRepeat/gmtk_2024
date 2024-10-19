@@ -19,7 +19,7 @@ var active_building: Building
 var available_buildings: Array[RBuilding]
 
 signal building_selected(p_selected_building: RBuilding)
-signal menu_caneceled()
+signal menu_canceled()
 signal confirm_build()
 
 # Called when the node enters the scene tree for the first time.
@@ -38,7 +38,7 @@ func clear_cost_controls() -> void:
 
 func _on_close_pressed() -> void:
 	clear_build_buttons()
-	menu_caneceled.emit()
+	menu_canceled.emit()
 	disconnect_signals()
 	hide()
 
@@ -50,12 +50,12 @@ func _on_action_pressed() -> void:
 
 func connect_signals() -> void:
 	building_selected.connect(active_building._on_building_selected)
-	menu_caneceled.connect(active_building._on_menu_cancelded)
+	menu_canceled.connect(active_building._on_menu_canceled)
 	confirm_build.connect(active_building._on_build_confirmed)
 
 func disconnect_signals() -> void:
 	building_selected.disconnect(active_building._on_building_selected)
-	menu_caneceled.disconnect(active_building._on_menu_cancelded)
+	menu_canceled.disconnect(active_building._on_menu_canceled)
 	confirm_build.disconnect(active_building._on_build_confirmed)
 
 func _on_build_button_pressed(p_building: Building, p_available_buildings: Array[RBuilding]) -> void:
@@ -67,7 +67,7 @@ func _on_build_button_pressed(p_building: Building, p_available_buildings: Array
 		button_instance.building_data = available_buildings[i]
 		button_instance.building_selected.connect(_on_building_selected)
 		building_button_container.add_child(button_instance)
-		if i == 0:	
+		if i == 0:
 			button_instance.grab_focus()
 	show()
 

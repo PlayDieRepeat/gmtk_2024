@@ -15,4 +15,4 @@ display_name = "Stable Scaffolds"
 description = "Sturdy enough to expand your settlement."
 material_requirements = Array[ExtResource("1_h4ucu")]([SubResource("Resource_welci")])
 can_build_above = false
-time_to_build = 2
+time_to_build = 0
