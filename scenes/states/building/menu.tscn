@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://scripts/states/building_states/menu_state.gd" id="1_qy4d0"]
 
-[node name="MenuState" type="Node"]
+[node name="Menu" type="Node"]
 script = ExtResource("1_qy4d0")

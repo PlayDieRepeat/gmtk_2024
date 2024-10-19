@@ -20,7 +20,7 @@ class_name Building
 
 var left_neighbor: Building = null
 var right_neighbor: Building = null
-var grid_coordinates := Vector2i (0,0)
+var grid_coordinates := Vector2i(0, 0)
 var build_progress := 0
 var world_timer: Timer
 
@@ -104,24 +104,24 @@ func add_to_waiting_queue() -> void:
 
 func fade_building(p_should_fade: bool) -> void:
 	if p_should_fade:
-		modulate = Color (1,1,1,.5)
+		modulate = Color(1, 1, 1, .5)
 	else:
-		modulate = Color (1,1,1,1)
+		modulate = Color(1, 1, 1, 1)
 
 func try_add_neighbor() -> void:
 	if left_neighbor == null:
 		left_neighbor = metropolis.add_neighbor(Vector2(position.x - scaffold_sprite.texture.get_width(), position.y))
 		left_neighbor.right_neighbor = self
-		left_neighbor.grid_coordinates = grid_coordinates + Vector2i (-1,0)
+		left_neighbor.grid_coordinates = grid_coordinates + Vector2i(-1, 0)
 		# left_neighbor.name = "Building_%s_%s" % [left_neighbor.grid_coordinates.x, left_neighbor.grid_coordinates.y]
 	if right_neighbor == null:
 		right_neighbor = metropolis.add_neighbor(Vector2(position.x + scaffold_sprite.texture.get_width(), position.y))
 		right_neighbor.left_neighbor = self
-		right_neighbor.grid_coordinates = grid_coordinates + Vector2i (1,0)
+		right_neighbor.grid_coordinates = grid_coordinates + Vector2i(1, 0)
 		# right_neighbor.name = "Building_%s_%s" % [right_neighbor.grid_coordinates.x, right_neighbor.grid_coordinates.y]
 
 func _on_build_button_pressed() -> void:
-	state_machine.change_state("MenuState")
+	state_machine.change_state("Menu")
 	build_button_pressed.emit(self)
 
 func _on_building_selected(p_building_data: RBuilding) -> void:
