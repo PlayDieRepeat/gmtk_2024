@@ -23,19 +23,19 @@ func _ready() -> void:
 	can_check_stock = true
 
 func _process(_delta: float) -> void:
-	ImGui.Begin("Hungry Debug")
-	if ImGui.BeginTabBar("Menus"):
-		if ImGui.BeginTabItem("Materials"):
-			ImGui.SeparatorText("Material Stacks")
-			ImGui.PushItemWidth(200)
-			for stack in material_stacks:
-				var count: Array[int] = [stack.stack_count]
-				if ImGui.InputInt("%s" % stack.stacked_material.display_name, count) and count[0] >= 0:
-					_set_stack_count(stack, count[0])
-			ImGui.PopItemWidth()
-			ImGui.EndTabItem()
-		ImGui.EndTabBar()
-	ImGui.End()
+	if ImGui.Begin("Hungry Debug"):
+		if ImGui.BeginTabBar("Menus"):
+			if ImGui.BeginTabItem("Materials"):
+				ImGui.SeparatorText("Material Stacks")
+				ImGui.PushItemWidth(200)
+				for stack in material_stacks:
+					var count: Array[int] = [stack.stack_count]
+					if ImGui.InputInt("%s" % stack.stacked_material.display_name, count) and count[0] >= 0:
+						_set_stack_count(stack, count[0])
+				ImGui.PopItemWidth()
+				ImGui.EndTabItem()
+			ImGui.EndTabBar()
+		ImGui.End()
 
 func try_get_materials(p_materials_to_check: Array[RMaterialStack]) -> bool:
 	var result = false

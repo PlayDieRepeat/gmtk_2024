@@ -26,24 +26,24 @@ func _ready():
 	set_god.emit(god_data)
 
 func _process(_delta: float) -> void:
-	ImGui.Begin("Hungry Debug")
-	if ImGui.BeginTabBar("Menus"):
-		if ImGui.BeginTabItem("Time"):
-			ImGui.SeparatorText("About Time")
-			ImGui.PushItemWidth(100)
-			ImGui.LabelText("Start of Day", "%s" % time_constants.start_of_day)
-			ImGui.LabelText("End of Day", "%s" % time_constants.end_of_day)
-			ImGui.LabelText("Current Time", "%s" % (hour_count))
-			ImGui.PopItemWidth()
-			ImGui.SeparatorText("Time Options")
-			if ImGui.Button("Restart Day"):
-				restart_day()
-			ImGui.SameLine()
-			if ImGui.Button("End Day"):
-				end_day()
-			ImGui.EndTabItem()
-		ImGui.EndTabBar()
-	ImGui.End()
+	if ImGui.Begin("Hungry Debug"):
+		if ImGui.BeginTabBar("Menus"):
+			if ImGui.BeginTabItem("Time"):
+				ImGui.SeparatorText("About Time")
+				ImGui.PushItemWidth(100)
+				ImGui.LabelText("Start of Day", "%s" % time_constants.start_of_day)
+				ImGui.LabelText("End of Day", "%s" % time_constants.end_of_day)
+				ImGui.LabelText("Current Time", "%s" % (hour_count))
+				ImGui.PopItemWidth()
+				ImGui.SeparatorText("Time Options")
+				if ImGui.Button("Restart Day"):
+					restart_day()
+				ImGui.SameLine()
+				if ImGui.Button("End Day"):
+					end_day()
+				ImGui.EndTabItem()
+			ImGui.EndTabBar()
+		ImGui.End()
 
 func _on_timer_timeout():
 	seconds_count += 1
