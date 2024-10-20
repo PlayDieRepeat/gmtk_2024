@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://y8cgu2jamiir"]
+
+[ext_resource type="Script" path="res://scripts/menus/material_cost_control.gd" id="1_feq54"]
+[ext_resource type="Texture2D" uid="uid://cblck7ex4ac67" path="res://assets/images/ui/stone_icon.png" id="2_yr2tg"]
+
+[node name="MaterialCost" type="HBoxContainer" node_paths=PackedStringArray("material_icon", "cost_label", "available_label")]
+script = ExtResource("1_feq54")
+material_icon = NodePath("Icon")
+cost_label = NodePath("Cost")
+available_label = NodePath("Available")
+
+[node name="Icon" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(16, 2.08165e-12)
+layout_mode = 2
+tooltip_text = "Material Name"
+texture = ExtResource("2_yr2tg")
+stretch_mode = 3
+
+[node name="Cost" type="Label" parent="."]
+custom_minimum_size = Vector2(16, 2.08165e-12)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Available" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "(300)"
+vertical_alignment = 1

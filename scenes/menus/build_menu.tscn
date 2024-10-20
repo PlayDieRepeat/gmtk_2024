@@ -1,25 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://b04fabibrse1a"]
+[gd_scene load_steps=4 format=3 uid="uid://b04fabibrse1a"]
 
 [ext_resource type="Script" path="res://scripts/menus/build_menu.gd" id="1_phppl"]
-[ext_resource type="Texture2D" uid="uid://cblck7ex4ac67" path="res://assets/images/ui/stone_icon.png" id="2_oe60h"]
 [ext_resource type="PackedScene" uid="uid://dyw57toxwlpqd" path="res://scenes/menus/building_button.tscn" id="2_xcmxj"]
-[ext_resource type="Script" path="res://scripts/menus/material_cost_control.gd" id="3_ijvi1"]
+[ext_resource type="PackedScene" uid="uid://y8cgu2jamiir" path="res://scenes/menus/material_cost.tscn" id="4_t8i7f"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_hlqtn"]
-
-[sub_resource type="ButtonGroup" id="ButtonGroup_flggl"]
-
-[sub_resource type="ButtonGroup" id="ButtonGroup_y71y2"]
-
-[sub_resource type="ButtonGroup" id="ButtonGroup_vcceb"]
-
-[sub_resource type="ButtonGroup" id="ButtonGroup_l3flt"]
-
-[sub_resource type="ButtonGroup" id="ButtonGroup_efovf"]
-
-[sub_resource type="ButtonGroup" id="ButtonGroup_axx83"]
-
-[node name="BuildMenu" type="Panel" node_paths=PackedStringArray("building_buttton_container", "cost_grid", "usage_label", "close_button", "action_button")]
+[node name="BuildMenu" type="Panel" node_paths=PackedStringArray("building_button_container", "cost_grid", "usage_label", "close_button", "action_button")]
 anchors_preset = -1
 anchor_top = -0.0222222
 anchor_right = 0.9375
@@ -31,9 +16,11 @@ offset_bottom = 188.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_phppl")
-building_buttton_container = NodePath("HBoxContainer/BuildingSelect/ScrollContainer/BuildingButonContainer")
-cost_grid = NodePath("HBoxContainer/Details/Panel/MarginContainer/VBoxContainer/CostGrid")
-usage_label = NodePath("HBoxContainer/Details/Panel/MarginContainer/VBoxContainer/UseText")
+building_button = ExtResource("2_xcmxj")
+cost_control = ExtResource("4_t8i7f")
+building_button_container = NodePath("HBoxContainer/BuildingSelect/ScrollContainer/BuildingButonContainer")
+cost_grid = NodePath("HBoxContainer/BuildingDetails/Panel/MarginContainer/VBoxContainer/CostGrid")
+usage_label = NodePath("HBoxContainer/BuildingDetails/Panel/MarginContainer/VBoxContainer/MarginContainer/UseText")
 close_button = NodePath("Close")
 action_button = NodePath("Action")
 metadata/_edit_use_anchors_ = true
@@ -52,7 +39,7 @@ custom_minimum_size = Vector2(256, 2.08165e-12)
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 2
+theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 8
 
 [node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/BuildingSelect"]
@@ -62,181 +49,68 @@ vertical_scroll_mode = 0
 
 [node name="BuildingButonContainer" type="HBoxContainer" parent="HBoxContainer/BuildingSelect/ScrollContainer"]
 clip_contents = true
+custom_minimum_size = Vector2(256, 124)
 layout_mode = 2
 
-[node name="Button" parent="HBoxContainer/BuildingSelect/ScrollContainer/BuildingButonContainer" instance=ExtResource("2_xcmxj")]
-layout_mode = 2
-button_group = SubResource("ButtonGroup_hlqtn")
-
-[node name="Button2" parent="HBoxContainer/BuildingSelect/ScrollContainer/BuildingButonContainer" instance=ExtResource("2_xcmxj")]
-layout_mode = 2
-button_group = SubResource("ButtonGroup_flggl")
-
-[node name="Button3" parent="HBoxContainer/BuildingSelect/ScrollContainer/BuildingButonContainer" instance=ExtResource("2_xcmxj")]
-layout_mode = 2
-button_group = SubResource("ButtonGroup_y71y2")
-
-[node name="Button4" parent="HBoxContainer/BuildingSelect/ScrollContainer/BuildingButonContainer" instance=ExtResource("2_xcmxj")]
-layout_mode = 2
-button_group = SubResource("ButtonGroup_vcceb")
-
-[node name="Button5" parent="HBoxContainer/BuildingSelect/ScrollContainer/BuildingButonContainer" instance=ExtResource("2_xcmxj")]
-layout_mode = 2
-button_group = SubResource("ButtonGroup_l3flt")
-
-[node name="Button6" parent="HBoxContainer/BuildingSelect/ScrollContainer/BuildingButonContainer" instance=ExtResource("2_xcmxj")]
-layout_mode = 2
-button_group = SubResource("ButtonGroup_efovf")
-
-[node name="Button7" parent="HBoxContainer/BuildingSelect/ScrollContainer/BuildingButonContainer" instance=ExtResource("2_xcmxj")]
-layout_mode = 2
-button_group = SubResource("ButtonGroup_axx83")
-
-[node name="Details" type="MarginContainer" parent="HBoxContainer"]
+[node name="BuildingDetails" type="MarginContainer" parent="HBoxContainer"]
 custom_minimum_size = Vector2(128, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/margin_left = 2
+theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="Panel" type="Panel" parent="HBoxContainer/Details"]
+[node name="Panel" type="Panel" parent="HBoxContainer/BuildingDetails"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Details/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/BuildingDetails/Panel"]
 clip_contents = true
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -2.0
+offset_bottom = 136.0
 grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_right = 4
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Details/Panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/BuildingDetails/Panel/MarginContainer"]
 layout_mode = 2
+size_flags_vertical = 0
 
-[node name="Costs" type="Label" parent="HBoxContainer/Details/Panel/MarginContainer/VBoxContainer"]
+[node name="CostLabel" type="Label" parent="HBoxContainer/BuildingDetails/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
-text = "Costs"
+text = "Cost"
 horizontal_alignment = 1
 
-[node name="CostGrid" type="GridContainer" parent="HBoxContainer/Details/Panel/MarginContainer/VBoxContainer"]
+[node name="CostGrid" type="GridContainer" parent="HBoxContainer/BuildingDetails/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(144, 38)
 layout_mode = 2
 columns = 2
 
-[node name="MaterialCost" type="HBoxContainer" parent="HBoxContainer/Details/Panel/MarginContainer/VBoxContainer/CostGrid"]
-layout_mode = 2
-script = ExtResource("3_ijvi1")
-
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Details/Panel/MarginContainer/VBoxContainer/CostGrid/MaterialCost"]
-custom_minimum_size = Vector2(16, 2.08165e-12)
-layout_mode = 2
-tooltip_text = "Material Name"
-texture = ExtResource("2_oe60h")
-stretch_mode = 3
-
-[node name="Cost" type="Label" parent="HBoxContainer/Details/Panel/MarginContainer/VBoxContainer/CostGrid/MaterialCost"]
-custom_minimum_size = Vector2(16, 2.08165e-12)
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "00"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Available" type="Label" parent="HBoxContainer/Details/Panel/MarginContainer/VBoxContainer/CostGrid/MaterialCost"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "(300)"
-vertical_alignment = 1
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/Details/Panel/MarginContainer/VBoxContainer/CostGrid"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Details/Panel/MarginContainer/VBoxContainer/CostGrid/HBoxContainer2"]
-custom_minimum_size = Vector2(16, 2.08165e-12)
-layout_mode = 2
-tooltip_text = "Material Name"
-texture = ExtResource("2_oe60h")
-stretch_mode = 3
-
-[node name="Cost" type="Label" parent="HBoxContainer/Details/Panel/MarginContainer/VBoxContainer/CostGrid/HBoxContainer2"]
-custom_minimum_size = Vector2(16, 2.08165e-12)
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "00"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Available" type="Label" parent="HBoxContainer/Details/Panel/MarginContainer/VBoxContainer/CostGrid/HBoxContainer2"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "(300)"
-vertical_alignment = 1
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer/Details/Panel/MarginContainer/VBoxContainer/CostGrid"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Details/Panel/MarginContainer/VBoxContainer/CostGrid/HBoxContainer3"]
-custom_minimum_size = Vector2(16, 2.08165e-12)
-layout_mode = 2
-tooltip_text = "Material Name"
-texture = ExtResource("2_oe60h")
-stretch_mode = 3
-
-[node name="Cost" type="Label" parent="HBoxContainer/Details/Panel/MarginContainer/VBoxContainer/CostGrid/HBoxContainer3"]
-custom_minimum_size = Vector2(16, 2.08165e-12)
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "00"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Available" type="Label" parent="HBoxContainer/Details/Panel/MarginContainer/VBoxContainer/CostGrid/HBoxContainer3"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "(300)"
-vertical_alignment = 1
-
-[node name="HBoxContainer4" type="HBoxContainer" parent="HBoxContainer/Details/Panel/MarginContainer/VBoxContainer/CostGrid"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Details/Panel/MarginContainer/VBoxContainer/CostGrid/HBoxContainer4"]
-custom_minimum_size = Vector2(16, 2.08165e-12)
-layout_mode = 2
-tooltip_text = "Material Name"
-texture = ExtResource("2_oe60h")
-stretch_mode = 3
-
-[node name="Cost" type="Label" parent="HBoxContainer/Details/Panel/MarginContainer/VBoxContainer/CostGrid/HBoxContainer4"]
-custom_minimum_size = Vector2(16, 2.08165e-12)
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "00"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Available" type="Label" parent="HBoxContainer/Details/Panel/MarginContainer/VBoxContainer/CostGrid/HBoxContainer4"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "(300)"
-vertical_alignment = 1
-
-[node name="Use" type="Label" parent="HBoxContainer/Details/Panel/MarginContainer/VBoxContainer"]
+[node name="UseLabel" type="Label" parent="HBoxContainer/BuildingDetails/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "Use"
 horizontal_alignment = 1
 
-[node name="UseText" type="Label" parent="HBoxContainer/Details/Panel/MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/BuildingDetails/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "Add 2x Housing"
-horizontal_alignment = 1
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_right = 2
+
+[node name="UseText" type="Label" parent="HBoxContainer/BuildingDetails/Panel/MarginContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 10
+text = "cxc"
+autowrap_mode = 2
+clip_text = true
+text_overrun_behavior = 3
 
 [node name="Action" type="Button" parent="."]
 layout_mode = 1
@@ -248,6 +122,7 @@ anchor_bottom = 0.993056
 offset_top = -31.0
 offset_right = 62.0
 grow_vertical = 0
+focus_mode = 0
 text = "Action"
 metadata/_edit_use_anchors_ = true
 
@@ -260,6 +135,7 @@ offset_left = 8.0
 offset_right = 40.0
 offset_bottom = 32.0
 grow_horizontal = 0
+focus_mode = 0
 text = "X"
 
 [connection signal="pressed" from="Action" to="." method="_on_action_pressed"]
