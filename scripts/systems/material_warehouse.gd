@@ -22,6 +22,21 @@ func _ready() -> void:
 
 	can_check_stock = true
 
+func _process(_delta: float) -> void:
+	if ImGui.Begin("Hungry Debug"):
+		if ImGui.BeginTabBar("Menus"):
+			if ImGui.BeginTabItem("Materials"):
+				ImGui.SeparatorText("Material Stacks")
+				ImGui.PushItemWidth(200)
+				for stack in material_stacks:
+					var count: Array[int] = [stack.stack_count]
+					if ImGui.InputInt("%s" % stack.stacked_material.display_name, count) and count[0] >= 0:
+						_set_stack_count(stack, count[0])
+				ImGui.PopItemWidth()
+				ImGui.EndTabItem()
+			ImGui.EndTabBar()
+		ImGui.End()
+
 func try_get_materials(p_materials_to_check: Array[RMaterialStack]) -> bool:
 	var result = false
 	if can_check_stock == true:
@@ -72,8 +87,6 @@ func remove_material(p_material_to_remove: RMaterial, p_amount: int) -> void:
 	_remove_from_stack(stack, p_amount)
 
 func _add_to_stack(p_material_stack: MaterialStack, p_amount_to_add: int) -> void:
-	assert(p_amount_to_add > 0, "Cannot add 0 or negative stone.")
-
 	var material = p_material_stack.stacked_material
 	var old_value = p_material_stack.get_stack_count(p_material_stack.stacked_material)
 	var new_value = p_material_stack.add_to_stack(p_material_stack.stacked_material, p_amount_to_add)
@@ -81,10 +94,15 @@ func _add_to_stack(p_material_stack: MaterialStack, p_amount_to_add: int) -> voi
 	material_stack_changed.emit(material, new_value, old_value)
 
 func _remove_from_stack(p_material_stack: MaterialStack, p_amount_to_remove: int) -> void:
-	assert(p_amount_to_remove > 0, "Cannot remove 0 or negative stone.")
-
 	var material = p_material_stack.stacked_material
 	var old_value = p_material_stack.get_stack_count(p_material_stack.stacked_material)
 	var new_value = p_material_stack.remove_from_stack_to_zero(p_material_stack.stacked_material, p_amount_to_remove)
+
+	material_stack_changed.emit(material, new_value, old_value)
+
+func _set_stack_count(p_material_stack: MaterialStack, p_count: int) -> void:
+	var material = p_material_stack.stacked_material
+	var old_value = p_material_stack.get_stack_count(p_material_stack.stacked_material)
+	var new_value = p_material_stack.set_stack_count(p_material_stack.stacked_material, p_count)
 
 	material_stack_changed.emit(material, new_value, old_value)
