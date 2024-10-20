@@ -33,7 +33,7 @@ func clear_build_buttons() -> void:
 
 func clear_cost_controls() -> void:
 	for control in cost_grid.get_children():
-		control.remove_child(control)
+		cost_grid.remove_child(control)
 		control.queue_free()
 
 func _on_close_pressed() -> void:
