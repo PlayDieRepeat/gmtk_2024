@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="RMaterial" load_steps=3 format=3 uid="uid://bv37ojbxge7uo"]
+[gd_resource type="Resource" script_class="RMaterial" load_steps=3 format=3 uid="uid://7gdej5v4q8hr"]
 
+[ext_resource type="Texture2D" uid="uid://bs5pxch7md6qu" path="res://assets/images/ui/grid_icon.png" id="1_bj0p8"]
 [ext_resource type="Script" path="res://scripts/_data_templates/materials/r_material.gd" id="1_kqy6k"]
 
 [resource]
 script = ExtResource("1_kqy6k")
 id = "food"
 display_name = "Food"
-icon = ExtResource("1_dhvyo")
+icon = ExtResource("1_bj0p8")

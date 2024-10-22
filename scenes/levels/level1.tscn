@@ -8,7 +8,7 @@
 [ext_resource type="Resource" uid="uid://jew5ejix3nu" path="res://resources/constants/time_constants.tres" id="8_7fp10"]
 [ext_resource type="Resource" uid="uid://mdu3kq4heym6" path="res://resources/gods/cat_god.tres" id="9_s4vp6"]
 [ext_resource type="Texture2D" uid="uid://cpohewy4agqu0" path="res://assets/images/environment/ground.png" id="12_543hd"]
-[ext_resource type="Script" path="res://scenes/levels/im_gui_helper.gd" id="13_hj33i"]
+[ext_resource type="Script" path="res://scripts/helpers/im_gui_helper.gd" id="13_hj33i"]
 [ext_resource type="PackedScene" uid="uid://dodop7a7svo6t" path="res://scenes/world/SkyBox.tscn" id="14_xq1sr"]
 [ext_resource type="Texture2D" uid="uid://bmmq23vga8ukr" path="res://assets/images/trees/treeRed.png" id="16_tywj6"]
 [ext_resource type="Texture2D" uid="uid://clcspwowhnoch" path="res://assets/images/trees/treeGreen.png" id="17_c7fb8"]
