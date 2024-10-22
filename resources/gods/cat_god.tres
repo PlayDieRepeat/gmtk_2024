@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="RGod" load_steps=4 format=3 uid="uid://mdu3kq4heym6"]
 
 [ext_resource type="Texture2D" uid="uid://d3m77xmt42aw0" path="res://assets/images/gods/cats_gods_faded.png" id="1_ua417"]
-[ext_resource type="Script" path="res://scripts/_data_templates/game/r_god.gd" id="2_havnm"]
+[ext_resource type="Script" path="res://scripts/_data_templates/materials/r_god.gd" id="2_havnm"]
 [ext_resource type="Resource" uid="uid://budhkjtph0vo" path="res://resources/gods/tithes/cat_tithe.tres" id="3_1ytoe"]
 
 [resource]

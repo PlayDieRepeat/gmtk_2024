@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://dfuotlar74515" path="res://assets/images/trees/treeYellow.png" id="18_pbdb7"]
 [ext_resource type="Script" path="res://scripts/menus/game/ui_layer.gd" id="19_ddqww"]
 [ext_resource type="Script" path="res://scripts/levels/world_camera.gd" id="19_qtfqm"]
-[ext_resource type="Script" path="res://scripts/_resources/r_building.gd" id="20_j6upy"]
+[ext_resource type="Script" path="res://scripts/_data_templates/materials/r_building.gd" id="20_j6upy"]
 [ext_resource type="Resource" uid="uid://b7qymya8ffvmv" path="res://resources/constants/camera_constants.tres" id="20_r8y4d"]
 [ext_resource type="Script" path="res://scripts/systems/game/material_warehouse.gd" id="21_soe2c"]
 [ext_resource type="Resource" uid="uid://7cpuj3gwskah" path="res://resources/buildings/scaffold.tres" id="21_7j7m8"]

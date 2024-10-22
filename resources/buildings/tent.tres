@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="RHousing" load_steps=12 format=3 uid="uid://ccyyrasw84v38"]
 
-[ext_resource type="Script" path="res://scripts/_data_templates/game/r_housing.gd" id="1_prk0f"]
-[ext_resource type="Script" path="res://scripts/_data_templates/game/r_material_stack.gd" id="3_dy1vw"]
+[ext_resource type="Script" path="res://scripts/_data_templates/materials/r_housing.gd" id="1_prk0f"]
+[ext_resource type="Script" path="res://scripts/_data_templates/materials/r_material_stack.gd" id="3_dy1vw"]
 [ext_resource type="Resource" uid="uid://bv37ojbxge7uo" path="res://resources/materials/food.tres" id="3_knyfr"]
 [ext_resource type="Resource" uid="uid://54wdamax4i3s" path="res://resources/materials/stone.tres" id="4_0ltub"]
 [ext_resource type="Resource" uid="uid://wscpuo1ajsvh" path="res://resources/materials/wood.tres" id="5_r773v"]
