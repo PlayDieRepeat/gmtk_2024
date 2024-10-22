@@ -1,4 +1,5 @@
 extends CanvasLayer
+class_name LoadingScreen
 
 signal loading_screen_has_full_coverage
 signal loading_outro_finished

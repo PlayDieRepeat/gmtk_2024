@@ -1,25 +1,38 @@
-[gd_resource type="Resource" script_class="RHousing" load_steps=8 format=3 uid="uid://ccyyrasw84v38"]
+[gd_resource type="Resource" script_class="RHousing" load_steps=12 format=3 uid="uid://ccyyrasw84v38"]
 
 [ext_resource type="Script" path="res://scripts/_data_templates/game/r_housing.gd" id="1_prk0f"]
-[ext_resource type="Texture2D" uid="uid://bw8ytxmokitbi" path="res://assets/images/buildings/tent_flag.png" id="2_obnag"]
-[ext_resource type="Texture2D" uid="uid://d3ghmy86v1wej" path="res://assets/images/buildings/tent.png" id="2_rd0dy"]
 [ext_resource type="Script" path="res://scripts/_data_templates/game/r_material_stack.gd" id="3_dy1vw"]
-[ext_resource type="Resource" uid="uid://54wdamax4i3s" path="res://resources/materials/stone.tres" id="4_gbf66"]
-[ext_resource type="Texture2D" uid="uid://50wfv2tgimjw" path="res://assets/images/buildings/tent_teardown.png" id="4_wnqdk"]
+[ext_resource type="Resource" uid="uid://bv37ojbxge7uo" path="res://resources/materials/food.tres" id="3_knyfr"]
+[ext_resource type="Resource" uid="uid://54wdamax4i3s" path="res://resources/materials/stone.tres" id="4_0ltub"]
+[ext_resource type="Resource" uid="uid://wscpuo1ajsvh" path="res://resources/materials/wood.tres" id="5_r773v"]
+[ext_resource type="Resource" uid="uid://3kpa276sseob" path="res://resources/materials/cloth.tres" id="6_ndxu4"]
 
-[sub_resource type="Resource" id="Resource_3unp3"]
+[sub_resource type="Resource" id="Resource_oebqg"]
 script = ExtResource("3_dy1vw")
-stacked_material = ExtResource("4_gbf66")
-stack_count = 12
+stacked_material = ExtResource("3_knyfr")
+stack_count = 4
+
+[sub_resource type="Resource" id="Resource_tnslj"]
+script = ExtResource("3_dy1vw")
+stacked_material = ExtResource("4_0ltub")
+stack_count = 4
+
+[sub_resource type="Resource" id="Resource_hdt1g"]
+script = ExtResource("3_dy1vw")
+stacked_material = ExtResource("5_r773v")
+stack_count = 4
+
+[sub_resource type="Resource" id="Resource_7uusm"]
+script = ExtResource("3_dy1vw")
+stacked_material = ExtResource("6_ndxu4")
+stack_count = 4
 
 [resource]
-script = ExtResource("1_prk0f")
-occupancy = 0
-grid_width = 2
-grid_height = 2
-building_texture = ExtResource("2_rd0dy")
-construction_texture = ExtResource("2_obnag")
-teardown_texture = ExtResource("4_wnqdk")
-material_requirements = Array[ExtResource("3_dy1vw")]([SubResource("Resource_3unp3")])
-can_build_above = true
-time_to_build = 6
+script = ExtResource("2_v1pjq")
+occupancy = 2
+display_name = "Simple Tent"
+description = "Provides housing for two villagers."
+building_texture = ExtResource("1_1invn")
+material_requirements = Array[ExtResource("3_dy1vw")]([SubResource("Resource_oebqg"), SubResource("Resource_tnslj"), SubResource("Resource_hdt1g"), SubResource("Resource_7uusm")])
+can_build_above = false
+time_to_build = 8

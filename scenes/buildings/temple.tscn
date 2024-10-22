@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://b5t8vmp1prekn"]
-
-[ext_resource type="Texture2D" uid="uid://4ee6v0atlgul" path="res://assets/images/buildings/temple.png" id="1_hm3a8"]
-
-[node name="temple" type="Node2D"]
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_hm3a8")

@@ -14,6 +14,7 @@ scene = ExtResource("5_pdr76")
 scene_id = "Level1"
 scene_is_pausable = true
 is_game_scene = true
+[ext_resource type="Resource" uid="uid://bkccupmu5mjrh" path="res://resources/scenes/game_scenes/level_1.tres" id="5_pkkgv"]
 
 [node name="MainMenu" type="Node"]
 script = ExtResource("1_551gt")
@@ -21,4 +22,4 @@ start_menu_packed_scene = ExtResource("2_fj2cm")
 load_menu_packed_scene = ExtResource("3_4nak5")
 credits_menu_packed_scene = ExtResource("3_ce5hj")
 options_menu_packed_scene = ExtResource("4_8pjeb")
-game_scene = SubResource("Resource_euw0v")
+game_scene = ExtResource("5_pkkgv")
