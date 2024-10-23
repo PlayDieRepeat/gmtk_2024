@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/_data_templates/setup/r_scenario_values.gd" id="1_l6fbw"]
 [ext_resource type="Script" path="res://scripts/_data_templates/game/r_material_stack.gd" id="2_0t84c"]
 [ext_resource type="Resource" uid="uid://3kpa276sseob" path="res://resources/materials/cloth.tres" id="3_clc7g"]
-[ext_resource type="Resource" uid="uid://r05m2n5w07kb" path="res://resources/materials/cat_favor.tres" id="4_6jq5r"]
+[ext_resource type="Resource" uid="uid://r05m2n5w07kb" path="res://resources/materials/favor.tres" id="4_6jq5r"]
 [ext_resource type="Resource" uid="uid://bv37ojbxge7uo" path="res://resources/materials/food.tres" id="5_af4n4"]
 [ext_resource type="Resource" uid="uid://cdsmuncw6nplf" path="res://resources/materials/fulfillment.tres" id="6_etgff"]
 [ext_resource type="Resource" uid="uid://d2ukj2ro02jds" path="res://resources/materials/housing.tres" id="7_deggw"]

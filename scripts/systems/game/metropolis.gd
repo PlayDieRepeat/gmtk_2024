@@ -4,7 +4,6 @@ class_name Metropolis
 @export_group("City Components")
 @export var starting_values: RScenarioValues
 @export var building_scene: PackedScene
-@export var available_buildings: Array[RBuilding]
 
 @export_group("References")
 @export var warehouse: MaterialWarehouse
@@ -12,7 +11,7 @@ class_name Metropolis
 var waiting_queue: Array[Building]
 var world_timer: Timer
 
-signal build_button_pressed(p_building: Building, p_available_buildings: Array[RBuilding])
+signal build_button_pressed(p_building: Building)
 
 func _ready() -> void:
 	world_timer = get_tree().get_first_node_in_group("world_timer")
@@ -20,7 +19,10 @@ func _ready() -> void:
 	world_timer.timeout.connect(_on_tick)
 
 func _on_build_pressed(p_building: Building) -> void:
-	build_button_pressed.emit(p_building, available_buildings)
+	build_button_pressed.emit(p_building)
+	# var menu_instance := build_menu.instantiate()
+	# add_child.call_deferred(menu_instance)
+	# menu_instance.empty_building = p_building
 
 func add_neighbor(p_position: Vector2) -> Node:
 	var building_instance := building_scene.instantiate()

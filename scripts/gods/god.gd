@@ -1,5 +1,5 @@
 class_name God
-extends Node
+extends Node2D
 
 signal favor_has_changed(favor: int)
 signal favor_cap_reached

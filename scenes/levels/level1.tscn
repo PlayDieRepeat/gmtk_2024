@@ -1,5 +1,6 @@
-[gd_scene load_steps=29 format=3 uid="uid://di3ut8c68gk7h"]
+[gd_scene load_steps=27 format=3 uid="uid://di3ut8c68gk7h"]
 
+[ext_resource type="Script" path="res://scripts/levels/level1.gd" id="1_xqb88"]
 [ext_resource type="Script" path="res://scripts/gods/god.gd" id="2_8w0jy"]
 [ext_resource type="Resource" uid="uid://cm0a8vlbhldmn" path="res://resources/gods/pig_god.tres" id="3_xqme8"]
 [ext_resource type="Script" path="res://scripts/systems/game/world_event_system.gd" id="4_bo6sm"]
@@ -7,18 +8,15 @@
 [ext_resource type="Script" path="res://scripts/systems/game/world_controller.gd" id="6_4oqem"]
 [ext_resource type="Resource" uid="uid://jew5ejix3nu" path="res://resources/constants/time_constants.tres" id="8_7fp10"]
 [ext_resource type="Resource" uid="uid://mdu3kq4heym6" path="res://resources/gods/cat_god.tres" id="9_s4vp6"]
-[ext_resource type="Texture2D" uid="uid://cpohewy4agqu0" path="res://assets/images/environment/ground.png" id="12_543hd"]
-[ext_resource type="Script" path="res://scenes/levels/im_gui_helper.gd" id="13_hj33i"]
+[ext_resource type="Texture2D" uid="uid://cpohewy4agqu0" path="res://assets/images/ground.png" id="12_543hd"]
 [ext_resource type="PackedScene" uid="uid://dodop7a7svo6t" path="res://scenes/world/SkyBox.tscn" id="14_xq1sr"]
 [ext_resource type="Texture2D" uid="uid://bmmq23vga8ukr" path="res://assets/images/trees/treeRed.png" id="16_tywj6"]
 [ext_resource type="Texture2D" uid="uid://clcspwowhnoch" path="res://assets/images/trees/treeGreen.png" id="17_c7fb8"]
 [ext_resource type="Texture2D" uid="uid://dfuotlar74515" path="res://assets/images/trees/treeYellow.png" id="18_pbdb7"]
 [ext_resource type="Script" path="res://scripts/menus/game/ui_layer.gd" id="19_ddqww"]
-[ext_resource type="Script" path="res://scripts/levels/world_camera.gd" id="19_qtfqm"]
-[ext_resource type="Script" path="res://scripts/_resources/r_building.gd" id="20_j6upy"]
+[ext_resource type="Script" path="res://scripts/levels/Camera2D.gd" id="19_qtfqm"]
 [ext_resource type="Resource" uid="uid://b7qymya8ffvmv" path="res://resources/constants/camera_constants.tres" id="20_r8y4d"]
 [ext_resource type="Script" path="res://scripts/systems/game/material_warehouse.gd" id="21_soe2c"]
-[ext_resource type="Resource" uid="uid://7cpuj3gwskah" path="res://resources/buildings/scaffold.tres" id="21_7j7m8"]
 [ext_resource type="Resource" uid="uid://c14csn7vlswum" path="res://resources/scenarios/testing.tres" id="22_clcv6"]
 [ext_resource type="PackedScene" uid="uid://b04fabibrse1a" path="res://scenes/menus/game/build_menu.tscn" id="23_6t45l"]
 [ext_resource type="PackedScene" uid="uid://b5ru1bmvckk8a" path="res://scenes/systems/population_manager.tscn" id="23_vxo0p"]
@@ -30,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://c6x87uubuyc2" path="res://scenes/menus/game/material_display.tscn" id="28_y16u3"]
 
 [node name="Level1" type="Node"]
+script = ExtResource("1_xqb88")
 
 [node name="Systems" type="Node" parent="."]
 
@@ -57,17 +56,25 @@ unique_name_in_owner = true
 script = ExtResource("2_8w0jy")
 god_data = ExtResource("3_xqme8")
 
-[node name="WorldCamera" type="Camera2D" parent="Systems"]
+[node name="Camera2D" type="Camera2D" parent="Systems"]
 anchor_mode = 0
 script = ExtResource("19_qtfqm")
 camera_constant = ExtResource("20_r8y4d")
 
-[node name="ImGuiHelper" type="Node" parent="Systems"]
-script = ExtResource("13_hj33i")
-
 [node name="World" type="Node" parent="."]
 
 [node name="SkyBox" parent="World" instance=ExtResource("14_xq1sr")]
+
+[node name="Metropolis" type="Node" parent="World" node_paths=PackedStringArray("warehouse")]
+script = ExtResource("24_ue6nq")
+starting_values = ExtResource("22_clcv6")
+building_scene = ExtResource("25_ddt1y")
+warehouse = NodePath("../../Systems/MaterialWarehouse")
+
+[node name="RootBuilding" parent="World/Metropolis" node_paths=PackedStringArray("metropolis") instance=ExtResource("25_ddt1y")]
+position = Vector2(288, 344)
+building_data = ExtResource("26_8hnv5")
+metropolis = NodePath("..")
 
 [node name="Terrain" type="Node" parent="World"]
 
@@ -106,19 +113,6 @@ position = Vector2(81, 306)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("18_pbdb7")
 
-[node name="Metropolis" type="Node" parent="World" node_paths=PackedStringArray("warehouse")]
-script = ExtResource("24_ue6nq")
-starting_values = ExtResource("22_clcv6")
-building_scene = ExtResource("25_ddt1y")
-available_buildings = Array[ExtResource("20_j6upy")]([ExtResource("21_7j7m8"), ExtResource("26_8hnv5")])
-warehouse = NodePath("../../Systems/MaterialWarehouse")
-
-[node name="RootBuilding" parent="World/Metropolis" node_paths=PackedStringArray("metropolis") instance=ExtResource("25_ddt1y")]
-position = Vector2(288, 352)
-is_prebuilt = true
-building_data = ExtResource("26_8hnv5")
-metropolis = NodePath("..")
-
 [node name="UILayer" type="CanvasLayer" parent="."]
 script = ExtResource("19_ddqww")
 
@@ -136,9 +130,9 @@ material_display_control = ExtResource("28_y16u3")
 
 [node name="ClockDisplay" parent="UILayer" instance=ExtResource("25_twn3v")]
 
-[node name="BuildMenu" parent="UILayer" node_paths=PackedStringArray("material_warehouse") instance=ExtResource("23_6t45l")]
+[node name="BuildMenu" parent="UILayer" instance=ExtResource("23_6t45l")]
 visible = false
-material_warehouse = NodePath("../../Systems/MaterialWarehouse")
+availabile_buildings = null
 
 [connection signal="initialize_stack_ui" from="Systems/MaterialWarehouse" to="UILayer/ResourceGrid" method="_on_initiliaze_control"]
 [connection signal="material_stack_changed" from="Systems/MaterialWarehouse" to="UILayer/ResourceGrid" method="_on_material_stack_changed"]

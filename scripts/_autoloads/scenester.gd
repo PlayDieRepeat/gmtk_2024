@@ -14,6 +14,7 @@ signal scene_has_changed(p_scene: String)
 @export var reconnect_rscene: RScene
 @export var initial_rscene: RScene
 @export var should_load_initial_alt: bool = false
+@export var pause_menu: PackedScene = null
 var current_scene_id := ""
 var current_scene: Node = null
 var game_scene_id := ""
