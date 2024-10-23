@@ -1,10 +1,9 @@
-[gd_resource type="Resource" script_class="RMaterial" load_steps=3 format=3 uid="uid://d2bxaffuhbp4v"]
+[gd_resource type="Resource" script_class="RMaterial" load_steps=3 format=3 uid="uid://3kpa276sseob"]
 
-[ext_resource type="Texture2D" uid="uid://bs5pxch7md6qu" path="res://assets/images/ui/grid_icon.png" id="1_87tsy"]
 [ext_resource type="Script" path="res://scripts/_data_templates/materials/r_material.gd" id="1_up633"]
 
 [resource]
 script = ExtResource("1_up633")
 id = "cloth"
 display_name = "Cloth"
-icon = ExtResource("1_87tsy")
+icon = ExtResource("1_icgw1")
