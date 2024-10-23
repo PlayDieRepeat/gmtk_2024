@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RMaterial" load_steps=2 format=3 uid="uid://d2ukj2ro02jds"]
 
-[ext_resource type="Script" path="res://scripts/_data_templates/materials/r_material.gd" id="1_vp8l3"]
+[ext_resource type="Script" path="res://scripts/_data_templates/game/r_material.gd" id="1_vp8l3"]
 
 [resource]
 script = ExtResource("1_vp8l3")
