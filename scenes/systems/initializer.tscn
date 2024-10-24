@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://5mkvk5mqe4vv"]
+
+[ext_resource type="Script" path="res://scripts/systems/initializer.gd" id="1_gqeig"]
+[ext_resource type="Resource" uid="uid://bkccupmu5mjrh" path="res://resources/scenes/game_scenes/level_1.tres" id="2_orngu"]
+
+[node name="Initializer" type="Node"]
+script = ExtResource("1_gqeig")
+scene_override = ExtResource("2_orngu")
+use_overide = null

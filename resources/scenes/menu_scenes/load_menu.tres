@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="RScene" load_steps=3 format=3 uid="uid://cex65rd2ojmbu"]
 
-[ext_resource type="PackedScene" uid="uid://d2xgqssq13ewq" path="res://scenes/menus/utility/loading_screen.tscn" id="1_gs6cs"]
-[ext_resource type="Script" path="res://scripts/_data_templates/setup/r_scene.gd" id="1_h6o0a"]
+[ext_resource type="PackedScene" uid="uid://d2xgqssq13ewq" path="res://scenes/menus/loading_screen.tscn" id="1_gs6cs"]
+[ext_resource type="Script" path="res://scripts/_resources/r_scene.gd" id="1_h6o0a"]
 
 [resource]
 script = ExtResource("1_h6o0a")
