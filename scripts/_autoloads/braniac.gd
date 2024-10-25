@@ -24,8 +24,6 @@ var controller_deadzone := 0.2
 signal back_to_start_from_pause_menu
 signal game_state_has_changed(p_state: String)
 signal input_event_has_changed(p_action: StringName, p_event: Array)
-signal scroll_up
-signal scroll_down
 
 var gamepads: Array[int]= []
 var gamepad_info: Array[Dictionary]= []
@@ -35,8 +33,13 @@ func _ready() -> void:
 	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 	# set_process_unhandled_input(false)
 	_get_all_actions_from_map()
+	_create_signals_from_actions()
 	_write_action_event_dicts(input_actions)
 	Elephant.log_event("All Input Actions and Events captured.")
+
+func _create_signals_from_actions() -> void:
+	for action in input_actions:
+		add_user_signal(action)
 
 func _get_all_actions_from_map() -> void:
 	var all_input_actions: Array[StringName]
@@ -46,8 +49,9 @@ func _get_all_actions_from_map() -> void:
 	# differing ones as our custom actions, these can be modified, deleted, 
 	# or appended to.
 	for action in all_input_actions:
-		if !action.begins_with("ui_"):
-			input_actions.append(action)
+		var f_str = action.to_snake_case()
+		if !f_str.begins_with("ui_"):
+			input_actions.append(f_str)
 
 ## Save all actions and events as two dictionaries, one for GP and one for KnM
 ##  with key=Action(StringName) and values as a list of [String, InputEvent] 
@@ -159,59 +163,6 @@ func _get_gamepads() -> bool:
 		gamepad_detected = false
 		return gamepad_detected
 
-func _input(event: InputEvent) -> void:
-	#print(event.as_text())
-	_process_input(event)
-
-func _process_input(event: InputEvent) -> void:
-	# check the event type for mouse motion
-	var str_event = event.get_class()
-	match str_event:
-		"InputEventMouseMotion":
-			mouse_relative_change = event.relative
-			mouse_position = event.global_position
-			#get_tree().get_root().set_input_as_handled()
-		"InputEventKey":
-			Elephant.log_event("Keystroke: " + OS.get_keycode_string(event.keycode), false)
-		"":
-			pass
-	
-	if Input.is_action_just_pressed("Scroll Up"):
-		scroll_up.emit()
-	if Input.is_action_just_pressed("Scroll Down"):
-		scroll_down.emit()
-	
-	if Input.is_action_just_pressed("Menu"):
-		if input_state == InputState.GAME_STATE:
-			#is_pausing = true TODO: probably need to remove these
-			pause_game()
-		elif input_state == InputState.PAUSE_STATE:
-			#is_pausing = false TODO: probably need to remove these
-			unpause_game()
-	if Input.is_action_just_pressed("ui_DebugMenu"):
-		if Elephant.is_debug_build == true:
-			debug_menu.display_or_hide_debug_ui()
-	
-	match input_detect_type:
-		InputType.AUTO_DETECT:
-			if gamepad_detected:
-				_process_gamepad_input(event)
-			else:
-				_process_key_and_mouse_input(event)
-		InputType.FORCE_CONTROLLER:
-			if gamepad_detected:
-				_process_gamepad_input(event)
-			else:
-				_prompt_for_reconnect()
-		InputType.FORCE_MOUSE_KEYBOARD:
-			_process_key_and_mouse_input(event)
-
-func _process_gamepad_input(event: InputEvent) -> void:
-	pass
-
-func _process_key_and_mouse_input(event: InputEvent) -> void:
-	pass
-
 # not sure Brainiac needs this.
 func _process(_delta: float) -> void:
 	match input_state:
@@ -247,6 +198,50 @@ func _unhandled_input(event: InputEvent) -> void:
 					_update_event_and_notify(event)
 				"InputEventKey":
 					_update_event_and_notify(event)
+	else:
+		match str_event:
+			"InputEventMouseMotion":
+				_process_mouse_motion()
+				mouse_relative_change = event.relative
+				mouse_position = event.global_position
+				#get_tree().get_root().set_input_as_handled()
+			"InputEventJoypadMotion":
+				pass
+			_:
+				for i in range(input_actions.size()):
+					if event.is_action(input_actions[i]):
+						emit_signal(input_actions[i])
+
+	if Input.is_action_just_pressed("Menu"):
+		if input_state == InputState.GAME_STATE:
+			#is_pausing = true TODO: probably need to remove these
+			pause_game()
+		elif input_state == InputState.PAUSE_STATE:
+			#is_pausing = false TODO: probably need to remove these
+			unpause_game()
+	
+	match input_detect_type:
+		InputType.AUTO_DETECT:
+			if gamepad_detected:
+				_process_gamepad_input(event)
+			else:
+				_process_key_and_mouse_input(event)
+		InputType.FORCE_CONTROLLER:
+			if gamepad_detected:
+				_process_gamepad_input(event)
+			else:
+				_prompt_for_reconnect()
+		InputType.FORCE_MOUSE_KEYBOARD:
+			_process_key_and_mouse_input(event)
+
+func _process_mouse_motion() -> void:
+	pass
+
+func _process_gamepad_input(event: InputEvent) -> void:
+	pass
+
+func _process_key_and_mouse_input(event: InputEvent) -> void:
+	pass
 
 func _update_event_and_notify(p_event: InputEvent) -> void:
 	InputMap.action_add_event(remap_info[0], p_event)
@@ -343,9 +338,13 @@ func get_gp_actions_and_events() -> Dictionary:
 	#Brainiac.register_for_action("Scroll Up", on_scroll_up_input_action)
 	#Brainiac.register_for_action("Scroll Down", on_scroll_down_input_action)
 
-func register_for_action(p_action_string: String, p_callable: Callable):
-	var action_string: StringName = scroll_up.get_name()
-	if scroll_up.get_name() == p_action_string:
-		scroll_up.connect(p_callable)
-	elif scroll_down.get_name() == p_action_string:
-		scroll_down.connect(p_callable)
+func register_for_action(p_action_string: StringName, p_callable: Callable):
+	for _signal in input_actions:
+		if _signal == p_action_string:
+			if !self.is_connected(_signal, p_callable):
+				self.connect(_signal, p_callable)
+	
+	#if scroll_up.get_name() == p_action_string:
+		#scroll_up.connect(p_callable)
+	#elif scroll_down.get_name() == p_action_string:
+		#scroll_down.connect(p_callable)

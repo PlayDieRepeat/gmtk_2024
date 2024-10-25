@@ -93,8 +93,10 @@ func _on_quit() -> void:
 
 ## Triggers the hover sfx on mouse enter
 func _on_button_mouse_entered() -> void:
-	button_hover_sfx_instance.trigger()
+	pass
+	#button_hover_sfx_instance.trigger()
 
 ## Triggers the click sfx on button pressed
 func _on_button_clicked() -> void:
-	button_click_sfx_instance.trigger()
+	pass
+	#button_click_sfx_instance.trigger()

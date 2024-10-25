@@ -41,8 +41,8 @@ func scrolling() -> void:
 func _ready() -> void:
 	viewport_height = get_viewport_rect().size.y / zoom.y
 	viewport_width = get_viewport_rect().size.x / zoom.x
-	Brainiac.register_for_action("scroll_up", Callable(self, "on_scroll_up_input_action"))
-	Brainiac.register_for_action("scroll_down", self.on_scroll_down_input_action)
+	Brainiac.register_for_action("scroll_up", on_scroll_up_input_action)
+	Brainiac.register_for_action("scroll_down", on_scroll_down_input_action)
 
 func _process(_delta: float = 0.0) -> void:
 	scrolling()
