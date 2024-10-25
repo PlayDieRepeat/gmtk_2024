@@ -24,6 +24,8 @@ var controller_deadzone := 0.2
 signal back_to_start_from_pause_menu
 signal game_state_has_changed(p_state: String)
 signal input_event_has_changed(p_action: StringName, p_event: Array)
+signal scroll_up
+signal scroll_down
 
 var gamepads: Array[int]= []
 var gamepad_info: Array[Dictionary]= []
@@ -31,10 +33,7 @@ var gamepad_info: Array[Dictionary]= []
 func _ready() -> void:
 	assert(debug_menu_packed != null, "Debug menu not set!!")
 	Input.joy_connection_changed.connect(_on_joy_connection_changed)
-	set_process_unhandled_input(false)
-	if Elephant.is_debug_build == true:
-		debug_menu = debug_menu_packed.instantiate()
-		add_child(debug_menu)
+	# set_process_unhandled_input(false)
 	_get_all_actions_from_map()
 	_write_action_event_dicts(input_actions)
 	Elephant.log_event("All Input Actions and Events captured.")
@@ -174,6 +173,13 @@ func _process_input(event: InputEvent) -> void:
 			#get_tree().get_root().set_input_as_handled()
 		"InputEventKey":
 			Elephant.log_event("Keystroke: " + OS.get_keycode_string(event.keycode), false)
+		"":
+			pass
+	
+	if Input.is_action_just_pressed("Scroll Up"):
+		scroll_up.emit()
+	if Input.is_action_just_pressed("Scroll Down"):
+		scroll_down.emit()
 	
 	if Input.is_action_just_pressed("Menu"):
 		if input_state == InputState.GAME_STATE:
@@ -333,3 +339,13 @@ func get_knm_actions_and_events() -> Dictionary:
 
 func get_gp_actions_and_events() -> Dictionary:
 	return input_action_gp_events
+
+	#Brainiac.register_for_action("Scroll Up", on_scroll_up_input_action)
+	#Brainiac.register_for_action("Scroll Down", on_scroll_down_input_action)
+
+func register_for_action(p_action_string: String, p_callable: Callable):
+	var action_string: StringName = scroll_up.get_name()
+	if scroll_up.get_name() == p_action_string:
+		scroll_up.connect(p_callable)
+	elif scroll_down.get_name() == p_action_string:
+		scroll_down.connect(p_callable)

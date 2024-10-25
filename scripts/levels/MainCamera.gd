@@ -5,6 +5,11 @@ var maxStep = 5
 var zoomSpeed = Vector2(0.1,0.1)
 var viewportSizeY: float = get_viewport_rect().size.y/zoom.y
 
+func _ready() -> void:
+	viewportSizeY = get_viewport_rect().size.y/zoom.y
+	Brainiac.register_for_action("Scroll Up", on_scroll_up_input_action)
+	Brainiac.register_for_action("Scroll Down", on_scroll_down_input_action)
+
 func zoomInAndOut(zoomAmount):
 	var maxZoomOut = 360
 	if (zoomAmount.y < 0 and maxZoomOut > viewportSizeY + zoomSpeed.y) or (zoomAmount.x > 0):
@@ -38,14 +43,16 @@ func scrolling(isHorizontal, isVertical):
 			position.y -= step
 		elif thresholdY and position.y < 0:
 			position.y = 0
-			
-func _ready() -> void:
-	viewportSizeY = get_viewport_rect().size.y/zoom.y
 
 func _process(_delta):
 	scrolling(true, true)
-	if Input.is_action_just_released("Scroll Up"):
-		zoomInAndOut(zoomSpeed)
-	elif Input.is_action_just_released("Scroll Down"):
-		zoomInAndOut(-zoomSpeed)
-			
+	#if Input.is_action_just_released("Scroll Up"):
+		#zoomInAndOut(zoomSpeed)
+	#elif Input.is_action_just_released("Scroll Down"):
+		#zoomInAndOut(-zoomSpeed)
+
+func on_scroll_up_input_action() -> void:
+	zoomInAndOut(zoomSpeed)
+
+func on_scroll_down_input_action() -> void:
+	zoomInAndOut(-zoomSpeed)

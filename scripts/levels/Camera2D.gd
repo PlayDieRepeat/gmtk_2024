@@ -41,10 +41,18 @@ func scrolling() -> void:
 func _ready() -> void:
 	viewport_height = get_viewport_rect().size.y / zoom.y
 	viewport_width = get_viewport_rect().size.x / zoom.x
+	Brainiac.register_for_action("scroll_up", Callable(self, "on_scroll_up_input_action"))
+	Brainiac.register_for_action("scroll_down", Callable(self, "on_scroll_down_input_action"))
 
 func _process(_delta: float = 0.0) -> void:
 	scrolling()
-	if Input.is_action_just_released("Scroll Up"):
-		zoom_in_and_out(camera_constant.zoom_speed)
-	elif Input.is_action_just_released("Scroll Down"):
-		zoom_in_and_out(-camera_constant.zoom_speed)
+	#if Input.is_action_just_released("Scroll Up"):
+		#zoom_in_and_out(camera_constant.zoom_speed)
+	#elif Input.is_action_just_released("Scroll Down"):
+		#zoom_in_and_out(-camera_constant.zoom_speed)
+
+func on_scroll_up_input_action() -> void:
+	zoom_in_and_out(camera_constant.zoom_speed)
+
+func on_scroll_down_input_action() -> void:
+	zoom_in_and_out(-camera_constant.zoom_speed)
