@@ -49,9 +49,8 @@ func _get_all_actions_from_map() -> void:
 	# differing ones as our custom actions, these can be modified, deleted, 
 	# or appended to.
 	for action in all_input_actions:
-		var f_str = action.to_snake_case()
-		if !f_str.begins_with("ui_"):
-			input_actions.append(f_str)
+		if !action.begins_with("ui_"):
+			input_actions.append(action)
 
 ## Save all actions and events as two dictionaries, one for GP and one for KnM
 ##  with key=Action(StringName) and values as a list of [String, InputEvent] 
