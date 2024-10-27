@@ -3,17 +3,14 @@ extends Node
 enum InputType {AUTO_DETECT, FORCE_CONTROLLER, FORCE_MOUSE_KEYBOARD}
 @export_group("Input Options")
 @export var input_detect_type: InputType
-@export_group("Debug Menu")
-@export var debug_menu_packed: PackedScene
-enum InputState {MENU_STATE, GAME_STATE, TRANSITIONAL_STATE, PAUSE_STATE, RECONNECT_STATE}
-var input_state: InputState = InputState.MENU_STATE
-var last_input_state: InputState = input_state
+@export var input_states: Array[PackedScene]
+@export var state_machine: FiniteStateMachine
 var mouse_position: Vector2 = Vector2.ZERO
 var mouse_relative_change: Vector2 = Vector2.ZERO
 var gamepad_detected := false
 var should_consume_event:= true
 var is_pausing := false
-var waiting_on_keypress := false
+var waiting_on_keypress_to_remap := false
 var debug_menu: Node
 var input_actions: Array[StringName]
 var input_action_knm_events := {}
@@ -29,17 +26,19 @@ var gamepads: Array[int]= []
 var gamepad_info: Array[Dictionary]= []
 
 func _ready() -> void:
-	assert(debug_menu_packed != null, "Debug menu not set!!")
 	Input.joy_connection_changed.connect(_on_joy_connection_changed)
-	# set_process_unhandled_input(false)
+	_generate_states()
+	state_machine.change_state("Menu")
 	_get_all_actions_from_map()
 	_create_signals_from_actions()
 	_write_action_event_dicts(input_actions)
 	Elephant.log_event("All Input Actions and Events captured.")
 
-func _create_signals_from_actions() -> void:
-	for action in input_actions:
-		add_user_signal(action)
+func _generate_states() -> void:
+	for state in input_states:
+		var state_instance = state.instantiate()
+		state_instance.parent = self
+		state_machine.add_child(state_instance)	
 
 func _get_all_actions_from_map() -> void:
 	var all_input_actions: Array[StringName]
@@ -51,6 +50,10 @@ func _get_all_actions_from_map() -> void:
 	for action in all_input_actions:
 		if !action.begins_with("ui_"):
 			input_actions.append(action)
+
+func _create_signals_from_actions() -> void:
+	for action in input_actions:
+		add_user_signal(action)
 
 ## Save all actions and events as two dictionaries, one for GP and one for KnM
 ##  with key=Action(StringName) and values as a list of [String, InputEvent] 
@@ -162,24 +165,24 @@ func _get_gamepads() -> bool:
 		gamepad_detected = false
 		return gamepad_detected
 
-# not sure Brainiac needs this.
 func _process(_delta: float) -> void:
-	match input_state:
-		InputState.MENU_STATE:
-			pass
-		InputState.GAME_STATE:
-			pass
-		InputState.TRANSITIONAL_STATE:
-			pass
-		InputState.PAUSE_STATE:
-			pass
-		InputState.RECONNECT_STATE:
+	match state_machine.current_state.name:
+		"Reconnect":
 			if gamepad_detected:
 				_device_reconnected()
+		#InputState.MENU_STATE:
+			#pass
+		#InputState.GAME_STATE:
+			#pass
+		#InputState.TRANSITIONAL_STATE:
+			#pass
+		#InputState.PAUSE_STATE:
+			#pass
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	var str_event = event.get_class()
-	if waiting_on_keypress == true:
+	if waiting_on_keypress_to_remap == true:
 		if remap_info[2] == true: # is a gamepad
 			match str_event:
 				"InputEventJoypadMotion":
@@ -211,11 +214,11 @@ func _unhandled_input(event: InputEvent) -> void:
 					if event.is_action(input_actions[i]):
 						emit_signal(input_actions[i])
 
-	if Input.is_action_just_pressed("Menu"):
-		if input_state == InputState.GAME_STATE:
+	if Input.is_action_just_pressed("menu"):
+		if state_machine.current_state.name == "Game":
 			#is_pausing = true TODO: probably need to remove these
 			pause_game()
-		elif input_state == InputState.PAUSE_STATE:
+		elif state_machine.current_state.name == "Pause":
 			#is_pausing = false TODO: probably need to remove these
 			unpause_game()
 	
@@ -250,7 +253,7 @@ func _update_event_and_notify(p_event: InputEvent) -> void:
 	# signal input_event_has_changed(p_action: StringName, p_event: InputEvent)
 	input_event_has_changed.emit(remap_info[0], _tranlated_event)
 	Elephant.log_event("Action Event Updated: " + remap_info[0] + _tranlated_event[0])
-	waiting_on_keypress = false
+	waiting_on_keypress_to_remap = false
 	set_process_unhandled_input(false)
 	#get_tree().get_root().set_input_as_handled()
 
@@ -322,7 +325,7 @@ func unpause_game() -> void:
 func change_event_on_action(p_action: StringName, p_event: InputEvent, p_is_gamepad: bool) -> void:
 	InputMap.action_erase_event(p_action, p_event)
 	remap_info = [p_action, p_event, p_is_gamepad]
-	waiting_on_keypress = true
+	waiting_on_keypress_to_remap = true
 	set_process_unhandled_input(true)
 
 func _set_input_action_mapping_to_default() -> void:
