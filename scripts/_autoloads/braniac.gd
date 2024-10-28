@@ -18,7 +18,6 @@ var input_action_gp_events := {}
 var remap_info = []
 var controller_deadzone := 0.2
 
-signal back_to_start_from_pause_menu
 signal game_state_has_changed(p_state: String)
 signal input_event_has_changed(p_action: StringName, p_event: Array)
 
@@ -258,53 +257,32 @@ func _update_event_and_notify(p_event: InputEvent) -> void:
 	#get_tree().get_root().set_input_as_handled()
 
 func set_menu_state() -> void:
-	if input_state != InputState.MENU_STATE:
-		last_input_state = input_state
-		input_state = InputState.MENU_STATE
-		Elephant.log_event("InputState: Menu State")
-		game_state_has_changed.emit("Menu State")
+	state_machine.change_state("Menu")
+	Elephant.log_event("InputState: Menu State")
+	game_state_has_changed.emit("Menu State")
 
 func set_game_state() -> void:
-	if input_state != InputState.GAME_STATE:
-		last_input_state = input_state
-		input_state = InputState.GAME_STATE
-		Elephant.log_event("InputState: Game State")
-		game_state_has_changed.emit("Game State")
+	state_machine.change_state("Game")
+	Elephant.log_event("InputState: Game State")
+	game_state_has_changed.emit("Game State")
 
 func set_transitional_state() -> void:
-	if input_state != InputState.TRANSITIONAL_STATE:
-		last_input_state = input_state
-		input_state = InputState.TRANSITIONAL_STATE
-		Elephant.log_event("InputState: Load State")
-		game_state_has_changed.emit("Load State")
+	state_machine.change_state("Transitional")
+	Elephant.log_event("InputState: Load State")
+	game_state_has_changed.emit("Load State")
 
 func set_pause_state() -> void:
-	if input_state != InputState.PAUSE_STATE:
-		last_input_state = input_state
-		input_state = InputState.PAUSE_STATE
-		Elephant.log_event("InputState: Pause State")
-		game_state_has_changed.emit("Pause State")
+	state_machine.change_state("Pause")
+	Elephant.log_event("InputState: Pause State")
+	game_state_has_changed.emit("Pause State")
 
 func set_reconnect_state() -> void:
-	if input_state != InputState.RECONNECT_STATE:
-		last_input_state = input_state
-		input_state = InputState.RECONNECT_STATE
-		Elephant.log_event("InputState: Reconnect State")
-		game_state_has_changed.emit("Reconnect State")
+	state_machine.change_state("Reconnect")
+	Elephant.log_event("InputState: Reconnect State")
+	game_state_has_changed.emit("Reconnect State")
 
 func get_game_state_string() -> String:
-	match input_state:
-		InputState.MENU_STATE:
-			return "Menu"
-		InputState.GAME_STATE:
-			return "Game"
-		InputState.TRANSITIONAL_STATE:
-			return "Transitional"
-		InputState.PAUSE_STATE:
-			return "Pause"
-		InputState.RECONNECT_STATE:
-			return "Reconnect"
-	return ""
+	return state_machine.current_state.name
 
 func _prompt_for_reconnect() -> void:
 	#Scenester.switch_scene(packed_reconnect_scene, false, false)
@@ -337,16 +315,8 @@ func get_knm_actions_and_events() -> Dictionary:
 func get_gp_actions_and_events() -> Dictionary:
 	return input_action_gp_events
 
-	#Brainiac.register_for_action("Scroll Up", on_scroll_up_input_action)
-	#Brainiac.register_for_action("Scroll Down", on_scroll_down_input_action)
-
 func register_for_action(p_action_string: StringName, p_callable: Callable):
 	for _signal in input_actions:
 		if _signal == p_action_string:
 			if !self.is_connected(_signal, p_callable):
 				self.connect(_signal, p_callable)
-	
-	#if scroll_up.get_name() == p_action_string:
-		#scroll_up.connect(p_callable)
-	#elif scroll_down.get_name() == p_action_string:
-		#scroll_down.connect(p_callable)

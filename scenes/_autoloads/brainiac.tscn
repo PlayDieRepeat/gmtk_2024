@@ -8,10 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://btno46ffvbos5" path="res://scenes/states/input/transitional.tscn" id="6_m3sjc"]
 [ext_resource type="Script" path="res://addons/finite_state_machine/scripts/finite_state_machine.gd" id="7_lxxrk"]
 
-[node name="Braniac" type="Node"]
+[node name="Braniac" type="Node" node_paths=PackedStringArray("state_machine")]
 script = ExtResource("1_3lba3")
-input_detect_type = null
 input_states = Array[PackedScene]([ExtResource("2_12drq"), ExtResource("3_lci1r"), ExtResource("4_17vr1"), ExtResource("5_ug0iv"), ExtResource("6_m3sjc")])
+state_machine = NodePath("FiniteStateMachine")
 
 [node name="FiniteStateMachine" type="Node" parent="."]
 script = ExtResource("7_lxxrk")

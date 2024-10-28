@@ -5,6 +5,7 @@ class_name MenuState
 # Called when the state machine enters this state.
 func on_enter() -> void:
 	#parent.call_method_here(parent.parameter.resourceID.value)
+	print("I'm in the Menu State Yo!!")
 	pass
 
 
