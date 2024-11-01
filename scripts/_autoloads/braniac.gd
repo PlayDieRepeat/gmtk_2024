@@ -18,11 +18,11 @@ var debug_menu: Node
 var input_actions: Array[StringName]
 var input_action_knm_events := {}
 var input_action_gp_events := {}
-var remap_info = []
+var remap_waiting_info = []
 var controller_deadzone := 0.2
 
 signal game_state_has_changed(p_state: String)
-signal input_event_has_changed(p_action: StringName, p_event: Array)
+signal input_event_has_changed(p_event_context: Array)
 
 var gamepads: Array[int]= []
 var gamepad_info: Array[Dictionary]= []
@@ -62,17 +62,17 @@ func _create_signals_from_actions() -> void:
 ## where the string is a translated version of the InputEvent.as_text() output
 func _write_action_event_dicts(p_actions_arr: Array[StringName]) -> void:
 	for action in p_actions_arr:
-		var translated_event: Array
+		var translated_event_arr: Array
 		var _events: Array[InputEvent] = InputMap.action_get_events(action)
 		for _event in _events:
-			translated_event = _translate_input_event(_event)
-			if translated_event.is_empty():
+			translated_event_arr = _translate_input_event(_event)
+			if translated_event_arr.is_empty():
 				printerr("Input translation FAILED!!")
 			else:
-				if translated_event[1] == true:
-					input_action_knm_events[action] = translated_event
+				if translated_event_arr[1] == true:
+					input_action_knm_events[action] = translated_event_arr
 				else:
-					input_action_gp_events[action] = translated_event
+					input_action_gp_events[action] = translated_event_arr
 
 ## Translator algo takes an InputEvent and returns a player-facing string to
 ## represent the InputEvent
@@ -200,7 +200,7 @@ func _process(_delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	var str_event = event.get_class()
 	if waiting_on_keypress_to_remap == true:
-		if remap_info[2] == true: # is a gamepad
+		if remap_waiting_info[2] == true: # is a gamepad
 			match str_event:
 				"InputEventJoypadMotion":
 					if abs(event.get_axis_value()) >= controller_deadzone:
@@ -255,17 +255,11 @@ func _process_mouse_motion(p_event: InputEvent) -> void:
 	mouse_relative_change = p_event.relative
 	mouse_position = p_event.global_position
 
-# Game controller left joystick x-axis.
-#JOY_AXIS_LEFT_Y = 1
-#Game controller left joystick y-axis.
-#JOY_AXIS_RIGHT_X = 2
-#Game controller right joystick x-axis.
-#JOY_AXIS_RIGHT_Y = 3
-#Game controller right joystick y-axis.
 #JOY_AXIS_TRIGGER_LEFT = 4
 #Game controller left trigger axis.
 #JOY_AXIS_TRIGGER_RIGHT = 5
 #Game controller right trigger axis.
+# TODO: implement triggers here?? do we care?
 func _process_joypad_motion(p_event: InputEvent) -> void:
 	if abs(p_event.get_axis_value()) >= controller_deadzone:
 		match p_event.axis:
@@ -286,7 +280,7 @@ func _process_key_and_mouse_action(p_event: InputEvent, p_action: StringName) ->
 
 ### takes the unhandled input event and adds it to the InputMap
 ### needs to know what action to add it to
-### TODO: change where action comes from, away from remap_info
+### TODO: change where action comes from, away from remap_waiting_info
 ### then the action event dictionaries are updated with the new mapping
 ### then the caught input is translated into a generic, ui and user_facing
 ### string that gets signal broadcasted (and caught by the options menu)
@@ -294,16 +288,31 @@ func _process_key_and_mouse_action(p_event: InputEvent, p_action: StringName) ->
 ### and the process for unhandled input is set to false ... I wonder if we need that?
 ### TODO: look into the need for set_process_unhandled_input's use
 func _update_event_and_notify(p_event: InputEvent) -> void:
-	InputMap.action_add_event(remap_info[0], p_event)
-	_write_action_event_dicts(input_actions)
-	var _tranlated_event: Array
-	_tranlated_event = _translate_input_event(p_event)
-	# signal input_event_has_changed(p_action: StringName, p_event: InputEvent)
-	input_event_has_changed.emit(remap_info[0], _tranlated_event)
-	Elephant.log_event("Action Event Updated: " + remap_info[0] + _tranlated_event[0])
+	if InputMap.action_has_event(remap_waiting_info[0], remap_waiting_info[3]): # input same as saved info
+		input_event_has_changed.emit(remap_waiting_info[1]) # send same info back
+	else:
+		InputMap.action_erase_event(remap_waiting_info[0], remap_waiting_info[3])
+		InputMap.action_add_event(remap_waiting_info[0], p_event)
+		var _tranlated_event: String = _update_action_mapping(remap_waiting_info, p_event)
+		# signal input_event_has_changed(p_action: StringName, p_event: InputEvent)
+		input_event_has_changed.emit(_tranlated_event)
+		Elephant.log_event("Action Event Updated: " + remap_waiting_info[0] + _tranlated_event)
 	waiting_on_keypress_to_remap = false
 	set_process_unhandled_input(false)
 	#get_tree().get_root().set_input_as_handled()
+	
+	#remap_waiting_info = [p_action, p_translated_text, p_is_gamepad, _event]
+
+func _update_action_mapping(p_remap_context: Array, p_event: InputEvent) -> String:
+	var _translation_arr: Array = _translate_input_event(p_event)
+	if _translation_arr[1] == true: #gamepad
+		if input_action_gp_events.erase(p_remap_context[0]):
+			input_action_gp_events[p_remap_context[0]] = _translation_arr
+	else: # knm
+		if input_action_knm_events.erase(p_remap_context[0]):
+			input_action_knm_events[p_remap_context[0]] = _translation_arr
+		
+	return _translation_arr[0]
 
 func set_menu_state() -> void:
 	state_machine.change_state("Menu")
@@ -348,31 +357,37 @@ func pause_game() -> void:
 
 func unpause_game() -> void:
 	Scenester.unpause_scene()
+	
 
-func set_change_action_event(p_action: StringName, p_is_gamepad: bool) -> void:
-	var _event: InputEvent = get_event_from_action(p_is_gamepad)
-	InputMap.action_erase_event(p_action, _event)
-	remap_info = [p_action, _event, p_is_gamepad]
+func set_change_action_event(p_action: StringName, p_translated_text: String, p_is_gamepad: bool) -> void:
+	var _event: InputEvent = get_event_from_action(p_action, p_is_gamepad)
+	remap_waiting_info = [p_action, p_translated_text, p_is_gamepad, _event]
 	waiting_on_keypress_to_remap = true
 	set_process_unhandled_input(true)
 
-func get_event_from_action(p_is_gamepad: bool) -> InputEvent:
+func get_event_from_action(p_action: StringName, p_is_gamepad: bool) -> InputEvent:
 	var _event: InputEvent
 	if p_is_gamepad:
-		pass
+		_event = input_action_gp_events[p_action][2]
 	else:
-		pass
+		_event = input_action_knm_events[p_action][2]
 	
 	return _event
 
 func _set_input_action_mapping_to_default() -> void:
 	InputMap.load_from_project_settings()
 
-func get_knm_actions_and_events() -> Dictionary:
-	return input_action_knm_events
+func get_knm_actions_and_events() -> Array:
+	var _arr: Array
+	for _key in input_action_knm_events:
+		_arr.append([_key, input_action_knm_events[_key][0], input_action_knm_events[_key][1]])
+	return _arr
 
-func get_gp_actions_and_events() -> Dictionary:
-	return input_action_gp_events
+func get_gp_actions_and_events() -> Array:
+	var _arr: Array
+	for _key in input_action_gp_events:
+		_arr.append([_key, input_action_gp_events[_key][0], input_action_gp_events[_key][1]])
+	return _arr
 
 func register_for_action(p_action_string: StringName, p_callable: Callable):
 	for _signal in input_actions:
