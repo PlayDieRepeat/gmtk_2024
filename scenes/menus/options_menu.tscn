@@ -57,6 +57,7 @@ clip_tabs = false
 visible = false
 layout_mode = 2
 theme = ExtResource("1_cmgag")
+metadata/_tab_index = 0
 
 [node name="MainScroll" type="ScrollContainer" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Main Options"]
 layout_mode = 2
@@ -116,6 +117,7 @@ fit_content = true
 visible = false
 layout_mode = 2
 theme = ExtResource("1_cmgag")
+metadata/_tab_index = 1
 
 [node name="SoundsScroll" type="ScrollContainer" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Sounds Options"]
 layout_mode = 2
@@ -197,16 +199,19 @@ ticks_on_borders = true
 [node name="Controls Options" type="PanelContainer" parent="Center/ARC/MarginContainer/MainVBox/MainTabs"]
 layout_mode = 2
 theme = ExtResource("1_cmgag")
+metadata/_tab_index = 2
 
 [node name="ControlsTabs" type="TabContainer" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Controls Options"]
 layout_mode = 2
 theme = ExtResource("1_cmgag")
+current_tab = 0
 
 [node name="Keyboard and Mouse" type="ScrollContainer" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Controls Options/ControlsTabs"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 theme = ExtResource("1_cmgag")
+metadata/_tab_index = 0
 
 [node name="ControlsMargin" type="MarginContainer" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Controls Options/ControlsTabs/Keyboard and Mouse"]
 layout_mode = 2
@@ -243,6 +248,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 theme = ExtResource("1_cmgag")
+metadata/_tab_index = 1
 
 [node name="ControlsMargin" type="MarginContainer" parent="Center/ARC/MarginContainer/MainVBox/MainTabs/Controls Options/ControlsTabs/Controller"]
 layout_mode = 2

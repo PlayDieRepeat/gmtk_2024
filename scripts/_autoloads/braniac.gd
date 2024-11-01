@@ -7,10 +7,13 @@ enum InputType {AUTO_DETECT, FORCE_CONTROLLER, FORCE_MOUSE_KEYBOARD}
 @export var state_machine: FiniteStateMachine
 var mouse_position: Vector2 = Vector2.ZERO
 var mouse_relative_change: Vector2 = Vector2.ZERO
+var joypad_left_stick: Vector2 = Vector2.ZERO
+var joypad_right_stick: Vector2 = Vector2.ZERO
 var gamepad_detected := false
 var should_consume_event:= true
 var is_pausing := false
 var waiting_on_keypress_to_remap := false
+var is_gamepad_event := false
 var debug_menu: Node
 var input_actions: Array[StringName]
 var input_action_knm_events := {}
@@ -59,96 +62,112 @@ func _create_signals_from_actions() -> void:
 ## where the string is a translated version of the InputEvent.as_text() output
 func _write_action_event_dicts(p_actions_arr: Array[StringName]) -> void:
 	for action in p_actions_arr:
-		var knm_list: Array
-		var gp_list: Array
-		var _list: Array[InputEvent]
-		_list = InputMap.action_get_events(action)
-		knm_list = _translate_input_event(_list[0])
-		input_action_knm_events[action] = knm_list
-		if _list.size() > 1:
-			gp_list = _translate_input_event(_list[1])
-			input_action_gp_events[action] = gp_list
-		else:
-			input_action_gp_events[action] = ["EMPTY", null]
+		var translated_event: Array
+		var _events: Array[InputEvent] = InputMap.action_get_events(action)
+		for _event in _events:
+			translated_event = _translate_input_event(_event)
+			if translated_event.is_empty():
+				printerr("Input translation FAILED!!")
+			else:
+				if translated_event[1] == true:
+					input_action_knm_events[action] = translated_event
+				else:
+					input_action_gp_events[action] = translated_event
 
 ## Translator algo takes an InputEvent and returns a player-facing string to
 ## represent the InputEvent
 func _translate_input_event(p_input_event: InputEvent) -> Array:
-	var _string: String = p_input_event.get_class()
+	var event_as_text := p_input_event.as_text()
+	var translated_string: String
 	match p_input_event.get_class():
 		"InputEventMouseButton":
-			var _button_str: String = p_input_event.as_text()
-			if p_input_event.as_text().contains("Left Mouse Button"):
-				return ["Left Mouse Click", p_input_event]
-			if p_input_event.as_text().contains("Right Mouse Button"):
-				return ["Right Mouse Click", p_input_event]
-			if p_input_event.as_text().contains("Mouse Wheel Up"):
-				return ["Mouse Wheel Up", p_input_event]
-			if p_input_event.as_text().contains("Mouse Wheel Down"):
-				return ["Mouse Wheel Down", p_input_event]
+			is_gamepad_event = false
+			if event_as_text.contains("Left Mouse Button"):
+				translated_string = "Left Mouse Click"
+			elif event_as_text.contains("Right Mouse Button"):
+				translated_string = "Right Mouse Click"
+			elif event_as_text.contains("Mouse Wheel Up"):
+				translated_string = "Mouse Wheel Up"
+			elif event_as_text.contains("Mouse Wheel Down"):
+				translated_string = "Mouse Wheel Down"
+				
+			return [translated_string, is_gamepad_event, p_input_event]
 		"InputEventKey":
-			var _key_str: String = p_input_event.as_text()
-			if p_input_event.as_text().contains(" (Physical)"):
-				return [p_input_event.as_text().replacen(" (Physical)", ""), p_input_event]
+			is_gamepad_event = false
+			if event_as_text.contains(" (Physical)"):
+				return [p_input_event.as_text().replacen(" (Physical)", ""), is_gamepad_event, p_input_event]
 			else:
-				return [p_input_event.as_text(), p_input_event]
+				return [p_input_event.as_text(), is_gamepad_event, p_input_event]
 		"InputEventJoypadMotion":
-			var _stick_str: String = p_input_event.as_text()
-			if _stick_str.contains("Left Stick Y-Axis"):
+			is_gamepad_event = true
+			if event_as_text.contains("Left Stick Y-Axis"):
 				if p_input_event.get_axis_value() < 0:
-					return ["Left Stick Up", p_input_event]
+					translated_string = "Left Stick Up"
 				elif p_input_event.get_axis_value() > 0:
-					return ["Left Stick Down", p_input_event]
-			elif _stick_str.contains("Left Stick X-Axis"):
+					translated_string = "Left Stick Down"
+				else:
+					pass
+			elif event_as_text.contains("Left Stick X-Axis"):
 				if p_input_event.get_axis_value() < 0:
-					return ["Left Stick Left", p_input_event]
+					translated_string = "Left Stick Left"
 				elif p_input_event.get_axis_value() > 0:
-					return ["Left Stick Right", p_input_event]
-			elif _stick_str.contains("Right Stick Y-Axis"):
+					translated_string = "Left Stick Right"
+				else:
+					pass
+			elif event_as_text.contains("Right Stick Y-Axis"):
 				if p_input_event.get_axis_value() < 0:
-					return ["Right Stick Up", p_input_event]
+					translated_string = "Right Stick Up"
 				elif p_input_event.get_axis_value() > 0:
-					return ["Right Stick Down", p_input_event]
-			elif _stick_str.contains("Right Stick X-Axis"):
+					translated_string = "Right Stick Down"
+				else:
+					pass
+			elif event_as_text.contains("Right Stick X-Axis"):
 				if p_input_event.get_axis_value() < 0:
-					return ["Right Stick Left", p_input_event]
+					translated_string = "Right Stick Left"
 				elif p_input_event.get_axis_value() > 0:
-					return ["Right Stick Right", p_input_event]
-			elif _stick_str.contains("Left Trigger"):
-				return ["Left Trigger", p_input_event]
-			elif _stick_str.contains("Right Trigger"):
-				return ["Right Trigger", p_input_event]
+					translated_string = "Right Stick Right"
+				else:
+					pass
+			elif event_as_text.contains("Left Trigger"):
+				translated_string = "Left Trigger"
+			elif event_as_text.contains("Right Trigger"):
+				translated_string = "Right Trigger"
+				
+			return [translated_string, is_gamepad_event, p_input_event]
 		"InputEventJoypadButton":
-			var _button_str: String = p_input_event.as_text()
-			if p_input_event.as_text().contains("Left Action"):
-				return ["Face Button Left", p_input_event]
-			elif p_input_event.as_text().contains("Right Action"):
-				return ["Face Button Right", p_input_event]
-			elif p_input_event.as_text().contains("Top Action"):
-				return ["Face Button Top", p_input_event]
-			elif p_input_event.as_text().contains("Bottom Action"):
-				return ["Face Button Bottom", p_input_event]
-			elif p_input_event.as_text().contains("Joypad Button 4"):
-				return ["Select", p_input_event]
-			elif p_input_event.as_text().contains("Joypad Button 6"):
-				return ["Start", p_input_event]
-			elif p_input_event.as_text().contains("Joypad Button 7"):
-				return ["Left Stick Click", p_input_event]
-			elif p_input_event.as_text().contains("Joypad Button 8"):
-				return ["Right Stick Click", p_input_event]
-			elif p_input_event.as_text().contains("Joypad Button 9"):
-				return ["Left Shoulder", p_input_event]
-			elif p_input_event.as_text().contains("Joypad Button 10"):
-				return ["Right Shoulder", p_input_event]
-			elif p_input_event.as_text().contains("Joypad Button 11"):
-				return ["D-Pad Up", p_input_event]
-			elif p_input_event.as_text().contains("Joypad Button 12"):
-				return ["D-Pad Down", p_input_event]
-			elif p_input_event.as_text().contains("Joypad Button 13"):
-				return ["D-Pad Left", p_input_event]
-			elif p_input_event.as_text().contains("Joypad Button 14"):
-				return ["D-Pad Right", p_input_event]
-	return []
+			is_gamepad_event = true
+			if event_as_text.contains("Left Action"):
+				translated_string = "Face Button Left"
+			elif event_as_text.contains("Right Action"):
+				translated_string = "Face Button Right"
+			elif event_as_text.contains("Top Action"):
+				translated_string = "Face Button Top"
+			elif event_as_text.contains("Bottom Action"):
+				translated_string = "Face Button Bottom"
+			elif event_as_text.contains("Joypad Button 4"):
+				translated_string = "Select"
+			elif event_as_text.contains("Joypad Button 6"):
+				translated_string = "Start"
+			elif event_as_text.contains("Joypad Button 7"):
+				translated_string = "Left Stick Click"
+			elif event_as_text.contains("Joypad Button 8"):
+				translated_string = "Right Stick Click"
+			elif event_as_text.contains("Joypad Button 9"):
+				translated_string = "Left Shoulder"
+			elif event_as_text.contains("Joypad Button 10"):
+				translated_string = "Right Shoulder"
+			elif event_as_text.contains("Joypad Button 11"):
+				translated_string = "D-Pad Up"
+			elif event_as_text.contains("Joypad Button 12"):
+				translated_string = "D-Pad Down"
+			elif event_as_text.contains("Joypad Button 13"):
+				translated_string = "D-Pad Left"
+			elif event_as_text.contains("Joypad Button 14"):
+				translated_string = "D-Pad Right"
+				
+			return [translated_string, is_gamepad_event, p_input_event]
+		_:
+			return []
 
 func _on_joy_connection_changed(device: int, connected: bool) -> void:
 	_get_gamepads()
@@ -178,7 +197,6 @@ func _process(_delta: float) -> void:
 		#InputState.PAUSE_STATE:
 			#pass
 
-
 func _unhandled_input(event: InputEvent) -> void:
 	var str_event = event.get_class()
 	if waiting_on_keypress_to_remap == true:
@@ -200,50 +218,81 @@ func _unhandled_input(event: InputEvent) -> void:
 				"InputEventKey":
 					_update_event_and_notify(event)
 	else:
+		for _action in input_actions:
+			if event.is_action(_action):
+				if input_detect_type == InputType.AUTO_DETECT:
+					_process_action(event, _action)
+				elif is_controller(event) and (input_detect_type == InputType.FORCE_CONTROLLER):
+					_process_gamepad_action(event, _action)
+				elif !is_controller(event) and (input_detect_type == InputType.FORCE_MOUSE_KEYBOARD):
+					_process_key_and_mouse_action(event, _action)
+		
 		match str_event:
 			"InputEventMouseMotion":
-				_process_mouse_motion()
-				mouse_relative_change = event.relative
-				mouse_position = event.global_position
+				_process_mouse_motion(event)
 				#get_tree().get_root().set_input_as_handled()
 			"InputEventJoypadMotion":
-				pass
+				_process_joypad_motion(event)
 			_:
-				for i in range(input_actions.size()):
-					if event.is_action(input_actions[i]):
-						emit_signal(input_actions[i])
+				if Input.is_action_just_pressed("menu"):
+					if state_machine.current_state.name == "Game":
+						#is_pausing = true TODO: probably need to remove these
+						pause_game()
+					elif state_machine.current_state.name == "Pause":
+						#is_pausing = false TODO: probably need to remove these
+						unpause_game()
 
-	if Input.is_action_just_pressed("menu"):
-		if state_machine.current_state.name == "Game":
-			#is_pausing = true TODO: probably need to remove these
-			pause_game()
-		elif state_machine.current_state.name == "Pause":
-			#is_pausing = false TODO: probably need to remove these
-			unpause_game()
+func is_controller(p_event: InputEvent) -> bool:
+	if p_event.is_class("InputEventJoypadMotion") or p_event.is_class("InputEventJoypadButton"):
+		return true
 	
-	match input_detect_type:
-		InputType.AUTO_DETECT:
-			if gamepad_detected:
-				_process_gamepad_input(event)
-			else:
-				_process_key_and_mouse_input(event)
-		InputType.FORCE_CONTROLLER:
-			if gamepad_detected:
-				_process_gamepad_input(event)
-			else:
-				_prompt_for_reconnect()
-		InputType.FORCE_MOUSE_KEYBOARD:
-			_process_key_and_mouse_input(event)
+	return false
 
-func _process_mouse_motion() -> void:
-	pass
+func _process_action(p_event: InputEvent, p_action: StringName) -> void:
+	emit_signal(p_action)
 
-func _process_gamepad_input(event: InputEvent) -> void:
-	pass
+func _process_mouse_motion(p_event: InputEvent) -> void:
+	mouse_relative_change = p_event.relative
+	mouse_position = p_event.global_position
 
-func _process_key_and_mouse_input(event: InputEvent) -> void:
-	pass
+# Game controller left joystick x-axis.
+#JOY_AXIS_LEFT_Y = 1
+#Game controller left joystick y-axis.
+#JOY_AXIS_RIGHT_X = 2
+#Game controller right joystick x-axis.
+#JOY_AXIS_RIGHT_Y = 3
+#Game controller right joystick y-axis.
+#JOY_AXIS_TRIGGER_LEFT = 4
+#Game controller left trigger axis.
+#JOY_AXIS_TRIGGER_RIGHT = 5
+#Game controller right trigger axis.
+func _process_joypad_motion(p_event: InputEvent) -> void:
+	if abs(p_event.get_axis_value()) >= controller_deadzone:
+		match p_event.axis:
+			JOY_AXIS_LEFT_X:
+				joypad_left_stick.x = p_event.axis_value
+			JOY_AXIS_LEFT_Y:
+				joypad_left_stick.y = p_event.axis_value
+			JOY_AXIS_RIGHT_X:
+				joypad_right_stick.x = p_event.axis_value
+			JOY_AXIS_RIGHT_Y:
+				joypad_right_stick.y = p_event.axis_value
 
+func _process_gamepad_action(p_event: InputEvent, p_action: StringName) -> void:
+	emit_signal(p_action)
+
+func _process_key_and_mouse_action(p_event: InputEvent, p_action: StringName) -> void:
+	emit_signal(p_action)
+
+### takes the unhandled input event and adds it to the InputMap
+### needs to know what action to add it to
+### TODO: change where action comes from, away from remap_info
+### then the action event dictionaries are updated with the new mapping
+### then the caught input is translated into a generic, ui and user_facing
+### string that gets signal broadcasted (and caught by the options menu)
+### then its logged, and finally a bool is flipped so we dont keep remapping new inputs randomly
+### and the process for unhandled input is set to false ... I wonder if we need that?
+### TODO: look into the need for set_process_unhandled_input's use
 func _update_event_and_notify(p_event: InputEvent) -> void:
 	InputMap.action_add_event(remap_info[0], p_event)
 	_write_action_event_dicts(input_actions)
@@ -300,11 +349,21 @@ func pause_game() -> void:
 func unpause_game() -> void:
 	Scenester.unpause_scene()
 
-func change_event_on_action(p_action: StringName, p_event: InputEvent, p_is_gamepad: bool) -> void:
-	InputMap.action_erase_event(p_action, p_event)
-	remap_info = [p_action, p_event, p_is_gamepad]
+func set_change_action_event(p_action: StringName, p_is_gamepad: bool) -> void:
+	var _event: InputEvent = get_event_from_action(p_is_gamepad)
+	InputMap.action_erase_event(p_action, _event)
+	remap_info = [p_action, _event, p_is_gamepad]
 	waiting_on_keypress_to_remap = true
 	set_process_unhandled_input(true)
+
+func get_event_from_action(p_is_gamepad: bool) -> InputEvent:
+	var _event: InputEvent
+	if p_is_gamepad:
+		pass
+	else:
+		pass
+	
+	return _event
 
 func _set_input_action_mapping_to_default() -> void:
 	InputMap.load_from_project_settings()
