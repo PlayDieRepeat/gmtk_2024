@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://btno46ffvbos5"]
 
-[ext_resource type="Script" path="res://scripts/states/input/transitional_state.gd" id="1_hq4vn"]
+[ext_resource type="Script" path="res://scenes/states/input/transitional_state.gd" id="1_hq4vn"]
 
 [node name="Transitional" type="Node"]
 script = ExtResource("1_hq4vn")

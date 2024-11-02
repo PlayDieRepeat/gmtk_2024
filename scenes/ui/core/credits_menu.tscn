@@ -1,0 +1,347 @@
+[gd_scene load_steps=8 format=3 uid="uid://bacvkh6dk4dm5"]
+
+[ext_resource type="Theme" uid="uid://58654jslq711" path="res://resources/themes/start_menu_theme.tres" id="1_olb7i"]
+[ext_resource type="Script" path="res://scenes/ui/core/credits_menu.gd" id="2_hrb3h"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ewx6g"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_h5t0e"]
+line_spacing = 4.0
+font_size = 19
+
+[sub_resource type="LabelSettings" id="LabelSettings_bxj4o"]
+line_spacing = 4.0
+font_size = 26
+
+[sub_resource type="LabelSettings" id="LabelSettings_lfur6"]
+line_spacing = 4.0
+font_size = 14
+
+[sub_resource type="LabelSettings" id="LabelSettings_c6lyl"]
+line_spacing = 4.0
+font_size = 12
+
+[node name="CreditsScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_olb7i")
+script = ExtResource("2_hrb3h")
+
+[node name="BackGround" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_olb7i")
+
+[node name="BackgroundColor" type="ColorRect" parent="BackGround"]
+layout_mode = 2
+color = Color(0.07, 0.07, 0.07, 1)
+
+[node name="MadeFor" type="PanelContainer" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
+layout_mode = 1
+offset_right = 189.0
+offset_bottom = 48.0
+theme = ExtResource("1_olb7i")
+
+[node name="MarginContainer" type="MarginContainer" parent="MadeFor"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ControlsText" type="VBoxContainer" parent="MadeFor/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme = ExtResource("1_olb7i")
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MadeFor/MarginContainer/ControlsText"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 0
+
+[node name="Title" type="Label" parent="MadeFor/MarginContainer/ControlsText/MarginContainer"]
+layout_mode = 2
+text = "A game made for..."
+label_settings = SubResource("LabelSettings_ewx6g")
+
+[node name="MarginContainer2" type="MarginContainer" parent="MadeFor/MarginContainer/ControlsText"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Title" type="Label" parent="MadeFor/MarginContainer/ControlsText/MarginContainer2"]
+layout_mode = 2
+text = "Ludum Dare 55 - 2024"
+label_settings = SubResource("LabelSettings_h5t0e")
+
+[node name="Credits" type="PanelContainer" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="Credits"]
+layout_mode = 2
+
+[node name="CollabMargin" type="MarginContainer" parent="Credits/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Credits/HBoxContainer/CollabMargin"]
+layout_mode = 2
+
+[node name="Title" type="MarginContainer" parent="Credits/HBoxContainer/CollabMargin/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title2" type="Label" parent="Credits/HBoxContainer/CollabMargin/VBoxContainer/Title"]
+layout_mode = 2
+text = "Featured Collaborator"
+label_settings = SubResource("LabelSettings_bxj4o")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Credits/HBoxContainer/CollabMargin/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Ayo" type="MarginContainer" parent="Credits/HBoxContainer/CollabMargin/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="Credits/HBoxContainer/CollabMargin/VBoxContainer/HBoxContainer/Ayo"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Credits/HBoxContainer/CollabMargin/VBoxContainer/HBoxContainer/Ayo/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Vbox" type="VBoxContainer" parent="Credits/HBoxContainer/CollabMargin/VBoxContainer/HBoxContainer/Ayo/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="Credits/HBoxContainer/CollabMargin/VBoxContainer/HBoxContainer/Ayo/PanelContainer/MarginContainer/Vbox"]
+layout_mode = 2
+text = "Ayo Afolabi"
+label_settings = SubResource("LabelSettings_lfur6")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Role" type="Label" parent="Credits/HBoxContainer/CollabMargin/VBoxContainer/HBoxContainer/Ayo/PanelContainer/MarginContainer/Vbox"]
+layout_mode = 2
+text = "Art | Design"
+label_settings = SubResource("LabelSettings_c6lyl")
+horizontal_alignment = 2
+
+[node name="LinkButton" type="LinkButton" parent="Credits/HBoxContainer/CollabMargin/VBoxContainer/HBoxContainer/Ayo/PanelContainer/MarginContainer/Vbox"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 12
+text = "arkeus.carrd.co"
+uri = "https://arkeus.carrd.co/"
+
+[node name="PDRMargin" type="MarginContainer" parent="Credits/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Credits/HBoxContainer/PDRMargin"]
+layout_mode = 2
+
+[node name="Title" type="MarginContainer" parent="Credits/HBoxContainer/PDRMargin/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title2" type="Label" parent="Credits/HBoxContainer/PDRMargin/VBoxContainer/Title"]
+layout_mode = 2
+text = "Play | Die | Repeat"
+label_settings = SubResource("LabelSettings_bxj4o")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Credits/HBoxContainer/PDRMargin/VBoxContainer"]
+layout_mode = 2
+
+[node name="Billy" type="MarginContainer" parent="Credits/HBoxContainer/PDRMargin/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="Credits/HBoxContainer/PDRMargin/VBoxContainer/HBoxContainer/Billy"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Credits/HBoxContainer/PDRMargin/VBoxContainer/HBoxContainer/Billy/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Vbox" type="VBoxContainer" parent="Credits/HBoxContainer/PDRMargin/VBoxContainer/HBoxContainer/Billy/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Name" type="Label" parent="Credits/HBoxContainer/PDRMargin/VBoxContainer/HBoxContainer/Billy/PanelContainer/MarginContainer/Vbox"]
+layout_mode = 2
+text = "Billy Craig"
+label_settings = SubResource("LabelSettings_lfur6")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Role" type="Label" parent="Credits/HBoxContainer/PDRMargin/VBoxContainer/HBoxContainer/Billy/PanelContainer/MarginContainer/Vbox"]
+layout_mode = 2
+text = "Narrative | Design"
+label_settings = SubResource("LabelSettings_c6lyl")
+horizontal_alignment = 2
+
+[node name="LinkButton" type="LinkButton" parent="Credits/HBoxContainer/PDRMargin/VBoxContainer/HBoxContainer/Billy/PanelContainer/MarginContainer/Vbox"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 12
+text = "seacreaturesandwich.com"
+uri = "https://www.seacreaturesandwich.com/"
+
+[node name="Jake" type="MarginContainer" parent="Credits/HBoxContainer/PDRMargin/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="Credits/HBoxContainer/PDRMargin/VBoxContainer/HBoxContainer/Jake"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Credits/HBoxContainer/PDRMargin/VBoxContainer/HBoxContainer/Jake/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Vbox" type="VBoxContainer" parent="Credits/HBoxContainer/PDRMargin/VBoxContainer/HBoxContainer/Jake/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Name" type="Label" parent="Credits/HBoxContainer/PDRMargin/VBoxContainer/HBoxContainer/Jake/PanelContainer/MarginContainer/Vbox"]
+layout_mode = 2
+text = "Jake 'Gilla' Gilfillan"
+label_settings = SubResource("LabelSettings_lfur6")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Role" type="Label" parent="Credits/HBoxContainer/PDRMargin/VBoxContainer/HBoxContainer/Jake/PanelContainer/MarginContainer/Vbox"]
+layout_mode = 2
+text = "Design | Programming"
+label_settings = SubResource("LabelSettings_c6lyl")
+horizontal_alignment = 2
+
+[node name="LinkButton" type="LinkButton" parent="Credits/HBoxContainer/PDRMargin/VBoxContainer/HBoxContainer/Jake/PanelContainer/MarginContainer/Vbox"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 12
+text = "jakedidit.com"
+uri = "https://www.jakedidit.com]jakedidit.com"
+
+[node name="Richard" type="MarginContainer" parent="Credits/HBoxContainer/PDRMargin/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="Credits/HBoxContainer/PDRMargin/VBoxContainer/HBoxContainer/Richard"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Credits/HBoxContainer/PDRMargin/VBoxContainer/HBoxContainer/Richard/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Vbox" type="VBoxContainer" parent="Credits/HBoxContainer/PDRMargin/VBoxContainer/HBoxContainer/Richard/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="Credits/HBoxContainer/PDRMargin/VBoxContainer/HBoxContainer/Richard/PanelContainer/MarginContainer/Vbox"]
+layout_mode = 2
+text = "Richard Ortiz"
+label_settings = SubResource("LabelSettings_lfur6")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Role" type="Label" parent="Credits/HBoxContainer/PDRMargin/VBoxContainer/HBoxContainer/Richard/PanelContainer/MarginContainer/Vbox"]
+layout_mode = 2
+text = "Programming | Design"
+label_settings = SubResource("LabelSettings_c6lyl")
+horizontal_alignment = 2
+
+[node name="LinkButton" type="LinkButton" parent="Credits/HBoxContainer/PDRMargin/VBoxContainer/HBoxContainer/Richard/PanelContainer/MarginContainer/Vbox"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 12
+
+[node name="Buttons" type="PanelContainer" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -102.0
+offset_top = -48.0
+offset_right = 102.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("1_olb7i")
+
+[node name="MarginContainer" type="MarginContainer" parent="Buttons"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ReturnButton" type="Button" parent="Buttons/MarginContainer" groups=["Buttons"]]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Return to Title"
+
+[connection signal="pressed" from="Buttons/MarginContainer/ReturnButton" to="." method="_on_return_button_pressed"]

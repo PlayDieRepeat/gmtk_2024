@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dlonsh4d8ywjc"]
 
-[ext_resource type="Script" path="res://scripts/states/input/reconnect_state.gd" id="1_kkjwj"]
+[ext_resource type="Script" path="res://scenes/states/input/reconnect_state.gd" id="1_kkjwj"]
 
 [node name="Reconnect" type="Node"]
 script = ExtResource("1_kkjwj")
