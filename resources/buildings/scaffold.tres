@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RBuilding" load_steps=5 format=3 uid="uid://7cpuj3gwskah"]
+[gd_resource type="Resource" script_class="RStructure" load_steps=5 format=3 uid="uid://7cpuj3gwskah"]
 
 [ext_resource type="Script" path="res://scripts/_resources/r_material_stack.gd" id="1_h4ucu"]
 [ext_resource type="Resource" uid="uid://wscpuo1ajsvh" path="res://resources/materials/wood.tres" id="2_au7u3"]

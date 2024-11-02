@@ -4,7 +4,7 @@ class_name Metropolis
 @export_group("City Components")
 @export var starting_values: RScenarioValues
 @export var building_scene: PackedScene
-@export var available_buildings: Array[RBuilding]
+@export var available_buildings: Array[RStructure]
 
 @export_group("References")
 @export var warehouse: MaterialWarehouse
@@ -12,7 +12,7 @@ class_name Metropolis
 var waiting_queue: Array[Building]
 var world_timer: Timer
 
-signal build_button_pressed(p_building: Building, p_available_buildings: Array[RBuilding])
+signal build_button_pressed(p_building: Building, p_available_buildings: Array[RStructure])
 
 func _ready() -> void:
 	world_timer = get_tree().get_first_node_in_group("world_timer")

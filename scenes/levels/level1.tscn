@@ -123,6 +123,7 @@ metropolis = NodePath("..")
 script = ExtResource("19_ddqww")
 
 [node name="ResourceGrid" type="GridContainer" parent="UILayer"]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5

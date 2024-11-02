@@ -1,14 +1,14 @@
 class_name BuildingButton
 extends TextureButton
 
-var building_data: RBuilding
+var building_data: RStructure
 
 @export_group("Child Nodes")
 @export var building_rect: TextureRect
 @export var scaffold_rect: TextureRect
 @export var name_label: Label
 
-signal building_selected(p_building_data: RBuilding)
+signal building_selected(p_building_data: RStructure)
 
 func _ready() -> void:
 	assert(building_rect != null, "building_rect is null in BuildingButton")

@@ -16,9 +16,9 @@ class_name BuildMenu
 @export var material_warehouse: MaterialWarehouse
 
 var active_building: Building
-var available_buildings: Array[RBuilding]
+var available_buildings: Array[RStructure]
 
-signal building_selected(p_selected_building: RBuilding)
+signal building_selected(p_selected_building: RStructure)
 signal menu_canceled()
 signal confirm_build()
 
@@ -58,7 +58,7 @@ func disconnect_signals() -> void:
 	menu_canceled.disconnect(active_building._on_menu_canceled)
 	confirm_build.disconnect(active_building._on_build_confirmed)
 
-func _on_build_button_pressed(p_building: Building, p_available_buildings: Array[RBuilding]) -> void:
+func _on_build_button_pressed(p_building: Building, p_available_buildings: Array[RStructure]) -> void:
 	active_building = p_building
 	available_buildings = p_available_buildings
 	connect_signals()
@@ -71,7 +71,7 @@ func _on_build_button_pressed(p_building: Building, p_available_buildings: Array
 			button_instance.grab_focus()
 	show()
 
-func _on_building_selected(p_building_data: RBuilding) -> void:
+func _on_building_selected(p_building_data: RStructure) -> void:
 	clear_cost_controls()
 	usage_label.text = p_building_data.description
 	for stack in p_building_data.material_requirements:

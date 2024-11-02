@@ -1,7 +1,7 @@
 extends Resource
-class_name RBuilding
+class_name RStructure
 
-## The name display name for this buidling type
+## The name display name for this building type
 @export var display_name: String
 ## Describe how the building is used
 @export var description: String
@@ -13,7 +13,7 @@ class_name RBuilding
 ##
 ## MAX 4 entries
 @export var material_requirements: Array[RMaterialStack]
-## Whether additional buildings can be built up avoce this building
+## Whether additional buildings can be built up above this building
 @export var can_build_above: bool
 ## Time in ticks to build this structure
 @export var time_to_build: int

@@ -3,7 +3,7 @@ class_name Building
 
 @export_group("Building Data")
 @export var is_prebuilt := false
-@export var building_data: RBuilding
+@export var building_data: RStructure
 @export var building_states: Array[PackedScene]
 
 @export_group("Child Nodes")
@@ -24,7 +24,7 @@ var grid_coordinates := Vector2i(0, 0)
 var build_progress := 0
 var world_timer: Timer
 
-signal build_button_pressed(p_building: RBuilding)
+signal build_button_pressed(p_building: RStructure)
 
 func _ready() -> void:
 	assert(metropolis != null, "No reference to Metropolis")
@@ -124,7 +124,7 @@ func _on_build_button_pressed() -> void:
 	state_machine.change_state("Menu")
 	build_button_pressed.emit(self)
 
-func _on_building_selected(p_building_data: RBuilding) -> void:
+func _on_building_selected(p_building_data: RStructure) -> void:
 	building_data = p_building_data
 	show_building_texture(true)
 	show_scaffolding(true)
