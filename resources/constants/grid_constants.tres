@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="RGrid" load_steps=2 format=3 uid="uid://bvmm3p821o0ls"]
+
+[ext_resource type="Script" path="res://resources/_scripts/r_grid.gd" id="1_afy5m"]
+
+[resource]
+script = ExtResource("1_afy5m")
+position = Vector2(0, 0)
+size = Vector2(4, 4)
+terrain = {}

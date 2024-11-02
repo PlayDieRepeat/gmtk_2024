@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="RScene" load_steps=3 format=3 uid="uid://bp1y4f6kywxid"]
+
+[ext_resource type="PackedScene" path="res://scenes/levels/building_test.tscn" id="1_00ra3"]
+[ext_resource type="Script" path="res://resources/_scripts/r_scene.gd" id="2_gs4lm"]
+
+[resource]
+script = ExtResource("2_gs4lm")
+scene = ExtResource("1_00ra3")
+scene_id = ""

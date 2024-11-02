@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0qpyxfnjuyr3"]
+
+[ext_resource type="Script" path="res://scenes/ui/components/clock_display.gd" id="1_ow6e0"]
+
+[node name="ClockDisplay" type="MarginContainer" node_paths=PackedStringArray("clock_label")]
+offset_right = 75.0
+offset_bottom = 27.0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+script = ExtResource("1_ow6e0")
+clock_label = NodePath("Time")
+
+[node name="Time" type="Label" parent="."]
+layout_mode = 2
+text = "00 AM"

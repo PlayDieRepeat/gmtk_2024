@@ -1,0 +1,144 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3tch322g3hhb"]
+
+[ext_resource type="Theme" uid="uid://58654jslq711" path="res://resources/themes/start_menu_theme.tres" id="1_12hgg"]
+[ext_resource type="Script" path="res://scenes/ui/core/start_menu.gd" id="1_uv3it"]
+
+[node name="StartMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_12hgg")
+script = ExtResource("1_uv3it")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_12hgg")
+color = Color(0.192157, 0.192157, 0.192157, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(50, 5)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_12hgg")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="CenterContainer"]
+layout_mode = 2
+theme = ExtResource("1_12hgg")
+ratio = 1.7778
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/AspectRatioContainer"]
+layout_mode = 2
+theme = ExtResource("1_12hgg")
+
+[node name="Title" type="Label" parent="CenterContainer/AspectRatioContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("1_12hgg")
+text = "Hungry Gods
+"
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/AspectRatioContainer/VBoxContainer"]
+custom_minimum_size = Vector2(225, 5)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme = ExtResource("1_12hgg")
+
+[node name="ButtonGrid" type="GridContainer" parent="CenterContainer/AspectRatioContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme = ExtResource("1_12hgg")
+columns = 3
+
+[node name="StartButton" type="Button" parent="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid" groups=["Buttons"]]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_12hgg")
+text = "Start"
+
+[node name="PanelBlank1" type="PanelContainer" parent="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid"]
+layout_mode = 2
+theme = ExtResource("1_12hgg")
+
+[node name="LoadButton" type="Button" parent="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid" groups=["Buttons"]]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_12hgg")
+text = "Load"
+
+[node name="PanelBlank2" type="PanelContainer" parent="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid"]
+layout_mode = 2
+theme = ExtResource("1_12hgg")
+
+[node name="OptionsButton" type="Button" parent="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid" groups=["Buttons"]]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_12hgg")
+text = "Options
+"
+
+[node name="PanelBlank3" type="PanelContainer" parent="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid"]
+layout_mode = 2
+theme = ExtResource("1_12hgg")
+
+[node name="CreditsButton" type="Button" parent="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid" groups=["Buttons"]]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_12hgg")
+text = "Credits
+"
+
+[node name="PanelBlank4" type="PanelContainer" parent="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid"]
+layout_mode = 2
+theme = ExtResource("1_12hgg")
+
+[node name="QuitButton" type="Button" parent="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid" groups=["Buttons"]]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_12hgg")
+text = "Exit
+"
+
+[node name="HSeparator2" type="HSeparator" parent="CenterContainer/AspectRatioContainer/VBoxContainer"]
+custom_minimum_size = Vector2(225, 5)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme = ExtResource("1_12hgg")
+
+[node name="Controls" type="Label" parent="CenterContainer/AspectRatioContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_12hgg")
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 12
+text = "by PLAY|DIE|REPEAT"
+horizontal_alignment = 1
+
+[connection signal="mouse_entered" from="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid/StartButton" to="." method="_on_start_button_mouse_entered"]
+[connection signal="pressed" from="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid/LoadButton" to="." method="_on_load_button_pressed"]
+[connection signal="mouse_entered" from="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid/OptionsButton" to="." method="_on_options_button_mouse_entered"]
+[connection signal="pressed" from="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="mouse_entered" from="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid/CreditsButton" to="." method="_on_credits_button_mouse_entered"]
+[connection signal="pressed" from="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="mouse_entered" from="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid/QuitButton" to="." method="_on_quit_button_mouse_entered"]
+[connection signal="pressed" from="CenterContainer/AspectRatioContainer/VBoxContainer/ButtonGrid/QuitButton" to="." method="_on_quit_button_pressed"]

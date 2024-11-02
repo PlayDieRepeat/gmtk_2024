@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="RMaterial" load_steps=3 format=3 uid="uid://wscpuo1ajsvh"]
+
+[ext_resource type="Script" path="res://resources/_scripts/r_material.gd" id="1_a3jwk"]
+[ext_resource type="Texture2D" uid="uid://bs5pxch7md6qu" path="res://assets/images/ui/grid_icon.png" id="1_p0tjm"]
+
+[resource]
+script = ExtResource("1_a3jwk")
+id = "wood"
+display_name = "Wood"
+icon = ExtResource("1_p0tjm")

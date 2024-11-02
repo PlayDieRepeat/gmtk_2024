@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://hj14prvlw4hv"]
+
+[ext_resource type="Script" path="res://scenes/structures/flag.gd" id="1_0u7qi"]
+[ext_resource type="Texture2D" uid="uid://ce2oho5ssclub" path="res://assets/images/structures/_base/flag_base.png" id="1_kep2i"]
+[ext_resource type="Texture2D" uid="uid://dw8sjdbfpcmmp" path="res://assets/images/structures/tent/flag_tent.png" id="2_wchcd"]
+[ext_resource type="Texture2D" uid="uid://cglyomnnhhpqk" path="res://assets/images/structures/_base/flag_remove.png" id="3_okn0w"]
+
+[node name="Flag" type="Sprite2D" node_paths=PackedStringArray("icon_sprite", "remove_sprite")]
+texture = ExtResource("1_kep2i")
+script = ExtResource("1_0u7qi")
+icon_sprite = NodePath("BuildigIcon")
+remove_sprite = NodePath("RemoveIcon")
+
+[node name="BuildigIcon" type="Sprite2D" parent="."]
+texture = ExtResource("2_wchcd")
+
+[node name="RemoveIcon" type="Sprite2D" parent="."]
+texture = ExtResource("3_okn0w")

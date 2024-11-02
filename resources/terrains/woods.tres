@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="RTerrainType" load_steps=2 format=3 uid="uid://17xay6j4o8x1"]
+
+[ext_resource type="Script" path="res://resources/_scripts/r_terrain_type.gd" id="1_makvd"]
+
+[resource]
+script = ExtResource("1_makvd")
+id = "Woods"
+display_name = "Forest"

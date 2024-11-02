@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="RFavorRewards" load_steps=3 format=3 uid="uid://dnyl0vkf620yq"]
+
+[ext_resource type="Resource" uid="uid://b7uqljvjo8qsl" path="res://resources/materials/crow_favor.tres" id="1_6s3p0"]
+[ext_resource type="Script" path="res://resources/_scripts/r_favor_rewards.gd" id="2_qmkcc"]
+
+[resource]
+script = ExtResource("2_qmkcc")
+favor_material = ExtResource("1_6s3p0")
+favor_low_reward_amt = 6
+favor_mid_reward_amt = 11
+favor_high_reward_amt = 16
+favor_awarded_cap = 120

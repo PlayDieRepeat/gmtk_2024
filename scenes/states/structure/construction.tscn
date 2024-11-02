@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://daw8idi8fjmp"]
+
+[ext_resource type="Script" path="res://scenes/states/structure/construction_state.gd" id="1_0tbrd"]
+
+[node name="Construction" type="Node"]
+script = ExtResource("1_0tbrd")

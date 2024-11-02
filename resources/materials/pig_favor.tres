@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="RMaterial" load_steps=2 format=3 uid="uid://v7hly1ajtn3c"]
+
+[ext_resource type="Script" path="res://resources/_scripts/r_material.gd" id="1_s81ql"]
+
+[resource]
+script = ExtResource("1_s81ql")
+id = "pig_favor"
+display_name = "Abundance"

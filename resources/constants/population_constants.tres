@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="RPopConstants" load_steps=2 format=3 uid="uid://dyjtaobat81sc"]
+
+[ext_resource type="Script" path="res://resources/_scripts/r_population_constants.gd" id="1_7xahi"]
+
+[resource]
+script = ExtResource("1_7xahi")
+min_population = 3
+max_population = 50
+starting_population = 5
+min_hunger = 0
+max_hunger = 100
+starting_hunger = 50
+min_fulfillment = 0
+max_fulfillment = 100
+starting_fulfillment = 2
