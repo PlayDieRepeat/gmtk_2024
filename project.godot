@@ -33,6 +33,7 @@ SoundManager="*res://addons/resonate/sound_manager/sound_manager.gd"
 Elephant="*res://scenes/_autoloads/elephant.tscn"
 Brainiac="*res://scenes/_autoloads/brainiac.tscn"
 Scenester="*res://scenes/_autoloads/scenester.tscn"
+ImGuiRoot="*res://addons/imgui-godot/data/ImGuiRoot.tscn"
 
 [display]
 
@@ -52,7 +53,7 @@ export/convert_text_resources_to_binary=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/finite_state_machine/plugin.cfg", "res://addons/resonate/plugin.cfg")
+enabled=PackedStringArray("res://addons/filesystem_drawer/plugin.cfg", "res://addons/finite_state_machine/plugin.cfg", "res://addons/imgui-godot/plugin.cfg", "res://addons/resonate/plugin.cfg")
 
 [input]
 
