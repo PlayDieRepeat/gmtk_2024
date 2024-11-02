@@ -2,8 +2,8 @@ class_name WorldCamera
 extends Camera2D
 
 @export var camera_constant: RCameraConstants
-var scroll_step_size := Vector2i (0,0)
-var zoomed_viewport_size := Vector2 (0.0, 0.0)
+var scroll_step_size := Vector2i(0, 0)
+var zoomed_viewport_size := Vector2(0.0, 0.0)
 
 func zoom_in_and_out(p_zoom_speed = Vector2(0, 0)) -> void:
 	if (p_zoom_speed.y < 0 and zoomed_viewport_size.y + p_zoom_speed.y < camera_constant.default_view_height + p_zoom_speed.y) or (p_zoom_speed.x > 0):
@@ -11,8 +11,8 @@ func zoom_in_and_out(p_zoom_speed = Vector2(0, 0)) -> void:
 		position = lerp(position, get_local_mouse_position(), 0.05)
 
 func scrolling() -> void:
-	zoomed_viewport_size = Vector2(get_viewport_rect().size.x / zoom.x, get_viewport_rect().size.y / zoom.y) 
-	var threshold := Vector2 (zoomed_viewport_size.x / 15, zoomed_viewport_size.y / 10)
+	zoomed_viewport_size = Vector2(get_viewport_rect().size.x / zoom.x, get_viewport_rect().size.y / zoom.y)
+	var threshold := Vector2(zoomed_viewport_size.x / 15, zoomed_viewport_size.y / 10)
 	
 	if get_local_mouse_position().x < threshold.x and position.x > -camera_constant.default_view_width:
 		scroll_step_size.x = -clamp((threshold.x - get_local_mouse_position().x) / 10, 1, camera_constant.camera_x_step_size)
@@ -34,12 +34,12 @@ func scrolling() -> void:
 		position.y = 0
 
 func _ready() -> void:
-	zoomed_viewport_size = Vector2 (get_viewport_rect().size.y / zoom.y, get_viewport_rect().size.x / zoom.x)
+	zoomed_viewport_size = Vector2(get_viewport_rect().size.y / zoom.y, get_viewport_rect().size.x / zoom.x)
 
 func _process(_delta: float = 0.0) -> void:
-	if get_local_mouse_position() < get_viewport_rect().size and get_local_mouse_position() > Vector2(0,0):
+	if get_local_mouse_position() < get_viewport_rect().size and get_local_mouse_position() > Vector2(0, 0):
 		scrolling()
-		if Input.is_action_just_released("Scroll Up"):
+		if Input.is_action_just_released("scroll_up"):
 			zoom_in_and_out(camera_constant.zoom_speed)
-		elif Input.is_action_just_released("Scroll Down"):
+		elif Input.is_action_just_released("scroll_down"):
 			zoom_in_and_out(-camera_constant.zoom_speed)
