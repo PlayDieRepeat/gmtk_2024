@@ -16,5 +16,6 @@ func _ready():
 	material_icon.texture = material_stack.stacked_material.icon
 	cost_label.text = "%s" % material_stack.stack_count
 
+## This is to force a merge
 func set_available(p_stock: int) -> void:
 	available_label.text = "(%s)" % p_stock
