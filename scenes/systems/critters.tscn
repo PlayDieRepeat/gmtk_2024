@@ -49,6 +49,7 @@ theme = ExtResource("2_ivgnl")
 [node name="HeaderPanel" type="PanelContainer" parent="UI/MainMargin/MainVBox"]
 custom_minimum_size = Vector2(620, 16)
 layout_mode = 2
+size_flags_stretch_ratio = 0.1
 mouse_filter = 2
 theme = ExtResource("2_ivgnl")
 theme_type_variation = &"HeaderPanel"
@@ -83,9 +84,11 @@ theme = ExtResource("2_ivgnl")
 [node name="Clear Contents" type="PopupMenu" parent="UI/MainMargin/MainVBox/HeaderPanel/HeaderMargin/HeaderHBox/MenuBar"]
 
 [node name="GridContainer" type="GridContainer" parent="UI/MainMargin/MainVBox"]
-custom_minimum_size = Vector2(640, 300)
+custom_minimum_size = Vector2(640, 200)
 layout_direction = 2
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.8
 mouse_filter = 2
 theme = ExtResource("2_ivgnl")
 columns = 3
@@ -294,6 +297,8 @@ fit_content = true
 [node name="FooterPanel" type="PanelContainer" parent="UI/MainMargin/MainVBox"]
 custom_minimum_size = Vector2(640, 16)
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
 mouse_filter = 2
 theme = ExtResource("2_ivgnl")
 theme_type_variation = &"FooterPanel"

@@ -1,5 +1,5 @@
 extends BuildingState
-class_name MenuState
+class_name LimboState
 
 # Called when the state machine enters this state.
 func on_enter() -> void:

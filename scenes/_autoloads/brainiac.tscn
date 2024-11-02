@@ -1,0 +1,17 @@
+[gd_scene load_steps=8 format=3 uid="uid://ugpj28gi7f71"]
+
+[ext_resource type="Script" path="res://scripts/_autoloads/braniac.gd" id="1_3lba3"]
+[ext_resource type="PackedScene" uid="uid://dp18kvdk6bafd" path="res://scenes/states/input/game.tscn" id="2_12drq"]
+[ext_resource type="PackedScene" uid="uid://j2m0823dobdl" path="res://scenes/states/input/menu.tscn" id="3_lci1r"]
+[ext_resource type="PackedScene" uid="uid://cax44jfdjnf7f" path="res://scenes/states/input/pause.tscn" id="4_17vr1"]
+[ext_resource type="PackedScene" uid="uid://dlonsh4d8ywjc" path="res://scenes/states/input/reconnect.tscn" id="5_ug0iv"]
+[ext_resource type="PackedScene" uid="uid://btno46ffvbos5" path="res://scenes/states/input/transitional.tscn" id="6_m3sjc"]
+[ext_resource type="Script" path="res://addons/finite_state_machine/scripts/finite_state_machine.gd" id="7_lxxrk"]
+
+[node name="Braniac" type="Node" node_paths=PackedStringArray("state_machine")]
+script = ExtResource("1_3lba3")
+input_states = Array[PackedScene]([ExtResource("2_12drq"), ExtResource("3_lci1r"), ExtResource("4_17vr1"), ExtResource("5_ug0iv"), ExtResource("6_m3sjc")])
+state_machine = NodePath("FiniteStateMachine")
+
+[node name="FiniteStateMachine" type="Node" parent="."]
+script = ExtResource("7_lxxrk")

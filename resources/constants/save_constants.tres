@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RSaveGame" load_steps=2 format=3 uid="uid://wjtrwnrcig01"]
 
-[ext_resource type="Script" path="res://scripts/_resources/r_save_constants.gd" id="1_s086h"]
+[ext_resource type="Script" path="res://scripts/_resources/r_game_save.gd" id="1_s086h"]
 
 [resource]
 script = ExtResource("1_s086h")

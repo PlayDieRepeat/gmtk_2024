@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://d2xgqssq13ewq"]
 
-[ext_resource type="Script" path="res://scripts/systems/loading_screen.gd" id="1_hiq1b"]
+[ext_resource type="Script" path="res://scripts/menus/loading_screen.gd" id="1_hiq1b"]
 [ext_resource type="Theme" uid="uid://b2b2620ynkvy7" path="res://resources/themes/loading_screen_theme.tres" id="2_aweu8"]
 
 [sub_resource type="Animation" id="Animation_3rs0m"]

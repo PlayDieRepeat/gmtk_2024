@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://58654jslq711"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://58654jslq711"]
 
 [ext_resource type="FontFile" uid="uid://dvvl4nkxhvp37" path="res://assets/fonts/Jersey15-Regular.ttf" id="1_3nxat"]
 
@@ -40,6 +40,8 @@ expand_margin_bottom = 4.0
 shadow_size = 5
 shadow_offset = Vector2(2, 2)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vtp7l"]
+
 [resource]
 Button/font_sizes/font_size = 28
 Button/fonts/font = ExtResource("1_3nxat")
@@ -54,4 +56,5 @@ Label/constants/outline_size = 8
 Label/font_sizes/font_size = 96
 Label/fonts/font = ExtResource("1_3nxat")
 Label/styles/normal = SubResource("StyleBoxFlat_l63a4")
+PanelContainer/styles/panel = SubResource("StyleBoxEmpty_vtp7l")
 VBoxContainer/constants/separation = 8
