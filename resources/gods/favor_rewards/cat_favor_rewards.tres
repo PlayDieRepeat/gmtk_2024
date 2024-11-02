@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="RFavorRewards" load_steps=3 format=3 uid="uid://0ih6kq47hawg"]
 
 [ext_resource type="Resource" uid="uid://r05m2n5w07kb" path="res://resources/materials/cat_favor.tres" id="1_7ucqq"]
-[ext_resource type="Script" path="res://scripts/_resources/r_favor_rewards.gd" id="1_ash6i"]
+[ext_resource type="Script" path="res://resources/_scripts/r_favor_rewards.gd" id="1_ash6i"]
 
 [resource]
 script = ExtResource("1_ash6i")

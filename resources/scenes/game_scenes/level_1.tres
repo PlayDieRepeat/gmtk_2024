@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="RScene" load_steps=3 format=3 uid="uid://bkccupmu5mjrh"]
 
-[ext_resource type="PackedScene" uid="uid://di3ut8c68gk7h" path="res://scenes/levels/level1.tscn" id="1_ee3oc"]
-[ext_resource type="Script" path="res://scripts/_resources/r_scene.gd" id="2_mss3e"]
+[ext_resource type="PackedScene" uid="uid://di3ut8c68gk7h" path="res://scenes/world/game_world.tscn" id="1_ee3oc"]
+[ext_resource type="Script" path="res://resources/_scripts/r_scene.gd" id="2_mss3e"]
 
 [resource]
 script = ExtResource("2_mss3e")

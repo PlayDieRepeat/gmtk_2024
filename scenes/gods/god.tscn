@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dv0twjcqcp3dt"]
 
-[ext_resource type="Script" path="res://scripts/gods/god.gd" id="1_adyte"]
+[ext_resource type="Script" path="res://scenes/gods/god.gd" id="1_adyte"]
 [ext_resource type="Resource" uid="uid://cm0a8vlbhldmn" path="res://resources/gods/pig_god.tres" id="2_jelpa"]
 
 [node name="God" type="Node"]

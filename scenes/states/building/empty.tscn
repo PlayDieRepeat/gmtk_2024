@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://djmvcveo0wqpx"]
-
-[ext_resource type="Script" path="res://scripts/states/building_states/empty_state.gd" id="1_awlbi"]
-
-[node name="Empty" type="Node"]
-script = ExtResource("1_awlbi")

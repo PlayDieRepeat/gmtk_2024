@@ -1,0 +1,153 @@
+[gd_scene load_steps=29 format=3 uid="uid://di3ut8c68gk7h"]
+
+[ext_resource type="Script" path="res://scenes/economy/material_warehouse.gd" id="1_i7mdd"]
+[ext_resource type="Resource" uid="uid://c14csn7vlswum" path="res://resources/scenarios/testing.tres" id="2_14ua3"]
+[ext_resource type="PackedScene" uid="uid://b5ru1bmvckk8a" path="res://scenes/economy/population_manager.tscn" id="3_irjp3"]
+[ext_resource type="Script" path="res://scenes/events/world_event_system.gd" id="4_ppa1v"]
+[ext_resource type="PackedScene" uid="uid://bd3cvxjknt16n" path="res://scenes/events/end_of_day_card.tscn" id="5_ny503"]
+[ext_resource type="Script" path="res://scenes/world/world_controller.gd" id="6_in2nf"]
+[ext_resource type="Resource" uid="uid://jew5ejix3nu" path="res://resources/constants/time_constants.tres" id="7_nvcia"]
+[ext_resource type="Resource" uid="uid://mdu3kq4heym6" path="res://resources/gods/cat_god.tres" id="8_o2pf2"]
+[ext_resource type="Script" path="res://scenes/gods/god.gd" id="9_tbd20"]
+[ext_resource type="Resource" uid="uid://cm0a8vlbhldmn" path="res://resources/gods/pig_god.tres" id="10_lnig4"]
+[ext_resource type="Script" path="res://scenes/world/world_camera.gd" id="11_xpsuw"]
+[ext_resource type="Resource" uid="uid://b7qymya8ffvmv" path="res://resources/constants/camera_constants.tres" id="12_rhflj"]
+[ext_resource type="Script" path="res://scenes/ui/debug/im_gui_helper.gd" id="13_7kwj1"]
+[ext_resource type="PackedScene" uid="uid://dodop7a7svo6t" path="res://scenes/world/sky_box.tscn" id="14_p21m1"]
+[ext_resource type="Texture2D" uid="uid://cpohewy4agqu0" path="res://assets/images/environment/ground.png" id="15_xamrd"]
+[ext_resource type="Texture2D" uid="uid://bmmq23vga8ukr" path="res://assets/images/trees/treeRed.png" id="16_xttbk"]
+[ext_resource type="Texture2D" uid="uid://clcspwowhnoch" path="res://assets/images/trees/treeGreen.png" id="17_5yxcy"]
+[ext_resource type="Texture2D" uid="uid://dfuotlar74515" path="res://assets/images/trees/treeYellow.png" id="18_7x0k4"]
+[ext_resource type="Script" path="res://scenes/world/metropolis.gd" id="19_33eio"]
+[ext_resource type="PackedScene" uid="uid://esp3ey8uhv7t" path="res://scenes/structures/structure.tscn" id="20_u6ojs"]
+[ext_resource type="Script" path="res://resources/_scripts/r_structure.gd" id="21_at3xn"]
+[ext_resource type="Resource" uid="uid://7cpuj3gwskah" path="res://resources/structures/scaffold.tres" id="22_o53yn"]
+[ext_resource type="Resource" uid="uid://ccyyrasw84v38" path="res://resources/structures/tent.tres" id="23_5xlbt"]
+[ext_resource type="Script" path="res://scenes/ui/gui_layer.gd" id="24_551p7"]
+[ext_resource type="Script" path="res://scenes/ui/layouts/debug_resource_grid.gd" id="25_fn8jq"]
+[ext_resource type="PackedScene" uid="uid://c6x87uubuyc2" path="res://scenes/ui/components/material_display.tscn" id="26_bg884"]
+[ext_resource type="PackedScene" uid="uid://c0qpyxfnjuyr3" path="res://scenes/ui/components/clock_display.tscn" id="27_pwpgb"]
+[ext_resource type="PackedScene" uid="uid://b04fabibrse1a" path="res://scenes/ui/layouts/build_menu.tscn" id="28_2tq1t"]
+
+[node name="Level1" type="Node"]
+
+[node name="Systems" type="Node" parent="."]
+
+[node name="MaterialWarehouse" type="Node" parent="Systems"]
+script = ExtResource("1_i7mdd")
+starting_values = ExtResource("2_14ua3")
+
+[node name="PopulationManager" parent="Systems" instance=ExtResource("3_irjp3")]
+
+[node name="EventSystem" type="Node" parent="Systems"]
+script = ExtResource("4_ppa1v")
+end_of_day_card = ExtResource("5_ny503")
+
+[node name="WorldController" type="Node" parent="Systems"]
+script = ExtResource("6_in2nf")
+time_constants = ExtResource("7_nvcia")
+god_data = ExtResource("8_o2pf2")
+
+[node name="WorldTimer" type="Timer" parent="Systems" groups=["world_timer"]]
+unique_name_in_owner = true
+autostart = true
+
+[node name="God" type="Node2D" parent="Systems"]
+unique_name_in_owner = true
+script = ExtResource("9_tbd20")
+god_data = ExtResource("10_lnig4")
+
+[node name="WorldCamera" type="Camera2D" parent="Systems"]
+anchor_mode = 0
+script = ExtResource("11_xpsuw")
+camera_constant = ExtResource("12_rhflj")
+
+[node name="ImGuiHelper" type="Node" parent="Systems"]
+script = ExtResource("13_7kwj1")
+
+[node name="World" type="Node" parent="."]
+
+[node name="SkyBox" parent="World" instance=ExtResource("14_p21m1")]
+
+[node name="Terrain" type="Node" parent="World"]
+
+[node name="Ground" type="Sprite2D" parent="World/Terrain"]
+position = Vector2(0, 328)
+scale = Vector2(10.023, 0.5)
+texture = ExtResource("15_xamrd")
+centered = false
+
+[node name="Ground3" type="Sprite2D" parent="World/Terrain"]
+position = Vector2(-640, 328)
+scale = Vector2(10.023, 0.5)
+texture = ExtResource("15_xamrd")
+centered = false
+
+[node name="Ground2" type="Sprite2D" parent="World/Terrain"]
+position = Vector2(640, 328)
+scale = Vector2(10.023, 0.5)
+texture = ExtResource("15_xamrd")
+centered = false
+
+[node name="Foliage" type="Node" parent="World"]
+
+[node name="RedTree" type="Sprite2D" parent="World/Foliage"]
+position = Vector2(40, 301)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("16_xttbk")
+
+[node name="GreenTree" type="Sprite2D" parent="World/Foliage"]
+position = Vector2(62, 310)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("17_5yxcy")
+
+[node name="YellowTree" type="Sprite2D" parent="World/Foliage"]
+position = Vector2(81, 306)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("18_7x0k4")
+
+[node name="Metropolis" type="Node" parent="World" node_paths=PackedStringArray("warehouse")]
+script = ExtResource("19_33eio")
+starting_values = ExtResource("2_14ua3")
+building_scene = ExtResource("20_u6ojs")
+available_buildings = Array[ExtResource("21_at3xn")]([ExtResource("22_o53yn"), ExtResource("23_5xlbt")])
+warehouse = NodePath("../../Systems/MaterialWarehouse")
+
+[node name="RootBuilding" parent="World/Metropolis" node_paths=PackedStringArray("metropolis") instance=ExtResource("20_u6ojs")]
+position = Vector2(288, 352)
+is_prebuilt = true
+building_data = ExtResource("23_5xlbt")
+metropolis = NodePath("..")
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+script = ExtResource("24_551p7")
+
+[node name="ResourceGrid" type="GridContainer" parent="UILayer"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -220.0
+offset_right = 220.0
+offset_bottom = 71.0
+grow_horizontal = 2
+columns = 3
+script = ExtResource("25_fn8jq")
+material_display_control = ExtResource("26_bg884")
+
+[node name="ClockDisplay" parent="UILayer" instance=ExtResource("27_pwpgb")]
+
+[node name="BuildMenu" parent="UILayer" node_paths=PackedStringArray("material_warehouse") instance=ExtResource("28_2tq1t")]
+visible = false
+material_warehouse = NodePath("../../Systems/MaterialWarehouse")
+
+[connection signal="initialize_stack_ui" from="Systems/MaterialWarehouse" to="UILayer/ResourceGrid" method="_on_initiliaze_control"]
+[connection signal="material_stack_changed" from="Systems/MaterialWarehouse" to="UILayer/ResourceGrid" method="_on_material_stack_changed"]
+[connection signal="new_day" from="Systems/WorldController" to="Systems/EventSystem" method="_on_world_controller_new_day"]
+[connection signal="new_hour" from="Systems/WorldController" to="World/SkyBox" method="_on_time_of_day_changed"]
+[connection signal="new_hour" from="Systems/WorldController" to="UILayer/ClockDisplay" method="_on_time_of_day_changed"]
+[connection signal="set_god" from="Systems/WorldController" to="Systems/God" method="set_god"]
+[connection signal="set_god" from="Systems/WorldController" to="World/SkyBox" method="_on_set_god"]
+[connection signal="build_button_pressed" from="World/Metropolis" to="UILayer/BuildMenu" method="_on_build_button_pressed"]
+[connection signal="debug_add_material" from="UILayer/ResourceGrid" to="Systems/MaterialWarehouse" method="add_material"]
+[connection signal="debug_remove_material" from="UILayer/ResourceGrid" to="Systems/MaterialWarehouse" method="remove_material"]

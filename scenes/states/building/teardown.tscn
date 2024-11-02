@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://btitbsdycbkic"]
-
-[ext_resource type="Script" path="res://scripts/states/building_states/teardown_state.gd" id="1_6hi01"]
-
-[node name="Teardown" type="Node"]
-script = ExtResource("1_6hi01")
