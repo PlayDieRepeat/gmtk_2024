@@ -2,11 +2,11 @@ extends Panel
 class_name BuildMenu
 
 @export_group("Component References")
-@export var building_button: PackedScene
+@export var structure_button: PackedScene
 @export var cost_control: PackedScene
 
 @export_group("Child Nodes")
-@export var building_button_container: HBoxContainer
+@export var structure_button_container: HBoxContainer
 @export var cost_grid: GridContainer
 @export var usage_label: Label
 @export var close_button: Button
@@ -15,10 +15,10 @@ class_name BuildMenu
 @export_group("Tree References")
 @export var material_warehouse: MaterialWarehouse
 
-var active_building: Building
-var available_buildings: Array[RStructure]
+var active_structure: Structure
+var available_structures: Array[RStructure]
 
-signal building_selected(p_selected_building: RStructure)
+signal structure_selected(p_selected_structure: RStructure)
 signal menu_canceled()
 signal confirm_build()
 
@@ -26,57 +26,57 @@ signal confirm_build()
 func _ready() -> void:
 	pass
 
-func clear_build_buttons() -> void:
-	for button in building_button_container.get_children():
-		building_button_container.remove_child(button)
+func _clear_build_buttons() -> void:
+	for button in structure_button_container.get_children():
+		structure_button_container.remove_child(button)
 		button.queue_free()
 
-func clear_cost_controls() -> void:
+func _clear_cost_controls() -> void:
 	for control in cost_grid.get_children():
 		cost_grid.remove_child(control)
 		control.queue_free()
 
 func _on_close_pressed() -> void:
-	clear_build_buttons()
+	_clear_build_buttons()
 	menu_canceled.emit()
-	disconnect_signals()
+	_disconnect_signals()
 	hide()
 
 func _on_action_pressed() -> void:
-	clear_build_buttons()
+	_clear_build_buttons()
 	confirm_build.emit()
-	disconnect_signals()
+	_disconnect_signals()
 	hide()
 
-func connect_signals() -> void:
-	building_selected.connect(active_building._on_building_selected)
-	menu_canceled.connect(active_building._on_menu_canceled)
-	confirm_build.connect(active_building._on_build_confirmed)
+func _connect_signals() -> void:
+	structure_selected.connect(active_structure._on_structure_selected)
+	menu_canceled.connect(active_structure._on_menu_canceled)
+	confirm_build.connect(active_structure._on_build_confirmed)
 
-func disconnect_signals() -> void:
-	building_selected.disconnect(active_building._on_building_selected)
-	menu_canceled.disconnect(active_building._on_menu_canceled)
-	confirm_build.disconnect(active_building._on_build_confirmed)
+func _disconnect_signals() -> void:
+	structure_selected.disconnect(active_structure._on_structure_selected)
+	menu_canceled.disconnect(active_structure._on_menu_canceled)
+	confirm_build.disconnect(active_structure._on_build_confirmed)
 
-func _on_build_button_pressed(p_building: Building, p_available_buildings: Array[RStructure]) -> void:
-	active_building = p_building
-	available_buildings = p_available_buildings
-	connect_signals()
-	for i in available_buildings.size():
-		var button_instance: BuildingButton = building_button.instantiate()
-		button_instance.building_data = available_buildings[i]
-		button_instance.building_selected.connect(_on_building_selected)
-		building_button_container.add_child(button_instance)
+func _on_build_button_pressed(p_structure: Structure, p_available_structures: Array[RStructure]) -> void:
+	active_structure = p_structure
+	available_structures = p_available_structures
+	_connect_signals()
+	for i in available_structures.size():
+		var button_instance: StructureButton = structure_button.instantiate()
+		button_instance.structure_data = available_structures[i]
+		button_instance.structure_selected.connect(_on_structure_selected)
+		structure_button_container.add_child(button_instance)
 		if i == 0:
 			button_instance.grab_focus()
 	show()
 
-func _on_building_selected(p_building_data: RStructure) -> void:
-	clear_cost_controls()
-	usage_label.text = p_building_data.description
-	for stack in p_building_data.material_requirements:
+func _on_structure_selected(p_structure_data: RStructure) -> void:
+	_clear_cost_controls()
+	usage_label.text = p_structure_data.description
+	for stack in p_structure_data.material_requirements:
 		var cost_instance: MaterialCostControl = cost_control.instantiate()
 		cost_instance.material_stack = stack
 		cost_instance.set_available(material_warehouse.check_material_stock(stack.stacked_material))
 		cost_grid.add_child(cost_instance)
-	building_selected.emit(p_building_data)
+	structure_selected.emit(p_structure_data)
