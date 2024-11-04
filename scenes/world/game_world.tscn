@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://di3ut8c68gk7h"]
+[gd_scene load_steps=36 format=3 uid="uid://di3ut8c68gk7h"]
 
 [ext_resource type="Script" path="res://scenes/economy/material_warehouse.gd" id="1_i7mdd"]
 [ext_resource type="Resource" uid="uid://c14csn7vlswum" path="res://resources/scenarios/testing.tres" id="2_14ua3"]
@@ -24,10 +24,17 @@
 [ext_resource type="Resource" uid="uid://7cpuj3gwskah" path="res://resources/structures/scaffold.tres" id="22_o53yn"]
 [ext_resource type="Resource" uid="uid://ccyyrasw84v38" path="res://resources/structures/tent.tres" id="23_5xlbt"]
 [ext_resource type="Script" path="res://scenes/ui/gui_layer.gd" id="24_551p7"]
+[ext_resource type="PackedScene" uid="uid://daw8idi8fjmp" path="res://scenes/states/structure/construction.tscn" id="24_7262b"]
 [ext_resource type="Script" path="res://scenes/ui/layouts/debug_resource_grid.gd" id="25_fn8jq"]
+[ext_resource type="PackedScene" uid="uid://bgrnf62cbgomf" path="res://scenes/states/structure/destroy.tscn" id="25_yadqn"]
 [ext_resource type="PackedScene" uid="uid://c6x87uubuyc2" path="res://scenes/ui/components/material_display.tscn" id="26_bg884"]
+[ext_resource type="PackedScene" uid="uid://djmvcveo0wqpx" path="res://scenes/states/structure/empty.tscn" id="26_q3quk"]
+[ext_resource type="PackedScene" uid="uid://5327j6ggy4i1" path="res://scenes/states/structure/limbo.tscn" id="27_llm8j"]
 [ext_resource type="PackedScene" uid="uid://c0qpyxfnjuyr3" path="res://scenes/ui/components/clock_display.tscn" id="27_pwpgb"]
 [ext_resource type="PackedScene" uid="uid://b04fabibrse1a" path="res://scenes/ui/layouts/build_menu.tscn" id="28_2tq1t"]
+[ext_resource type="PackedScene" uid="uid://cwmuvduyk6h1f" path="res://scenes/states/structure/open.tscn" id="28_18q6v"]
+[ext_resource type="PackedScene" uid="uid://btitbsdycbkic" path="res://scenes/states/structure/teardown.tscn" id="29_btd8p"]
+[ext_resource type="PackedScene" uid="uid://dq8s4idfun2xu" path="res://scenes/states/structure/waiting.tscn" id="30_awvix"]
 
 [node name="Level1" type="Node"]
 
@@ -109,14 +116,15 @@ texture = ExtResource("18_7x0k4")
 [node name="Metropolis" type="Node" parent="World" node_paths=PackedStringArray("warehouse")]
 script = ExtResource("19_33eio")
 starting_values = ExtResource("2_14ua3")
-building_scene = ExtResource("20_u6ojs")
-available_buildings = Array[ExtResource("21_at3xn")]([ExtResource("22_o53yn"), ExtResource("23_5xlbt")])
+structure_scene = ExtResource("20_u6ojs")
+available_structures = Array[ExtResource("21_at3xn")]([ExtResource("22_o53yn"), ExtResource("23_5xlbt")])
 warehouse = NodePath("../../Systems/MaterialWarehouse")
 
-[node name="RootBuilding" parent="World/Metropolis" node_paths=PackedStringArray("metropolis") instance=ExtResource("20_u6ojs")]
+[node name="RootStructure" parent="World/Metropolis" node_paths=PackedStringArray("metropolis") instance=ExtResource("20_u6ojs")]
 position = Vector2(288, 352)
 is_prebuilt = true
-building_data = ExtResource("23_5xlbt")
+structure_data = ExtResource("23_5xlbt")
+structure_states = Array[PackedScene]([ExtResource("24_7262b"), ExtResource("25_yadqn"), ExtResource("26_q3quk"), ExtResource("27_llm8j"), ExtResource("28_18q6v"), ExtResource("29_btd8p"), ExtResource("30_awvix")])
 metropolis = NodePath("..")
 
 [node name="UILayer" type="CanvasLayer" parent="."]

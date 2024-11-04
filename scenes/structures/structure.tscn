@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bgrnf62cbgomf" path="res://scenes/states/structure/destroy.tscn" id="7_allfj"]
 [ext_resource type="Script" path="res://addons/finite_state_machine/scripts/finite_state_machine.gd" id="8_5ewg2"]
 [ext_resource type="PackedScene" uid="uid://djmvcveo0wqpx" path="res://scenes/states/structure/empty.tscn" id="8_x86ni"]
-[ext_resource type="PackedScene" uid="uid://5327j6ggy4i1" path="res://scenes/states/structure/menu.tscn" id="9_0xsym"]
+[ext_resource type="PackedScene" uid="uid://5327j6ggy4i1" path="res://scenes/states/structure/limbo.tscn" id="9_0xsym"]
 [ext_resource type="Texture2D" uid="uid://cf18whdc2u2bf" path="res://assets/images/ui/waiting_bubbles.png" id="9_8nt18"]
 [ext_resource type="Texture2D" uid="uid://o2syfb3u6i0n" path="res://assets/images/structures/_base/scaffold_64.png" id="9_axkmf"]
 [ext_resource type="PackedScene" uid="uid://hj14prvlw4hv" path="res://scenes/structures/flag.tscn" id="10_7tueh"]
@@ -91,12 +91,12 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="Building" type="Node2D" node_paths=PackedStringArray("building_sprite", "scaffold_sprite", "flag", "progress_bar", "waiting_dots", "state_machine", "build_button")]
+[node name="Structure" type="Node2D" node_paths=PackedStringArray("structure_sprite", "scaffold_sprite", "flag", "progress_bar", "waiting_dots", "state_machine", "build_button")]
 z_index = 100
 texture_filter = 1
 script = ExtResource("1_akstq")
-building_states = Array[PackedScene]([ExtResource("8_x86ni"), ExtResource("3_ppb02"), ExtResource("4_m5pdg"), ExtResource("5_uag46"), ExtResource("6_k4bdq"), ExtResource("7_allfj"), ExtResource("9_0xsym")])
-building_sprite = NodePath("Building")
+structure_states = Array[PackedScene]([ExtResource("8_x86ni"), ExtResource("3_ppb02"), ExtResource("4_m5pdg"), ExtResource("5_uag46"), ExtResource("6_k4bdq"), ExtResource("7_allfj"), ExtResource("9_0xsym")])
+structure_sprite = NodePath("Structure")
 scaffold_sprite = NodePath("Scaffold")
 flag = NodePath("Flag")
 progress_bar = NodePath("ProgressBar")
@@ -115,7 +115,7 @@ texture = ExtResource("9_axkmf")
 [node name="Flag" parent="." instance=ExtResource("10_7tueh")]
 position = Vector2(32, -88)
 
-[node name="Building" type="Sprite2D" parent="."]
+[node name="Structure" type="Sprite2D" parent="."]
 position = Vector2(32, -88)
 texture = ExtResource("10_ajrp3")
 

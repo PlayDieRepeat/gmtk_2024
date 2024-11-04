@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://b04fabibrse1a"]
 
 [ext_resource type="Script" path="res://scenes/ui/layouts/build_menu.gd" id="1_phppl"]
-[ext_resource type="PackedScene" uid="uid://dyw57toxwlpqd" path="res://scenes/ui/components/building_button.tscn" id="2_xcmxj"]
+[ext_resource type="PackedScene" uid="uid://dyw57toxwlpqd" path="res://scenes/ui/components/structure_button.tscn" id="2_xcmxj"]
 [ext_resource type="PackedScene" uid="uid://y8cgu2jamiir" path="res://scenes/ui/components/material_cost.tscn" id="4_t8i7f"]
 
-[node name="BuildMenu" type="Panel" node_paths=PackedStringArray("building_button_container", "cost_grid", "usage_label", "close_button", "action_button")]
+[node name="BuildMenu" type="Panel" node_paths=PackedStringArray("structure_button_container", "cost_grid", "usage_label", "close_button", "action_button")]
 anchors_preset = -1
 anchor_top = -0.0222222
 anchor_right = 0.9375
@@ -16,11 +16,11 @@ offset_bottom = 188.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_phppl")
-building_button = ExtResource("2_xcmxj")
+structure_button = ExtResource("2_xcmxj")
 cost_control = ExtResource("4_t8i7f")
-building_button_container = NodePath("HBoxContainer/BuildingSelect/ScrollContainer/BuildingButonContainer")
-cost_grid = NodePath("HBoxContainer/BuildingDetails/Panel/MarginContainer/VBoxContainer/CostGrid")
-usage_label = NodePath("HBoxContainer/BuildingDetails/Panel/MarginContainer/VBoxContainer/MarginContainer/UseText")
+structure_button_container = NodePath("HBoxContainer/StructureSelect/ScrollContainer/StructureButonContainer")
+cost_grid = NodePath("HBoxContainer/StructureDetails/Panel/MarginContainer/VBoxContainer/CostGrid")
+usage_label = NodePath("HBoxContainer/StructureDetails/Panel/MarginContainer/VBoxContainer/MarginContainer/UseText")
 close_button = NodePath("Close")
 action_button = NodePath("Action")
 metadata/_edit_use_anchors_ = true
@@ -33,7 +33,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BuildingSelect" type="MarginContainer" parent="HBoxContainer"]
+[node name="StructureSelect" type="MarginContainer" parent="HBoxContainer"]
 clip_contents = true
 custom_minimum_size = Vector2(256, 2.08165e-12)
 layout_mode = 2
@@ -42,17 +42,17 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 8
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/BuildingSelect"]
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/StructureSelect"]
 layout_mode = 2
 follow_focus = true
 vertical_scroll_mode = 0
 
-[node name="BuildingButonContainer" type="HBoxContainer" parent="HBoxContainer/BuildingSelect/ScrollContainer"]
+[node name="StructureButonContainer" type="HBoxContainer" parent="HBoxContainer/StructureSelect/ScrollContainer"]
 clip_contents = true
 custom_minimum_size = Vector2(256, 124)
 layout_mode = 2
 
-[node name="BuildingDetails" type="MarginContainer" parent="HBoxContainer"]
+[node name="StructureDetails" type="MarginContainer" parent="HBoxContainer"]
 custom_minimum_size = Vector2(128, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -61,10 +61,10 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="Panel" type="Panel" parent="HBoxContainer/BuildingDetails"]
+[node name="Panel" type="Panel" parent="HBoxContainer/StructureDetails"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/BuildingDetails/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/StructureDetails/Panel"]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 10
@@ -76,33 +76,33 @@ theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/BuildingDetails/Panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/StructureDetails/Panel/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="CostLabel" type="Label" parent="HBoxContainer/BuildingDetails/Panel/MarginContainer/VBoxContainer"]
+[node name="CostLabel" type="Label" parent="HBoxContainer/StructureDetails/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "Cost"
 horizontal_alignment = 1
 
-[node name="CostGrid" type="GridContainer" parent="HBoxContainer/BuildingDetails/Panel/MarginContainer/VBoxContainer"]
+[node name="CostGrid" type="GridContainer" parent="HBoxContainer/StructureDetails/Panel/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(144, 38)
 layout_mode = 2
 columns = 2
 
-[node name="UseLabel" type="Label" parent="HBoxContainer/BuildingDetails/Panel/MarginContainer/VBoxContainer"]
+[node name="UseLabel" type="Label" parent="HBoxContainer/StructureDetails/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "Use"
 horizontal_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/BuildingDetails/Panel/MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/StructureDetails/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_right = 2
 
-[node name="UseText" type="Label" parent="HBoxContainer/BuildingDetails/Panel/MarginContainer/VBoxContainer/MarginContainer"]
+[node name="UseText" type="Label" parent="HBoxContainer/StructureDetails/Panel/MarginContainer/VBoxContainer/MarginContainer"]
 custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
 theme_override_constants/line_spacing = 0
