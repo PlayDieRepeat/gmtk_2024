@@ -1,38 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://dsaj00rb64dcy"]
+[gd_scene load_steps=7 format=3 uid="uid://dsaj00rb64dcy"]
 
 [ext_resource type="Script" path="res://scenes/core/scenester.gd" id="1_7h0d4"]
 [ext_resource type="Resource" uid="uid://dowv3jyjfcrb4" path="res://resources/scenes/menu_scenes/main_menu.tres" id="2_1d6hn"]
 [ext_resource type="Resource" uid="uid://dh7ss3dglp6tc" path="res://resources/scenes/menu_scenes/pause_menu.tres" id="3_we6my"]
-[ext_resource type="Script" path="res://resources/_scripts/r_scene.gd" id="4_ccw7k"]
 [ext_resource type="Resource" uid="uid://cex65rd2ojmbu" path="res://resources/scenes/menu_scenes/load_menu.tres" id="4_sftof"]
 [ext_resource type="Resource" uid="uid://7xr33l70656f" path="res://resources/scenes/menu_scenes/reconnect_menu.tres" id="5_vbg8l"]
-[ext_resource type="PackedScene" uid="uid://innnb2tbok8l" path="res://scenes/world/world.tscn" id="6_41k80"]
-[ext_resource type="Texture2D" uid="uid://cpohewy4agqu0" path="res://assets/images/environment/ground.png" id="7_4coya"]
-[ext_resource type="Texture2D" uid="uid://bmmq23vga8ukr" path="res://assets/images/trees/treeRed.png" id="8_8wtxq"]
-[ext_resource type="Texture2D" uid="uid://clcspwowhnoch" path="res://assets/images/trees/treeGreen.png" id="9_o2kux"]
-[ext_resource type="Texture2D" uid="uid://dfuotlar74515" path="res://assets/images/trees/treeYellow.png" id="10_cqo72"]
-[ext_resource type="Script" path="res://scenes/world/world_camera.gd" id="11_jy2i6"]
-[ext_resource type="Resource" uid="uid://b7qymya8ffvmv" path="res://resources/constants/camera_constants.tres" id="12_4tchh"]
-
-[sub_resource type="PackedScene" id="PackedScene_qpkpm"]
-_bundled = {
-"conn_count": 2,
-"conns": PackedInt32Array(1073741839, 1073741840, 71, 72, 2, 0, 0, 1073741841, 1073741842, 73, 74, 2, 0, 0),
-"editable_instances": [],
-"names": PackedStringArray("LevelTest", "Node2D", "world", "PauseMenu", "CanvasLayer", "unique_name_in_owner", "process_mode", "visible", "CenterContainer", "CenterContainer", "anchors_preset", "anchor_right", "anchor_bottom", "grow_horizontal", "grow_vertical", "AspectRatioContainer", "AspectRatioContainer", "layout_mode", "VBoxContainer", "VBoxContainer", "layout_mode", "BackButton", "Button", "layout_mode", "text", "QuitButton", "Button", "layout_mode", "text", "Ground", "Sprite2D", "position", "scale", "texture", "centered", "Ground3", "Sprite2D", "position", "scale", "texture", "centered", "Ground2", "Sprite2D", "position", "scale", "texture", "centered", "redTree", "Sprite2D", "position", "scale", "texture", "greenTree", "Sprite2D", "position", "scale", "texture", "yellowTree", "Sprite2D", "position", "scale", "texture", "Camera2D", "Camera2D", "anchor_mode", "script", "camera_constant", "Label", "Label", "offset_right", "offset_bottom", "pressed", "_on_back_button_pressed", "pressed", "_on_quit_button_pressed"),
-"node_count": 16,
-"node_paths": [NodePath("."), NodePath("."), NodePath("./PauseMenu"), NodePath("./PauseMenu/CenterContainer"), NodePath("./PauseMenu/CenterContainer/AspectRatioContainer"), NodePath("./PauseMenu/CenterContainer/AspectRatioContainer/VBoxContainer"), NodePath("./PauseMenu/CenterContainer/AspectRatioContainer/VBoxContainer"), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("./Camera2D"), NodePath("PauseMenu/CenterContainer/AspectRatioContainer/VBoxContainer/BackButton"), NodePath("."), NodePath("PauseMenu/CenterContainer/AspectRatioContainer/VBoxContainer/QuitButton"), NodePath(".")],
-"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 0, 0, 1073741824, 0, 2147483647, 2, 0, 0, 0, 1073741825, 0, 4, 3, -1, 3, 5, 1, 6, 2, 7, 3, 0, 1073741826, 0, 9, 8, -1, 5, 10, 4, 11, 5, 12, 6, 13, 7, 14, 8, 0, 1073741827, 0, 16, 15, -1, 1, 17, 9, 0, 1073741828, 0, 19, 18, -1, 1, 20, 10, 0, 1073741829, 0, 22, 21, -1, 2, 23, 11, 24, 12, 0, 1073741830, 0, 26, 25, -1, 2, 27, 13, 28, 14, 0, 1073741831, 0, 30, 29, -1, 4, 31, 15, 32, 16, 33, 17, 34, 18, 0, 1073741832, 0, 36, 35, -1, 4, 37, 19, 38, 20, 39, 21, 40, 22, 0, 1073741833, 0, 42, 41, -1, 4, 43, 23, 44, 24, 45, 25, 46, 26, 0, 1073741834, 0, 48, 47, -1, 3, 49, 27, 50, 28, 51, 29, 0, 1073741835, 0, 53, 52, -1, 3, 54, 30, 55, 31, 56, 32, 0, 1073741836, 0, 58, 57, -1, 3, 59, 33, 60, 34, 61, 35, 0, 1073741837, 0, 63, 62, -1, 3, 64, 36, 65, 37, 66, 38, 0, 1073741838, 0, 68, 67, -1, 2, 69, 39, 70, 40, 0),
-"variants": [ExtResource("6_41k80"), true, 3, false, 15, 1.0, 1.0, 2, 2, 2, 2, 2, "Back to Menu", 2, "Quit Game", Vector2(0, 328), Vector2(10.023, 0.5), ExtResource("7_4coya"), false, Vector2(-640, 328), Vector2(10.023, 0.5), ExtResource("7_4coya"), false, Vector2(640, 328), Vector2(10.023, 0.5), ExtResource("7_4coya"), false, Vector2(40, 301), Vector2(0.75, 0.75), ExtResource("8_8wtxq"), Vector2(62, 310), Vector2(0.75, 0.75), ExtResource("9_o2kux"), Vector2(81, 306), Vector2(0.75, 0.75), ExtResource("10_cqo72"), 0, ExtResource("11_jy2i6"), ExtResource("12_4tchh"), 40.0, 23.0],
-"version": 3
-}
-
-[sub_resource type="Resource" id="Resource_csbja"]
-script = ExtResource("4_ccw7k")
-scene = SubResource("PackedScene_qpkpm")
-scene_id = "LevelTest"
-scene_is_pausable = true
-is_game_scene = true
+[ext_resource type="Resource" uid="uid://bkccupmu5mjrh" path="res://resources/scenes/game_scenes/level_1.tres" id="6_2rwfk"]
 
 [node name="Scenester" type="Node"]
 process_mode = 3
@@ -41,4 +14,4 @@ main_menu_rscene = ExtResource("2_1d6hn")
 pause_rscene = ExtResource("3_we6my")
 load_rscene = ExtResource("4_sftof")
 reconnect_rscene = ExtResource("5_vbg8l")
-initial_rscene = SubResource("Resource_csbja")
+initial_rscene = ExtResource("6_2rwfk")

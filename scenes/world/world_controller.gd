@@ -19,6 +19,7 @@ func _ready():
 
 	# TODO - Should we just instantiate the Timer here as a node? think it depends how we handle time going forward.
 	world_timer = %WorldTimer
+	assert(world_timer != null, "world_timer is null in WorldController")
 	world_timer.timeout.connect(_on_timer_timeout)
 
 	hour_count = time_constants.start_of_day
@@ -67,14 +68,15 @@ func _update_day_count() -> void:
 
 func restart_day() -> void:
 	world_timer.stop()
-	seconds_count = 0
-	hour_count = time_constants.start_of_day
+	seconds_count = time_constants.seconds_in_hour
+	hour_count = time_constants.start_of_day - 1
 	world_timer.start()
-	new_hour.emit(hour_count, 0, time_constants)
+	_on_timer_timeout()
 
 func end_day() -> void:
+	print("HELLO")
 	world_timer.stop()
-	seconds_count = 0
-	hour_count = time_constants.start_of_day
+	seconds_count = time_constants.seconds_in_hour
+	hour_count = time_constants.end_of_day - 1
 	world_timer.start()
-	_update_day_count()
+	_on_timer_timeout()

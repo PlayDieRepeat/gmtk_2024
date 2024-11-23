@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6lkdogwqt17n"]
+
+[ext_resource type="Script" path="res://scenes/states/gui/default_state.gd" id="1_j6q41"]
+
+[node name="Default" type="Node"]
+script = ExtResource("1_j6q41")
