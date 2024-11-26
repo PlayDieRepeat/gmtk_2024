@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="RScenesterConstants" load_steps=7 format=3 uid="uid://owwa30qjap4r"]
+
+[ext_resource type="Script" path="res://resources/_scripts/r_scenester_references.gd" id="1_uo85t"]
+[ext_resource type="Resource" uid="uid://bkccupmu5mjrh" path="res://resources/scenes/game_scenes/level_1.tres" id="1_xu68x"]
+[ext_resource type="Resource" uid="uid://cex65rd2ojmbu" path="res://resources/scenes/menu_scenes/load_menu.tres" id="2_v04fn"]
+[ext_resource type="Resource" uid="uid://dowv3jyjfcrb4" path="res://resources/scenes/menu_scenes/main_menu.tres" id="3_67jws"]
+[ext_resource type="Resource" uid="uid://dh7ss3dglp6tc" path="res://resources/scenes/menu_scenes/pause_menu.tres" id="4_upaxt"]
+[ext_resource type="Resource" uid="uid://7xr33l70656f" path="res://resources/scenes/menu_scenes/reconnect_menu.tres" id="5_5xvgm"]
+
+[resource]
+script = ExtResource("1_uo85t")
+initial_rscene = ExtResource("1_xu68x")
+main_menu_rscene = ExtResource("3_67jws")
+load_to_main_menu = true
+pause_rscene = ExtResource("4_upaxt")
+load_rscene = ExtResource("2_v04fn")
+reconnect_rscene = ExtResource("5_5xvgm")
