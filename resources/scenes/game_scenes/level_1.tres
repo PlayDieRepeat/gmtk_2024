@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_mss3e")
 scene = ExtResource("1_ee3oc")
-scene_id = "levelTest"
+scene_id = "game_world"
 scene_is_pausable = true
 is_game_scene = true
