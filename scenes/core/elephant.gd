@@ -7,13 +7,14 @@ signal event_logged(p_event: String)
 ## It will also help save and load stuff from disk. It might also be the logger
 ## module, but that is a lot of things.
 @export var save_game_constants: RSaveGame
-var platform_name:= ""
-var is_debug_build:= false
+var platform_name := ""
+var is_debug_build := false
 var save_time: Dictionary
 var config_file_path: String
 var logger_file_path: String
 var log_queue := []
 var log_queue_buffer_size := 2
+var is_ready := false
 
 func _ready() -> void:
 	assert(save_game_constants != null, "Save Game Constants is empty!!")
@@ -42,6 +43,7 @@ func _ready() -> void:
 	save_config()
 	setup_game_save_dir()
 	log_event("All Elephant ready initialization is done!")
+	is_ready = true
 
 func check_dir_exists(p_dir_path: String) -> bool:
 	return DirAccess.dir_exists_absolute(p_dir_path)

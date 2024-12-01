@@ -1,17 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dsaj00rb64dcy"]
+[gd_scene load_steps=3 format=3 uid="uid://dsaj00rb64dcy"]
 
 [ext_resource type="Script" path="res://scenes/core/scenester.gd" id="1_7h0d4"]
-[ext_resource type="Resource" uid="uid://dowv3jyjfcrb4" path="res://resources/scenes/menu_scenes/main_menu.tres" id="2_1d6hn"]
-[ext_resource type="Resource" uid="uid://dh7ss3dglp6tc" path="res://resources/scenes/menu_scenes/pause_menu.tres" id="3_we6my"]
-[ext_resource type="Resource" uid="uid://cex65rd2ojmbu" path="res://resources/scenes/menu_scenes/load_menu.tres" id="4_sftof"]
-[ext_resource type="Resource" uid="uid://7xr33l70656f" path="res://resources/scenes/menu_scenes/reconnect_menu.tres" id="5_vbg8l"]
-[ext_resource type="Resource" uid="uid://bkccupmu5mjrh" path="res://resources/scenes/game_scenes/level_1.tres" id="6_2rwfk"]
+[ext_resource type="Resource" uid="uid://owwa30qjap4r" path="res://resources/core/scenester.tres" id="2_iupy0"]
 
 [node name="Scenester" type="Node"]
 process_mode = 3
 script = ExtResource("1_7h0d4")
-main_menu_rscene = ExtResource("2_1d6hn")
-pause_rscene = ExtResource("3_we6my")
-load_rscene = ExtResource("4_sftof")
-reconnect_rscene = ExtResource("5_vbg8l")
-initial_rscene = ExtResource("6_2rwfk")
+scenester_constants = ExtResource("2_iupy0")

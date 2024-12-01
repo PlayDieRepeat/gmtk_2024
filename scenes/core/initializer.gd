@@ -15,9 +15,23 @@ func _process(_delta: float) -> void:
 	if ready_to_start_game == true:
 		return
 	
-	if (SoundManager.has_loaded == true) and (MusicManager.has_loaded == true) and (AudioBankRobber.has_loaded == true):
+	if _confirm_autoloads_ready():
 		ready_to_start_game = true
 		if (use_override == true) and (scene_override != null):
 			Scenester.switch_scene(scene_override, false)
 		else:
 			Scenester.load_initial_scene()
+
+func _confirm_autoloads_ready() -> bool:
+	var result := true
+	if !SoundManager.has_loaded:
+		result = false
+	if !MusicManager.has_loaded:
+		result = false
+	if !AudioBankRobber.has_loaded:
+		result = false
+	if !Elephant.is_ready:
+		result = false
+	if !Brainiac.is_ready:
+		result = false
+	return result

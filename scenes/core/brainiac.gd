@@ -20,6 +20,7 @@ var input_action_knm_events := {}
 var input_action_gp_events := {}
 var remap_waiting_info = []
 var controller_deadzone := 0.2
+var is_ready := false
 
 signal game_state_has_changed(p_state: String)
 signal input_event_has_changed(p_event_context: Array)
@@ -35,6 +36,7 @@ func _ready() -> void:
 	_create_signals_from_actions()
 	_write_action_event_dicts(input_actions)
 	Elephant.log_event("All Input Actions and Events captured.")
+	is_ready = true
 
 func _generate_states() -> void:
 	for state in input_states:
