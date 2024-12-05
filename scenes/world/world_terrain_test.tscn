@@ -1,0 +1,44 @@
+[gd_scene load_steps=9 format=3 uid="uid://c0kqrq41j2y1l"]
+
+[ext_resource type="Shader" path="res://resources/shaders/simple_terrain_from_perlin_noise.gdshader" id="1_girri"]
+[ext_resource type="Script" path="res://scenes/world/world_terrain_test.gd" id="1_on7a1"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_crljx"]
+noise_type = 5
+fractal_type = 2
+fractal_octaves = 2
+fractal_lacunarity = 3.05
+fractal_weighted_strength = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w14xp"]
+noise = SubResource("FastNoiseLite_crljx")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4gyqp"]
+noise_type = 3
+seed = 11
+frequency = 0.0042
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qcnej"]
+seamless = true
+noise = SubResource("FastNoiseLite_4gyqp")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ae8ae"]
+render_priority = 0
+shader = ExtResource("1_girri")
+shader_parameter/heightmap = SubResource("NoiseTexture2D_qcnej")
+shader_parameter/ground = SubResource("NoiseTexture2D_w14xp")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nxkjv"]
+material = SubResource("ShaderMaterial_ae8ae")
+size = Vector2(10, 10)
+subdivide_width = 15
+subdivide_depth = 15
+
+[node name="WorldTerrain" type="Node3D"]
+script = ExtResource("1_on7a1")
+
+[node name="TerrainMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_nxkjv")
+
+[node name="GridMap" type="GridMap" parent="."]
+cell_size = Vector3(1, 1, 1)
