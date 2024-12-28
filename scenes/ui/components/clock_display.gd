@@ -6,10 +6,9 @@ const PM := "PM"
 
 @export var clock_label: Label
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	assert(clock_label != null, "No clock lable referenced in clock display.")
+	assert(clock_label != null, "No clock label referenced in clock display.")
 
 func _on_time_of_day_changed(p_new_hour: int, _p_previous_hour: int, p_time_constants: RTimeConstants) -> void:
 	var time_text: String

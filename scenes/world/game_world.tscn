@@ -1,9 +1,8 @@
-[gd_scene load_steps=36 format=3 uid="uid://di3ut8c68gk7h"]
+[gd_scene load_steps=39 format=3 uid="uid://di3ut8c68gk7h"]
 
 [ext_resource type="Script" path="res://scenes/economy/material_warehouse.gd" id="1_i7mdd"]
 [ext_resource type="Resource" uid="uid://c14csn7vlswum" path="res://resources/scenarios/testing.tres" id="2_14ua3"]
 [ext_resource type="PackedScene" uid="uid://b5ru1bmvckk8a" path="res://scenes/economy/population_manager.tscn" id="3_irjp3"]
-[ext_resource type="Script" path="res://scenes/events/world_event_system.gd" id="4_ppa1v"]
 [ext_resource type="PackedScene" uid="uid://bd3cvxjknt16n" path="res://scenes/events/end_of_day_card.tscn" id="5_ny503"]
 [ext_resource type="Script" path="res://scenes/world/world_controller.gd" id="6_in2nf"]
 [ext_resource type="Resource" uid="uid://jew5ejix3nu" path="res://resources/constants/time_constants.tres" id="7_nvcia"]
@@ -25,6 +24,7 @@
 [ext_resource type="Resource" uid="uid://ccyyrasw84v38" path="res://resources/structures/tent.tres" id="23_5xlbt"]
 [ext_resource type="Script" path="res://scenes/ui/gui_layer.gd" id="24_551p7"]
 [ext_resource type="PackedScene" uid="uid://daw8idi8fjmp" path="res://scenes/states/structure/construction.tscn" id="24_7262b"]
+[ext_resource type="Script" path="res://addons/finite_state_machine/scripts/finite_state_machine.gd" id="24_lvjdb"]
 [ext_resource type="Script" path="res://scenes/ui/layouts/debug_resource_grid.gd" id="25_fn8jq"]
 [ext_resource type="PackedScene" uid="uid://bgrnf62cbgomf" path="res://scenes/states/structure/destroy.tscn" id="25_yadqn"]
 [ext_resource type="PackedScene" uid="uid://c6x87uubuyc2" path="res://scenes/ui/components/material_display.tscn" id="26_bg884"]
@@ -35,6 +35,9 @@
 [ext_resource type="PackedScene" uid="uid://cwmuvduyk6h1f" path="res://scenes/states/structure/open.tscn" id="28_18q6v"]
 [ext_resource type="PackedScene" uid="uid://btitbsdycbkic" path="res://scenes/states/structure/teardown.tscn" id="29_btd8p"]
 [ext_resource type="PackedScene" uid="uid://dq8s4idfun2xu" path="res://scenes/states/structure/waiting.tscn" id="30_awvix"]
+[ext_resource type="PackedScene" uid="uid://c6lkdogwqt17n" path="res://scenes/states/gui/default.tscn" id="30_wfhn3"]
+[ext_resource type="PackedScene" uid="uid://bodceqhftfwvw" path="res://scenes/states/gui/eod.tscn" id="31_hspbe"]
+[ext_resource type="PackedScene" uid="uid://rjnabd8cfycv" path="res://scenes/states/gui/build_menu.tscn" id="32_l6k3q"]
 
 [node name="Level1" type="Node"]
 
@@ -45,10 +48,6 @@ script = ExtResource("1_i7mdd")
 starting_values = ExtResource("2_14ua3")
 
 [node name="PopulationManager" parent="Systems" instance=ExtResource("3_irjp3")]
-
-[node name="EventSystem" type="Node" parent="Systems"]
-script = ExtResource("4_ppa1v")
-end_of_day_card = ExtResource("5_ny503")
 
 [node name="WorldController" type="Node" parent="Systems"]
 script = ExtResource("6_in2nf")
@@ -127,10 +126,18 @@ structure_data = ExtResource("23_5xlbt")
 structure_states = Array[PackedScene]([ExtResource("24_7262b"), ExtResource("25_yadqn"), ExtResource("26_q3quk"), ExtResource("27_llm8j"), ExtResource("28_18q6v"), ExtResource("29_btd8p"), ExtResource("30_awvix")])
 metropolis = NodePath("..")
 
-[node name="UILayer" type="CanvasLayer" parent="."]
+[node name="GUILayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("fsm", "glass_wall", "build_menu", "eod_card")]
 script = ExtResource("24_551p7")
+gui_states = Array[PackedScene]([ExtResource("30_wfhn3"), ExtResource("31_hspbe"), ExtResource("32_l6k3q")])
+fsm = NodePath("FiniteStateMachine")
+glass_wall = NodePath("GlassWall")
+build_menu = NodePath("BuildMenu")
+eod_card = NodePath("EndOfDayCard")
 
-[node name="ResourceGrid" type="GridContainer" parent="UILayer"]
+[node name="FiniteStateMachine" type="Node" parent="GUILayer"]
+script = ExtResource("24_lvjdb")
+
+[node name="ResourceGrid" type="GridContainer" parent="GUILayer"]
 visible = false
 anchors_preset = 5
 anchor_left = 0.5
@@ -143,19 +150,30 @@ columns = 3
 script = ExtResource("25_fn8jq")
 material_display_control = ExtResource("26_bg884")
 
-[node name="ClockDisplay" parent="UILayer" instance=ExtResource("27_pwpgb")]
+[node name="GlassWall" type="Control" parent="GUILayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_force_pass_scroll_events = false
 
-[node name="BuildMenu" parent="UILayer" node_paths=PackedStringArray("material_warehouse") instance=ExtResource("28_2tq1t")]
+[node name="ClockDisplay" parent="GUILayer" instance=ExtResource("27_pwpgb")]
+
+[node name="BuildMenu" parent="GUILayer" node_paths=PackedStringArray("material_warehouse") instance=ExtResource("28_2tq1t")]
 visible = false
 material_warehouse = NodePath("../../Systems/MaterialWarehouse")
 
-[connection signal="initialize_stack_ui" from="Systems/MaterialWarehouse" to="UILayer/ResourceGrid" method="_on_initiliaze_control"]
-[connection signal="material_stack_changed" from="Systems/MaterialWarehouse" to="UILayer/ResourceGrid" method="_on_material_stack_changed"]
-[connection signal="new_day" from="Systems/WorldController" to="Systems/EventSystem" method="_on_world_controller_new_day"]
+[node name="EndOfDayCard" parent="GUILayer" instance=ExtResource("5_ny503")]
+visible = false
+
+[connection signal="initialize_stack_ui" from="Systems/MaterialWarehouse" to="GUILayer/ResourceGrid" method="_on_initiliaze_control"]
+[connection signal="material_stack_changed" from="Systems/MaterialWarehouse" to="GUILayer/ResourceGrid" method="_on_material_stack_changed"]
+[connection signal="new_day" from="Systems/WorldController" to="GUILayer" method="_on_open_end_of_day"]
 [connection signal="new_hour" from="Systems/WorldController" to="World/SkyBox" method="_on_time_of_day_changed"]
-[connection signal="new_hour" from="Systems/WorldController" to="UILayer/ClockDisplay" method="_on_time_of_day_changed"]
-[connection signal="set_god" from="Systems/WorldController" to="Systems/God" method="set_god"]
+[connection signal="new_hour" from="Systems/WorldController" to="GUILayer/ClockDisplay" method="_on_time_of_day_changed"]
 [connection signal="set_god" from="Systems/WorldController" to="World/SkyBox" method="_on_set_god"]
-[connection signal="build_button_pressed" from="World/Metropolis" to="UILayer/BuildMenu" method="_on_build_button_pressed"]
-[connection signal="debug_add_material" from="UILayer/ResourceGrid" to="Systems/MaterialWarehouse" method="add_material"]
-[connection signal="debug_remove_material" from="UILayer/ResourceGrid" to="Systems/MaterialWarehouse" method="remove_material"]
+[connection signal="build_button_pressed" from="World/Metropolis" to="GUILayer" method="_on_open_build_menu"]
+[connection signal="debug_add_material" from="GUILayer/ResourceGrid" to="Systems/MaterialWarehouse" method="add_material"]
+[connection signal="debug_remove_material" from="GUILayer/ResourceGrid" to="Systems/MaterialWarehouse" method="remove_material"]

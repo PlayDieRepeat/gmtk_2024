@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://rjnabd8cfycv"]
+
+[ext_resource type="Script" path="res://scenes/states/gui/build_menu_state.gd" id="1_wmcm6"]
+
+[node name="BuildMenu" type="Node"]
+script = ExtResource("1_wmcm6")

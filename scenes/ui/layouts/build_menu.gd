@@ -58,7 +58,7 @@ func _disconnect_signals() -> void:
 	menu_canceled.disconnect(active_structure._on_menu_canceled)
 	confirm_build.disconnect(active_structure._on_build_confirmed)
 
-func _on_build_button_pressed(p_structure: Structure, p_available_structures: Array[RStructure]) -> void:
+func open_build_menu(p_structure: Structure, p_available_structures: Array[RStructure]) -> void:
 	active_structure = p_structure
 	available_structures = p_available_structures
 	_connect_signals()
