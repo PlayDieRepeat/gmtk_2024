@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bodceqhftfwvw"]
+
+[ext_resource type="Script" path="res://scenes/states/gui/eod_state.gd" id="1_qu8bm"]
+
+[node name="EOD" type="Node"]
+script = ExtResource("1_qu8bm")

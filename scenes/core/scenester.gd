@@ -8,13 +8,7 @@ signal loading_done
 signal scene_has_changed(p_scene: String)
 
 @export_group("Special Scenes")
-@export var main_menu_rscene: RScene
-@export var pause_rscene: RScene
-@export var load_rscene: RScene
-@export var reconnect_rscene: RScene
-@export var initial_rscene: RScene
-@export var should_load_initial_alt: bool = false
-@export var pause_menu: PackedScene = null
+@export var scenester_constants: RScenesterConstants
 var current_scene_id := ""
 var current_scene: Node = null
 var game_scene_id := ""
@@ -28,22 +22,22 @@ var loading_screen_initialized := false
 ## Asserts that there is at least a main menu scene, also checks if there is an initial scene, and if not sets it to the
 ## main Menu scene.  Sets the current scene to whatever is currently in the scene.
 func _ready() -> void:
-	assert(main_menu_rscene != null,"Main menu scene is not set")
-	assert(pause_rscene != null,"Pause menu scene is not set")
-	assert(load_rscene != null,"Load scene is not set")
-	assert(reconnect_rscene != null,"Reconnect menu scene is not set")
+	assert(scenester_constants.main_menu_rscene != null, "Main menu scene is not set")
+	assert(scenester_constants.pause_rscene != null, "Pause menu scene is not set")
+	assert(scenester_constants.load_rscene != null, "Load scene is not set")
+	assert(scenester_constants.reconnect_rscene != null, "Reconnect menu scene is not set")
 	
-	if should_load_initial_alt == true:
-		assert(initial_rscene != null, "Initial scene is not set")
-		if initial_rscene.is_game_scene:
+	if scenester_constants.start_in_main_menu == false:
+		assert(scenester_constants.initial_rscene != null, "Initial scene is not set")
+		if scenester_constants.initial_rscene.is_game_scene:
 			Brainiac.set_game_state()
 		else:
 			Brainiac.set_menu_state()
 	else:
-		initial_rscene = main_menu_rscene
+		scenester_constants.initial_rscene = scenester_constants.main_menu_rscene
 		Brainiac.set_menu_state()
 	var root := get_tree().root
-	current_scene = root.get_child(root.get_child_count() -1)
+	current_scene = root.get_child(root.get_child_count() - 1)
 	set_process(false)
 	
 func get_current_scene_id() -> String:
@@ -53,7 +47,7 @@ func get_current_scene() -> Node:
 	return current_scene
 
 func load_initial_scene() -> void:
-	call_deferred("_deferred_switch_scene", initial_rscene, false)
+	call_deferred("_deferred_switch_scene", scenester_constants.initial_rscene, false)
 
 # Switch to a scene based on its id
 # 	p_scene_id: The scene id to switch to
@@ -69,8 +63,8 @@ func _deferred_switch_scene(p_scene: RScene, p_needs_to_load: bool, p_should_fre
 	if p_needs_to_load == true:
 		# set up the new loading screen, add to tree, and connect signal callbacks
 		# wait for the loading screen to finish, then start to load target scene
-		load_and_add_as_current(load_rscene)
-		check_scene_and_change_state(load_rscene)
+		load_and_add_as_current(scenester_constants.load_rscene)
+		check_scene_and_change_state(scenester_constants.load_rscene)
 		_setup_loading_screen()
 		_start_background_load(p_scene)
 	else:
@@ -124,7 +118,7 @@ func _setup_loading_screen() -> void:
 	loading_screen_initialized = true
 
 func _setup_pause_screen() -> void:
-	_deferred_switch_scene(pause_rscene, false, false)
+	_deferred_switch_scene(scenester_constants.pause_rscene, false, false)
 	var backButton: Button = current_scene.find_child("BackButton")
 	var quitButton: Button = current_scene.find_child("QuitButton")
 	backButton.connect("pressed", _on_BackButton_pressed)
@@ -153,7 +147,7 @@ func quit_game() -> void:
 func _on_BackButton_pressed() -> void:
 	_remove_pause_screen()
 	# TODO: setup a check to go back, or additionally auto-save here
-	switch_scene(main_menu_rscene, false, true)
+	switch_scene(scenester_constants.main_menu_rscene, false, true)
 
 func _on_QuitButton_pressed() -> void:
 	call_deferred("quit_game")
@@ -161,12 +155,12 @@ func _on_QuitButton_pressed() -> void:
 func _process(_delta: float) -> void:
 	var load_status = ResourceLoader.load_threaded_get_status(new_scene_to_load.scene.get_path(), load_progress)
 	match load_status:
-		0, 2: #? THREAD_LOAD_INVALID_RESOURCE, THREAD_LOAD_FAILED
+		0, 2: # ? THREAD_LOAD_INVALID_RESOURCE, THREAD_LOAD_FAILED
 			set_process(false)
 			return
-		1: #? THREAD_LOAD_IN_PROGRESS
+		1: # ? THREAD_LOAD_IN_PROGRESS
 			emit_signal("loading_progress_changed", load_progress[0])
-		3: #? THREAD_LOAD_LOADED
+		3: # ? THREAD_LOAD_LOADED
 			if loading_screen_initialized == true:
 				new_loaded_scene = ResourceLoader.load_threaded_get(new_scene_to_load.scene.get_path())
 				emit_signal("loading_progress_changed", 1.0)
