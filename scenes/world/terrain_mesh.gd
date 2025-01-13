@@ -1,17 +1,23 @@
 extends MeshInstance3D
 
 @export var default_heightmap: Image = null
-var heightmap: ImageTexture = null
+var heightmap: Image = null
+var mat: Material = null
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	assert(default_heightmap != null)
-	heightmap.create_from_image(default_heightmap)
-	self.mesh.material.shader.set_default_texture_parameter("heightmap", heightmap)
+	heightmap = default_heightmap.duplicate()
+
+	mat = get_active_material(0)
+	if mat is ShaderMaterial:
+		var smat: ShaderMaterial = mat as ShaderMaterial
+		smat.set_shader_parameter('heightmap', heightmap)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("up"):
 		# move all points of the image up
-		pass
+		heightmap.flip_x()
+		heightmap.flip_y()

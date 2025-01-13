@@ -41,3 +41,5 @@ script = ExtResource("4_4p7hw")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22495, 1.19209e-07, 1.08927)
 mesh_library = SubResource("MeshLibrary_5l2jj")
 cell_size = Vector3(1, 1, 1)
+
+[node name="Camera3D" type="Camera3D" parent="."]
