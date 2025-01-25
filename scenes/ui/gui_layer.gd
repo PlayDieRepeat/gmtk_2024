@@ -14,11 +14,12 @@ func _ready() -> void:
 	_generate_states()
 	fsm.change_state("Default")
 	build_menu.menu_canceled.connect(_on_build_menu_closed)
+	build_menu.confirm_build.connect(_on_build_menu_closed)
 	eod_card.card_closed.connect(_on_eod_closed)
 
 func _generate_states() -> void:
 	for state in gui_states:
-		var state_instance = state.instantiate()
+		var state_instance := state.instantiate()
 		state_instance.parent_ref = self
 		fsm.add_child(state_instance)
 

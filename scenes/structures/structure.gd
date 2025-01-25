@@ -38,7 +38,7 @@ func _ready() -> void:
 
 func _generate_states() -> void:
 	for state in structure_states:
-		var state_instance = state.instantiate()
+		var state_instance := state.instantiate()
 		state_instance.parent_ref = self
 		state_machine.add_child(state_instance)
 
@@ -47,9 +47,6 @@ func set_structure_name() -> void:
 	if structure_data != null:
 		name += "%s" % structure_data.resource_path.get_file().trim_suffix("tres").capitalize()
 	name += "%s" % state_machine.current_state.name
-
-func try_get_requirements() -> bool:
-	return metropolis.try_get_materials(structure_data.material_requirements)
 
 func check_construction_progress() -> bool:
 	build_progress += 1
