@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://di3ut8c68gk7h"]
+[gd_scene load_steps=41 format=3 uid="uid://di3ut8c68gk7h"]
 
 [ext_resource type="Script" path="res://scenes/economy/material_warehouse.gd" id="1_i7mdd"]
 [ext_resource type="Resource" uid="uid://c14csn7vlswum" path="res://resources/scenarios/testing.tres" id="2_14ua3"]
@@ -12,11 +12,12 @@
 [ext_resource type="Script" path="res://scenes/world/world_camera.gd" id="11_xpsuw"]
 [ext_resource type="Resource" uid="uid://b7qymya8ffvmv" path="res://resources/constants/camera_constants.tres" id="12_rhflj"]
 [ext_resource type="Script" path="res://scenes/ui/debug/im_gui_helper.gd" id="13_7kwj1"]
+[ext_resource type="Script" path="res://scenes/world/dynamic_terrain.gd" id="14_2l5bk"]
 [ext_resource type="PackedScene" uid="uid://dodop7a7svo6t" path="res://scenes/world/sky_box.tscn" id="14_p21m1"]
 [ext_resource type="Texture2D" uid="uid://cpohewy4agqu0" path="res://assets/images/environment/ground.png" id="15_xamrd"]
-[ext_resource type="Texture2D" uid="uid://bmmq23vga8ukr" path="res://assets/images/trees/treeRed.png" id="16_xttbk"]
+[ext_resource type="Texture2D" uid="uid://bmmq23vga8ukr" path="res://assets/images/trees/treeRed.png" id="16_tbyw4"]
 [ext_resource type="Texture2D" uid="uid://clcspwowhnoch" path="res://assets/images/trees/treeGreen.png" id="17_5yxcy"]
-[ext_resource type="Texture2D" uid="uid://dfuotlar74515" path="res://assets/images/trees/treeYellow.png" id="18_7x0k4"]
+[ext_resource type="Texture2D" uid="uid://dfuotlar74515" path="res://assets/images/trees/treeYellow.png" id="17_o81nm"]
 [ext_resource type="Script" path="res://scenes/world/metropolis.gd" id="19_33eio"]
 [ext_resource type="PackedScene" uid="uid://esp3ey8uhv7t" path="res://scenes/structures/structure.tscn" id="20_u6ojs"]
 [ext_resource type="Script" path="res://resources/_scripts/r_structure.gd" id="21_at3xn"]
@@ -38,6 +39,9 @@
 [ext_resource type="PackedScene" uid="uid://c6lkdogwqt17n" path="res://scenes/states/gui/default.tscn" id="30_wfhn3"]
 [ext_resource type="PackedScene" uid="uid://bodceqhftfwvw" path="res://scenes/states/gui/eod.tscn" id="31_hspbe"]
 [ext_resource type="PackedScene" uid="uid://rjnabd8cfycv" path="res://scenes/states/gui/build_menu.tscn" id="32_l6k3q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b2r66"]
+size = Vector2(528, 32)
 
 [node name="Level1" type="Node"]
 
@@ -78,7 +82,7 @@ script = ExtResource("13_7kwj1")
 [node name="Terrain" type="Node" parent="World"]
 
 [node name="Ground" type="Sprite2D" parent="World/Terrain"]
-position = Vector2(0, 328)
+position = Vector2(-8, 328)
 scale = Vector2(10.023, 0.5)
 texture = ExtResource("15_xamrd")
 centered = false
@@ -95,22 +99,19 @@ scale = Vector2(10.023, 0.5)
 texture = ExtResource("15_xamrd")
 centered = false
 
-[node name="Foliage" type="Node" parent="World"]
+[node name="Terrain2" type="Node2D" parent="World" node_paths=PackedStringArray("terrain_rect")]
+position = Vector2(-336, 360)
+script = ExtResource("14_2l5bk")
+placement_textures = Array[Texture2D]([ExtResource("17_o81nm"), ExtResource("16_tbyw4"), ExtResource("17_5yxcy")])
+maximum_placement_offset = 64.397
+maximum_placement_offset_layer_delta = 20.27
+terrain_rect = NodePath("Area2D/CollisionShape2D")
 
-[node name="RedTree" type="Sprite2D" parent="World/Foliage"]
-position = Vector2(40, 301)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("16_xttbk")
+[node name="Area2D" type="Area2D" parent="World/Terrain2"]
 
-[node name="GreenTree" type="Sprite2D" parent="World/Foliage"]
-position = Vector2(62, 310)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("17_5yxcy")
-
-[node name="YellowTree" type="Sprite2D" parent="World/Foliage"]
-position = Vector2(81, 306)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("18_7x0k4")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Terrain2/Area2D"]
+position = Vector2(264, -16)
+shape = SubResource("RectangleShape2D_b2r66")
 
 [node name="Metropolis" type="Node" parent="World" node_paths=PackedStringArray("warehouse")]
 script = ExtResource("19_33eio")
@@ -151,6 +152,7 @@ script = ExtResource("25_fn8jq")
 material_display_control = ExtResource("26_bg884")
 
 [node name="GlassWall" type="Control" parent="GUILayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -174,6 +176,7 @@ visible = false
 [connection signal="new_hour" from="Systems/WorldController" to="World/SkyBox" method="_on_time_of_day_changed"]
 [connection signal="new_hour" from="Systems/WorldController" to="GUILayer/ClockDisplay" method="_on_time_of_day_changed"]
 [connection signal="set_god" from="Systems/WorldController" to="World/SkyBox" method="_on_set_god"]
+[connection signal="item_rect_changed" from="World/Terrain2/Area2D/CollisionShape2D" to="World/Terrain2" method="draw_trees"]
 [connection signal="build_button_pressed" from="World/Metropolis" to="GUILayer" method="_on_open_build_menu"]
 [connection signal="debug_add_material" from="GUILayer/ResourceGrid" to="Systems/MaterialWarehouse" method="add_material"]
 [connection signal="debug_remove_material" from="GUILayer/ResourceGrid" to="Systems/MaterialWarehouse" method="remove_material"]

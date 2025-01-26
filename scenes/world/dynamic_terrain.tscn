@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfb5sf36to744"]
+
+[ext_resource type="Script" path="res://scenes/world/dynamic_terrain.gd" id="1_brt8q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b2r66"]
+size = Vector2(528, 32)
+
+[node name="Terrain2" type="Node2D" node_paths=PackedStringArray("terrain_rect")]
+position = Vector2(-336, 360)
+script = ExtResource("1_brt8q")
+terrain_rect = NodePath("Area2D/CollisionShape2D")
+redraw_placements = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(264, -16)
+shape = SubResource("RectangleShape2D_b2r66")
