@@ -3,12 +3,12 @@ shader_type spatial;
 render_mode wireframe, unshaded, cull_disabled;
 
 uniform sampler2D heightmap;
-
 uniform sampler2D ground;
+uniform float uHeight_offset = 0.0;
 
 void vertex() {
 	// Called for every vertex the material is visible on.
-	VERTEX.y += texture(heightmap, UV).r;
+	VERTEX.y += texture(heightmap, UV).r + uHeight_offset;
 }
 
 void fragment() {
