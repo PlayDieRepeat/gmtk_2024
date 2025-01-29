@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cedykl2q6xva4"]
+[gd_scene load_steps=12 format=3 uid="uid://cedykl2q6xva4"]
 
 [ext_resource type="Shader" path="res://resources/shaders/terrain.gdshader" id="1_e27mg"]
 [ext_resource type="PackedScene" uid="uid://b7qr4ulsu1fqf" path="res://scenes/structures/tent_model.tscn" id="2_l8g3o"]
@@ -29,11 +29,40 @@ size = Vector2(10, 10)
 subdivide_width = 15
 subdivide_depth = 15
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c55yd"]
+sky_top_color = Color(0, 0.406504, 0.936906, 1)
+sky_horizon_color = Color(0.761669, 0.60502, 0.664709, 1)
+sky_curve = 0.0530331
+ground_horizon_color = Color(0.792729, 0.614407, 0.467983, 1)
+sun_angle_max = 44.59
+sun_curve = 0.113679
+energy_multiplier = 3.2
+
+[sub_resource type="Sky" id="Sky_05al6"]
+sky_material = SubResource("ProceduralSkyMaterial_c55yd")
+
+[sub_resource type="Environment" id="Environment_2dyo2"]
+background_mode = 2
+sky = SubResource("Sky_05al6")
+
 [node name="3dTerrainTest" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 5)
 
 [node name="Ground" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00817505, -0.0144429, 0.00365162)
 mesh = SubResource("PlaneMesh_qfgyl")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.05703, 0)
+light_color = Color(0.71191, 0.00129953, 0.838986, 1)
+light_energy = 9.837
+omni_range = 4.764
+omni_attenuation = 2.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2dyo2")
 
 [node name="tent" parent="." instance=ExtResource("2_l8g3o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.55759, 0.743794, -1.31995)
