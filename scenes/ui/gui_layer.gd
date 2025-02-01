@@ -25,10 +25,6 @@ func _generate_states() -> void:
 
 func _enable_glass_wall(p_enable: bool) -> void:
 	glass_wall.visible = p_enable
-	if p_enable:
-		print("Glass Wall Up")
-	else:
-		print("Glass Wall Down")
 
 func _on_open_build_menu(p_building: Structure, p_available_buildings: Array[RStructure]) -> void:
 	fsm.change_state("BuildMenu")

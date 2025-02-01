@@ -116,6 +116,11 @@ scroll_down={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Building"
+2d_physics/layer_2="Forest"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

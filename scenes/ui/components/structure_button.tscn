@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dyw57toxwlpqd"]
+[gd_scene load_steps=12 format=3 uid="uid://dyw57toxwlpqd"]
 
 [ext_resource type="ButtonGroup" uid="uid://dobvk7poodyet" path="res://resources/structure_buttons.tres" id="1_1vvvr"]
 [ext_resource type="Script" path="res://scenes/ui/components/structure_button.gd" id="2_235xm"]
@@ -13,6 +13,17 @@ colors = PackedColorArray(0, 0, 0, 0.556863)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_j0hld"]
 gradient = SubResource("Gradient_lraos")
 height = 120
+
+[sub_resource type="Gradient" id="Gradient_n8uwd"]
+offsets = PackedFloat32Array(0.413146)
+colors = PackedColorArray(0.368627, 0.368627, 0.368627, 0.882353)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_h1qi0"]
+gradient = SubResource("Gradient_n8uwd")
+height = 120
+fill_from = Vector2(0.1, 0)
+fill_to = Vector2(0.1, 0)
+metadata/_snap_enabled = true
 
 [sub_resource type="Gradient" id="Gradient_qdenm"]
 interpolation_mode = 1
@@ -33,6 +44,7 @@ offset_bottom = 120.0
 toggle_mode = true
 button_group = ExtResource("1_1vvvr")
 texture_normal = SubResource("GradientTexture2D_j0hld")
+texture_disabled = SubResource("GradientTexture2D_h1qi0")
 texture_focused = SubResource("GradientTexture2D_3mh7u")
 script = ExtResource("2_235xm")
 structure_rect = NodePath("Structure")

@@ -2,6 +2,8 @@
 extends Node2D
 class_name DynamicTerrain
 
+@export var terrain_type: RTerrainType
+
 @export_group("Textures")
 ## The different textures that will be used to generate foliage.
 @export var placement_textures: Array[Texture2D]

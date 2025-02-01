@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="RStructure" load_steps=6 format=3 uid="uid://c7nt5xjvnc7cx"]
+
+[ext_resource type="Script" path="res://resources/_scripts/r_material_stack.gd" id="1_u4tpy"]
+[ext_resource type="Script" path="res://resources/_scripts/r_structure.gd" id="2_2qbsg"]
+[ext_resource type="Resource" uid="uid://wscpuo1ajsvh" path="res://resources/materials/wood.tres" id="2_2y4u1"]
+[ext_resource type="Resource" uid="uid://17xay6j4o8x1" path="res://resources/terrains/woods.tres" id="4_vh8lh"]
+
+[sub_resource type="Resource" id="Resource_jes08"]
+script = ExtResource("1_u4tpy")
+stacked_material = ExtResource("2_2y4u1")
+stack_count = 2
+
+[resource]
+script = ExtResource("2_2qbsg")
+display_name = "Wood Cutter"
+description = "Harvest tree for lumber"
+terrain_requirement = ExtResource("4_vh8lh")
+material_requirements = Array[ExtResource("1_u4tpy")]([SubResource("Resource_jes08")])
+can_build_above = false
+time_to_build = 4

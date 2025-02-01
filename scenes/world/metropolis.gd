@@ -5,6 +5,7 @@ class_name Metropolis
 @export var starting_values: RScenarioValues
 @export var structure_scene: PackedScene
 @export var available_structures: Array[RStructure]
+@export var terrain_type_table: Array[RTerrainType]
 
 @export_group("References")
 @export var warehouse: MaterialWarehouse
@@ -38,3 +39,6 @@ func _on_tick() -> void:
 		else:
 			new_queue.append(structure)
 	waiting_queue = new_queue
+
+func get_terrain_from_collision_layer(layer: int) -> RTerrainType:
+	return terrain_type_table[layer]

@@ -65,7 +65,10 @@ func open_build_menu(p_structure: Structure, p_available_structures: Array[RStru
 	for i in available_structures.size():
 		var button_instance: StructureButton = structure_button.instantiate()
 		button_instance.structure_data = available_structures[i]
-		button_instance.structure_selected.connect(_on_structure_selected)
+		if button_instance.structure_data.terrain_requirement and button_instance.structure_data.terrain_requirement != active_structure.terrain_type:
+			button_instance.disabled = true
+		else:
+			button_instance.structure_selected.connect(_on_structure_selected)
 		structure_button_container.add_child(button_instance)
 		if i == 0:
 			button_instance.grab_focus()

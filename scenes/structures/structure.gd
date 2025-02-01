@@ -14,6 +14,7 @@ class_name Structure
 @export var waiting_dots: AnimatedSprite2D
 @export var state_machine: FiniteStateMachine
 @export var build_button: TextureButton
+@export var area: Area2D
 
 @export_group("Tree References")
 @export var metropolis: Metropolis
@@ -23,6 +24,7 @@ var right_neighbor: Structure = null
 var grid_coordinates := Vector2i(0, 0)
 var build_progress := 0
 var world_timer: Timer
+var terrain_type: RTerrainType
 
 signal build_button_pressed(p_structure: RStructure)
 
@@ -30,6 +32,7 @@ func _ready() -> void:
 	assert(metropolis != null, "No reference to Metropolis")
 	world_timer = get_tree().get_first_node_in_group("world_timer")
 	assert(world_timer != null, "No reference to World Timer")
+	assert(area != null, "area is null in Structure")
 	_generate_states()
 	if structure_data == null:
 		state_machine.change_state("Empty")
@@ -118,6 +121,7 @@ func try_add_neighbor() -> void:
 		# right_neighbor.name = "Structure_%s_%s" % [right_neighbor.grid_coordinates.x, right_neighbor.grid_coordinates.y]
 
 func _on_build_button_pressed() -> void:
+	_check_terrain_collision()
 	state_machine.change_state("Limbo")
 	build_button_pressed.emit(self)
 
@@ -131,3 +135,14 @@ func _on_menu_canceled() -> void:
 
 func _on_build_confirmed() -> void:
 	state_machine.change_state("Waiting")
+
+func _check_terrain_collision() -> void:
+	var overlaps: Array[Area2D] = area.get_overlapping_areas()
+	var terrain_index := 0
+	if overlaps.size() == 1:
+		terrain_index = overlaps[0].collision_layer
+		print("collision layer %s", terrain_index)
+	if overlaps.size() > 1:
+		print("Collisions fucked")
+	terrain_type = metropolis.get_terrain_from_collision_layer(terrain_index)
+	print(terrain_type.display_name)
