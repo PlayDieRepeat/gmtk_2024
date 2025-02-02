@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c0kqrq41j2y1l"]
+[gd_scene load_steps=8 format=3 uid="uid://c0kqrq41j2y1l"]
 
 [ext_resource type="Shader" path="res://resources/shaders/simple_terrain_from_perlin_noise.gdshader" id="1_girri"]
 [ext_resource type="Texture2D" uid="uid://cf705cuub8hil" path="res://assets/images/debug/2x2_debug.png" id="2_iqwjl"]
 [ext_resource type="Script" path="res://scenes/world/terrain_mesh.gd" id="4_4p7hw"]
+[ext_resource type="PackedScene" uid="uid://dn5ivid3n5u1r" path="res://scenes/world/pivot_cam.tscn" id="4_ctix3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ae8ae"]
 render_priority = 0
@@ -13,8 +14,8 @@ shader_parameter/heightmap = ExtResource("2_iqwjl")
 [sub_resource type="PlaneMesh" id="PlaneMesh_nxkjv"]
 material = SubResource("ShaderMaterial_ae8ae")
 size = Vector2(10, 10)
-subdivide_width = 8
-subdivide_depth = 8
+subdivide_width = 1
+subdivide_depth = 1
 
 [sub_resource type="MeshLibrary" id="MeshLibrary_5l2jj"]
 
@@ -30,5 +31,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22495, 1.19209e-07, 1.0892
 mesh_library = SubResource("MeshLibrary_5l2jj")
 cell_size = Vector3(1, 1, 1)
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 5)
+[node name="PivotCam" parent="." instance=ExtResource("4_ctix3")]

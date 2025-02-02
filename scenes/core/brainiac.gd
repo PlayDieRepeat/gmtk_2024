@@ -18,7 +18,7 @@ var debug_menu: Node
 var input_actions: Array[StringName]
 var input_action_knm_events := {}
 var input_action_gp_events := {}
-var remap_waiting_info = []
+var remap_waiting_info := []
 var controller_deadzone := 0.2
 
 signal game_state_has_changed(p_state: String)

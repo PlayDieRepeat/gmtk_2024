@@ -21,14 +21,14 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("up"):
+	if Input.is_action_just_pressed("raise_cam"):
 		height_offset += 0.5
 		if shader_mat_is_set:
 			smat.set_shader_parameter('uHeight_offset', height_offset)
-	if Input.is_action_just_pressed("down"):
+	if Input.is_action_just_pressed("lower_cam"):
 		height_offset -= 0.5
 		if shader_mat_is_set:
-			smat.set_shader_parameter('uHeight_offset', height_offset)	
-		# move all points of the image up
-		#heightmap.get_image().flip_x()
-		#heightmap.get_image().flip_y()
+			smat.set_shader_parameter('uHeight_offset', height_offset)
+	
+	if Input.is_action_just_pressed("click"):
+		print("Fart!!!")
