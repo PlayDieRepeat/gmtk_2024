@@ -21,6 +21,7 @@ func _ready() -> void:
 	print("Is dev build: ", is_debug_build)
 	if is_debug_build == true:
 		start_logger()
+	print("Viewport Resolution is: ", get_viewport().get_visible_rect().size)
 	# Returns the name of the host OS.
 	# Note: Custom builds of the engine may support additional platforms,
 	# such as consoles, yielding other return values.
