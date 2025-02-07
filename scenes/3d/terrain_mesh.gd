@@ -28,7 +28,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		if _eventMB.button_index == 1 and _eventMB.pressed == true:
 			clicked_position = _eventMB.position
 			print("Event mouse position: ", clicked_position)
-			print("Viewport mouse position: ", get_viewport().get_mouse_position())
+			#turn screen coords into world coords
+			
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
