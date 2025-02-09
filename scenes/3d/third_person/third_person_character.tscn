@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dn5ivid3n5u1r"]
+[gd_scene load_steps=7 format=3 uid="uid://wycmd4vxes37"]
 
-[ext_resource type="Script" path="res://scenes/3d/pivot_cam.gd" id="1_cwhgx"]
-[ext_resource type="Environment" uid="uid://d3fu2l768h08q" path="res://resources/default_env.tres" id="2_347i2"]
+[ext_resource type="Script" path="res://scenes/3d/third_person/third_person_character.gd" id="1_6dg2k"]
+[ext_resource type="Environment" uid="uid://d3fu2l768h08q" path="res://resources/default_env.tres" id="2_timsy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_47njd"]
 albedo_texture_msdf = true
@@ -16,13 +16,12 @@ is_hemisphere = true
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_27smd"]
 height = 0.5
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_hyoyw"]
-radius = 10.263
+[sub_resource type="SphereShape3D" id="SphereShape3D_djp8j"]
 
-[node name="GroundSelector" type="CharacterBody3D"]
+[node name="ThirdPersonCharacter" type="CharacterBody3D"]
 collision_layer = 2
 collision_mask = 5
-script = ExtResource("1_cwhgx")
+script = ExtResource("1_6dg2k")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_ahc7k")
@@ -33,14 +32,12 @@ shape = SubResource("CylinderShape3D_27smd")
 
 [node name="Pivot" type="Node3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.5, 0)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="Pivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("SphereShape3D_hyoyw")
+shape = SubResource("SphereShape3D_djp8j")
 spring_length = 8.0
-margin = 0.03
+margin = 0.05
 
-[node name="Camera3D" type="Camera3D" parent="Pivot/SpringArm3D"]
-environment = ExtResource("2_347i2")
-current = true
+[node name="MainCamera" type="Camera3D" parent="Pivot/SpringArm3D"]
+unique_name_in_owner = true
+environment = ExtResource("2_timsy")

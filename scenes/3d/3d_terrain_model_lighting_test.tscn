@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://cedykl2q6xva4"]
 
-[ext_resource type="Shader" path="res://resources/shaders/terrain.gdshader" id="1_e27mg"]
-[ext_resource type="PackedScene" uid="uid://b7qr4ulsu1fqf" path="res://scenes/structures/tent_model.tscn" id="2_l8g3o"]
+[ext_resource type="Shader" path="res://resources/shaders/terrain.gdshader" id="1_6je13"]
+[ext_resource type="PackedScene" uid="uid://b7qr4ulsu1fqf" path="res://scenes/structures/tent_model.tscn" id="2_7gqej"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_oykvu"]
 
@@ -19,7 +19,7 @@ noise = SubResource("FastNoiseLite_5ydj4")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fl16f"]
 render_priority = 0
-shader = ExtResource("1_e27mg")
+shader = ExtResource("1_6je13")
 shader_parameter/heightmap = SubResource("NoiseTexture2D_wnam3")
 shader_parameter/ground_texture = SubResource("NoiseTexture2D_wbjna")
 
@@ -64,5 +64,5 @@ omni_attenuation = 2.0
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2dyo2")
 
-[node name="tent" parent="." instance=ExtResource("2_l8g3o")]
+[node name="tent" parent="." instance=ExtResource("2_7gqej")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.55759, 0.743794, -1.31995)
